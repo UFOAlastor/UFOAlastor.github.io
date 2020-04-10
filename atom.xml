@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pxv9w1.coding-pages.com</id>
+    <title>Zander Alastor&apos;s blog</title>
+    <updated>2020-04-10T07:16:05.549Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://pxv9w1.coding-pages.com"/>
+    <link rel="self" href="https://pxv9w1.coding-pages.com/atom.xml"/>
+    <subtitle>&lt;p style=text-align:center&gt;----Welcome to my blog!----&lt;/p&gt;
+&lt;p style=text-align:center&gt;Zander Alastor~此店不售此书&lt;/p&gt;
+&lt;p style=text-align:center&gt;QQ：1436922125  (∠・ω&lt; )⌒★&lt;/p&gt;
+&lt;p style=text-align:center&gt;ZanderAlastorUFO@gmail.com&lt;/p&gt;
+&lt;iframe style=text-align:center frameborder=no border=0 marginwidth=0 marginheight=0 width=100% height=80 src=//music.163.com/outchain/player?type=2&amp;id=29449499&amp;auto=0&amp;height=66&gt;&lt;/iframe&gt;</subtitle>
+    <logo>https://pxv9w1.coding-pages.com/images/avatar.png</logo>
+    <icon>https://pxv9w1.coding-pages.com/favicon.ico</icon>
+    <rights>All rights reserved 2020, Zander Alastor&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[初识git——上传文件指令]]></title>
+        <id>https://pxv9w1.coding-pages.com/git_push/</id>
+        <link href="https://pxv9w1.coding-pages.com/git_push/">
+        </link>
+        <updated>2020-04-10T07:05:22.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[kaios端网易云音乐播放器]]></title>
+        <id>https://pxv9w1.coding-pages.com/kaios_Music163/</id>
+        <link href="https://pxv9w1.coding-pages.com/kaios_Music163/">
+        </link>
+        <updated>2020-04-08T16:00:46.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[纯CSS制作的精美部件]]></title>
+        <id>https://pxv9w1.coding-pages.com/CSS_design/</id>
+        <link href="https://pxv9w1.coding-pages.com/CSS_design/">
+        </link>
+        <updated>2020-04-08T07:30:32.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[自用的实用在线工具网站大集合:D]]></title>
+        <id>https://pxv9w1.coding-pages.com/great_web/</id>
+        <link href="https://pxv9w1.coding-pages.com/great_web/">
+        </link>
+        <updated>2020-04-06T14:59:55.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[转载说明]]></title>
+        <id>https://pxv9w1.coding-pages.com/Reprint/</id>
+        <link href="https://pxv9w1.coding-pages.com/Reprint/">
+        </link>
+        <updated>2020-04-04T16:00:01.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Gridea深度定制——留言]]></title>
+        <id>https://pxv9w1.coding-pages.com/Gridea_Valine/</id>
+        <link href="https://pxv9w1.coding-pages.com/Gridea_Valine/">
+        </link>
+        <updated>2020-04-04T07:21:12.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Gridea深度定制——start]]></title>
+        <id>https://pxv9w1.coding-pages.com/Gridea_design/</id>
+        <link href="https://pxv9w1.coding-pages.com/Gridea_design/">
+        </link>
+        <updated>2020-04-04T07:05:55.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Gridea主题食用方法]]></title>
+        <id>https://pxv9w1.coding-pages.com/Gridea_themes/</id>
+        <link href="https://pxv9w1.coding-pages.com/Gridea_themes/">
+        </link>
+        <updated>2020-04-03T13:17:11.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Kaios上使用cmd的push注意事项]]></title>
+        <id>https://pxv9w1.coding-pages.com/KaiOS_push_cmd/</id>
+        <link href="https://pxv9w1.coding-pages.com/KaiOS_push_cmd/">
+        </link>
+        <updated>2020-04-03T04:49:51.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[测试视频播放]]></title>
+        <id>https://pxv9w1.coding-pages.com/Gridea_video/</id>
+        <link href="https://pxv9w1.coding-pages.com/Gridea_video/">
+        </link>
+        <updated>2020-04-03T04:05:52.000Z</updated>
+    </entry>
+</feed>

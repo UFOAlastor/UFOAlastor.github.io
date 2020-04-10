@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pxv9w1.coding-pages.com</id>
     <title>Zander Alastor&apos;s blog</title>
-    <updated>2020-04-10T09:09:11.111Z</updated>
+    <updated>2020-04-10T09:20:31.567Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pxv9w1.coding-pages.com"/>
     <link rel="self" href="https://pxv9w1.coding-pages.com/atom.xml"/>
@@ -14,6 +14,13 @@
     <logo>https://pxv9w1.coding-pages.com/images/avatar.png</logo>
     <icon>https://pxv9w1.coding-pages.com/favicon.ico</icon>
     <rights>All rights reserved 2020, Zander Alastor&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[网站访问量统计js]]></title>
+        <id>https://pxv9w1.coding-pages.com/web_visitors/</id>
+        <link href="https://pxv9w1.coding-pages.com/web_visitors/">
+        </link>
+        <updated>2020-04-10T09:14:07.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[初识git——上传文件指令]]></title>
         <id>https://pxv9w1.coding-pages.com/git_push/</id>
@@ -76,12 +83,5 @@
         <link href="https://pxv9w1.coding-pages.com/KaiOS_push_cmd/">
         </link>
         <updated>2020-04-03T04:49:51.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[测试视频播放]]></title>
-        <id>https://pxv9w1.coding-pages.com/Gridea_video/</id>
-        <link href="https://pxv9w1.coding-pages.com/Gridea_video/">
-        </link>
-        <updated>2020-04-03T04:05:52.000Z</updated>
     </entry>
 </feed>

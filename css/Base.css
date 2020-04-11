@@ -6,13 +6,13 @@
 
 /*定义滚动条轨道 内阴影+圆角*/
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px #eeeeeeee;
-    background-color: #5555552c;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
 }
 
 /*定义滑块 内阴影+圆角*/
 ::-webkit-scrollbar-thumb {
     border-radius: 3px;
-    -webkit-box-shadow: inset 0 0 6px #DBB302;
-    background-color: #DBB444;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.548);
 }

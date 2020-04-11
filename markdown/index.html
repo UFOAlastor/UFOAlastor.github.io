@@ -18,14 +18,30 @@
 <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-<meta name="description" content="前排提示，此问题如若不重视，可能导致手机无限重启
-前言：此问题并非所有人都会遇到，因系统版本和使用cmd或powershell而异
+<meta name="description" content="部分在此博客中显示错误，请移步以下链接：
+Markdown学习
 
-判断是否有问题的方式：
-​	使用adb进行pull，pull取任意应用（例如：adb pull /syst..." />
+Markdown学习
+
+标题索引
+标题
+文本
+列表
+区块
+代码
+链接
+图片
+表格
+Html元素
+公式
+流程图
+
+1、横向流程图源码格式：
+2、竖向流程图源码格式：
+3、标准流..." />
 <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js">
 <script async src="https://cdn.ampproject.org/v0.js"></script>
-<title>Kaios上使用cmd的push注意事项 | Zander Alastor&#39;s blog</title>
+<title>Markdown语法 | Zander Alastor&#39;s blog</title>
 <style amp-custom>
 body {
     width: 100vw;
@@ -2514,7 +2530,7 @@ footer {
 </style>
 <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
 <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-<link rel="canonical" href="https://pxv9w1.coding-pages.com/KaiOS_push_cmd/" />
+<link rel="canonical" href="https://pxv9w1.coding-pages.com/markdown/" />
 <link rel="shortcut icon" href="https://pxv9w1.coding-pages.com/favicon.ico?v=1586583249457">
 <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
@@ -2530,7 +2546,7 @@ footer {
   <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
   <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
   
-<link rel="alternate" type="application/atom+xml" title="Kaios上使用cmd的push注意事项 | Zander Alastor&#39;s blog - Atom Feed" href="https://pxv9w1.coding-pages.com/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Markdown语法 | Zander Alastor&#39;s blog - Atom Feed" href="https://pxv9w1.coding-pages.com/atom.xml">
 
   
 
@@ -2640,17 +2656,17 @@ footer {
             <div class="article-info">
                 
                 <div class="flex-box meta-category">
-                    <a class="post-cate" href="https://pxv9w1.coding-pages.com/e7uSPFqNN/">KaiOS</a></div>
+                    <a class="post-cate" href="https://pxv9w1.coding-pages.com/Study_notes/">学习笔记</a></div>
                 
                 <h2 class="article-title">
-                    <a href="https://pxv9w1.coding-pages.com/KaiOS_push_cmd/">Kaios上使用cmd的push注意事项</a>
+                    <a href="https://pxv9w1.coding-pages.com/markdown/">Markdown语法</a>
                 </h2>
                 <div class="flex-box">
                     <div class="flex-box post-meta-box">
                         <a class="post-meta" href="https://pxv9w1.coding-pages.com"><span
                                 class="iconfont icon-mr-postmeta"></span>Zander Alastor</a>
                         <span class="post-meta"><span
-                                class="iconfont icon-mr-postmeta"></span>2020 年 04	月 3日</span>
+                                class="iconfont icon-mr-postmeta"></span>2020 年 04	月 11日</span>
                         
 
 
@@ -2658,47 +2674,440 @@ footer {
                 </div>
             </div>
             <div class="content">
-                <h2 id="前排提示此问题如若不重视可能导致手机无限重启">前排提示，此问题如若不重视，可能导致手机无限重启</h2>
-<h3 id="前言此问题并非所有人都会遇到因系统版本和使用cmd或powershell而异">前言：此问题并非所有人都会遇到，因系统版本和使用cmd或powershell而异</h3>
+                <p>部分在此博客中显示错误，请移步以下链接：</p>
+<h1 id="markdown学习"><a href="https://www.runoob.com/markdown/md-tutorial.html">Markdown学习</a></h1>
+<p><ul class="markdownIt-TOC">
+<li><a href="#markdown%E5%AD%A6%E4%B9%A0">Markdown学习</a>
+<ul>
+<li><a href="#%E6%A0%87%E9%A2%98%E7%B4%A2%E5%BC%95">标题索引</a></li>
+<li><a href="#%E6%A0%87%E9%A2%98">标题</a></li>
+<li><a href="#%E6%96%87%E6%9C%AC">文本</a></li>
+<li><a href="#%E5%88%97%E8%A1%A8">列表</a></li>
+<li><a href="#%E5%8C%BA%E5%9D%97">区块</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码</a></li>
+<li><a href="#%E9%93%BE%E6%8E%A5">链接</a></li>
+<li><a href="#%E5%9B%BE%E7%89%87">图片</a></li>
+<li><a href="#%E8%A1%A8%E6%A0%BC">表格</a></li>
+<li><a href="#html%E5%85%83%E7%B4%A0">Html元素</a></li>
+<li><a href="#%E5%85%AC%E5%BC%8F">公式</a></li>
+<li><a href="#%E6%B5%81%E7%A8%8B%E5%9B%BE">流程图</a>
+<ul>
+<li><a href="#1-%E6%A8%AA%E5%90%91%E6%B5%81%E7%A8%8B%E5%9B%BE%E6%BA%90%E7%A0%81%E6%A0%BC%E5%BC%8F"><strong>1、横向流程图源码格式：</strong></a></li>
+<li><a href="#2-%E7%AB%96%E5%90%91%E6%B5%81%E7%A8%8B%E5%9B%BE%E6%BA%90%E7%A0%81%E6%A0%BC%E5%BC%8F"><strong>2、竖向流程图源码格式：</strong></a></li>
+<li><a href="#3-%E6%A0%87%E5%87%86%E6%B5%81%E7%A8%8B%E5%9B%BE%E6%BA%90%E7%A0%81%E6%A0%BC%E5%BC%8F"><strong>3、标准流程图源码格式：</strong></a></li>
+<li><a href="#4-%E6%A0%87%E5%87%86%E6%B5%81%E7%A8%8B%E5%9B%BE%E6%BA%90%E7%A0%81%E6%A0%BC%E5%BC%8F%E6%A8%AA%E5%90%91"><strong>4、标准流程图源码格式（横向）：</strong></a></li>
+<li><a href="#5-uml%E6%97%B6%E5%BA%8F%E5%9B%BE%E6%BA%90%E7%A0%81%E6%A0%B7%E4%BE%8B"><strong>5、UML时序图源码样例：</strong></a></li>
+<li><a href="#6-uml%E6%97%B6%E5%BA%8F%E5%9B%BE%E6%BA%90%E7%A0%81%E5%A4%8D%E6%9D%82%E6%A0%B7%E4%BE%8B"><strong>6、UML时序图源码复杂样例：</strong></a></li>
+<li><a href="#7-uml%E6%A0%87%E5%87%86%E6%97%B6%E5%BA%8F%E5%9B%BE%E6%A0%B7%E4%BE%8B"><strong>7、UML标准时序图样例：</strong></a></li>
+<li><a href="#8-%E7%94%98%E7%89%B9%E5%9B%BE%E6%A0%B7%E4%BE%8B"><strong>8、甘特图样例：</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</p>
+<h2 id="标题索引">标题索引</h2>
+<pre><code class="language-c">[Toc]
+
+其中gridea中语法为 @[Toc]
+</code></pre>
+<h2 id="标题">标题</h2>
+<pre><code class="language-c"># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题
+</code></pre>
+<h2 id="文本">文本</h2>
+<pre><code>*斜体文本*
+_斜体文本_
+**粗体文本**
+__粗体文本__
+***粗斜体文本***
+___粗斜体文本___
+</code></pre>
+<p><em>斜体文本</em><br>
+<em>斜体文本</em><br>
+<strong>粗体文本</strong><br>
+<strong>粗体文本</strong><br>
+<em><strong>粗斜体文本</strong></em><br>
+<em><strong>粗斜体文本</strong></em></p>
+<pre><code>***
+
+* * *
+
+*****
+
+- - -
+
+----------
+</code></pre>
 <hr>
-<h3 id="判断是否有问题的方式">判断是否有问题的方式：</h3>
-<p>​	使用adb进行pull，pull取任意应用（例如：adb pull /system/b2g/webapps/system.gaiamobile.org）</p>
-<p>​	情况1、如果出现以下情况（红线内部分为pull出的文件），即pull取得到的不是文件夹，而是文件夹内部分，说明你的遇到了这个bug</p>
-<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/04/03/6nPpKYCDd7aAxTS.png" alt="image.png" loading="lazy"></figure>
-<p>​	情况2、如果是出现了“system.gaiamobile.org“文件夹，说明没有问题，一切操作可以参照BH和清水博客内容，无需担忧</p>
 <hr>
-<h2 id="如果是情况1请继续往下看情况2请左转离开">如果是情况1，请继续往下看，情况2请左转离开</h2>
-<h3 id="首先注意我们进行的操作adb-pull-systemb2gwebappssystemgaiamobileorg">首先，注意我们进行的操作：adb pull /system/b2g/webapps/system.gaiamobile.org</h3>
-<h3 id="这个操作的对象是-systemgaiamobileorg-此对象在手机储存中为文件夹形式但是我们pull出的结果确为文件夹内的内容-而正常的情况应当pull出的就是-systemgaiamobileorg-文件夹-说明我们遇到了一种bug">这个操作的对象是 system.gaiamobile.org ，此对象在手机储存中为文件夹形式，但是我们pull出的结果确为文件夹内的内容。而正常的情况应当pull出的就是 system.gaiamobile.org 文件夹。说明我们遇到了一种bug。</h3>
-<h3 id="而且这个bug在push时也会出现当我们从主机向手机push时明明按照正常操作push某文件夹但是却不起作用原因就是我们看似正规操作但是push的结果确实仅仅将我们文件夹内的内容push进手机内存这样的结果导致修改失败甚至在修改系统关键应用时直接导致无限重启">而且！这个bug在push时也会出现，当我们从主机向手机push时，明明按照正常操作push某文件夹，但是却不起作用！原因就是，我们看似正规操作，但是push的结果确实仅仅将我们文件夹内的内容push进手机内存！这样的结果导致修改失败，甚至在修改系统关键应用时直接导致无限重启！</h3>
 <hr>
-<h2 id="解决方法">解决方法：</h2>
-<h3 id="我们搞清楚原因后就十分简单的能够解决这个问题既然push一层文件夹时仅仅会push进去文件夹内的内容那么我们多建立一层文件夹即可解决">我们搞清楚原因后就十分简单的能够解决这个问题！既然push一层文件夹时，仅仅会push进去文件夹内的内容，那么我们多建立一层文件夹，即可解决！</h3>
 <hr>
-<h2 id="具体示例">具体示例：</h2>
-<p>​	目的为push进去system.gaiamobile.org文件夹，</p>
-<p>​	建立new文件夹，将system.gaiamobile.org文件夹复制进new中，</p>
-<p>​	然后push new文件夹，</p>
-<p>​	结果为system.gaiamobile.org被成功push进手机内存</p>
-<hr>
-<h2 id="ps">PS：</h2>
-<p>这个问题害的我几次无限重启，希望遇到同样问题的人可以避免👍</p>
-<p>​</p>
+<pre><code>~~删除线~~
+</code></pre>
+<p><s>删除线</s></p>
+<pre><code>&lt;u&gt;带下划线文本&lt;/u&gt;
+</code></pre>
+<p><u>带下划线文本</u></p>
+<pre><code>[^要注明的文本]
+
+
+创建脚注格式类似这样 [^Zander]。
+
+[^Zander]: 最牛逼的蒟蒻:D
+</code></pre>
+<p>创建脚注格式类似这样 <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>。</p>
+<h2 id="列表">列表</h2>
+<pre><code>无序列表使用星号(*)、加号(+)或是减号(-)作为列表标记：
+* 第一项
+* 第二项
+* 第三项
+
++ 第一项
++ 第二项
++ 第三项
+
+
+- 第一项
+- 第二项
+- 第三项
+</code></pre>
+<ul>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ul>
+<ul>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ul>
+<ul>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ul>
+<pre><code>1. 第一项
+2. 第二项
+3. 第三项
+</code></pre>
+<ol>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ol>
+<pre><code>1. 第一项：
+    - 第一项嵌套的第一个元素
+    - 第一项嵌套的第二个元素
+2. 第二项：
+    - 第二项嵌套的第一个元素
+    - 第二项嵌套的第二个元素
+</code></pre>
+<ol>
+<li>第一项：
+<ul>
+<li>第一项嵌套的第一个元素</li>
+<li>第一项嵌套的第二个元素</li>
+</ul>
+</li>
+<li>第二项：
+<ul>
+<li>第二项嵌套的第一个元素</li>
+<li>第二项嵌套的第二个元素</li>
+</ul>
+</li>
+</ol>
+<h2 id="区块">区块</h2>
+<pre><code>&gt; 最外层
+&gt; &gt; 第一层嵌套
+&gt; &gt; &gt; 第二层嵌套
+</code></pre>
+<blockquote>
+<p>最外层</p>
+<blockquote>
+<p>第一层嵌套</p>
+<blockquote>
+<p>第二层嵌套</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="代码">代码</h2>
+<pre><code>​```javascript
+$(document).ready(function () {
+    alert('RUNOOB');
+});
+​```
+</code></pre>
+<pre><code class="language-javascript">$(document).ready(function () {
+    alert('RUNOOB');
+});
+</code></pre>
+<h2 id="链接">链接</h2>
+<pre><code>[链接名称](链接地址)
+
+或者
+
+&lt;链接地址&gt;
+</code></pre>
+<h2 id="图片">图片</h2>
+<pre><code>![alt 属性文本](图片地址 &quot;可选标题&quot;)
+</code></pre>
+<h2 id="表格">表格</h2>
+<pre><code>|  表头   | 表头  |
+|  ----  | ----  |
+| 单元格  | 单元格 |
+| 单元格  | 单元格 |
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>表头</th>
+<th>表头</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单元格</td>
+<td>单元格</td>
+</tr>
+<tr>
+<td>单元格</td>
+<td>单元格</td>
+</tr>
+</tbody>
+</table>
+<h2 id="html元素">Html元素</h2>
+<pre><code>使用 &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;Del&lt;/kbd&gt; 重启电脑
+</code></pre>
+<p>使用 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Del</kbd> 重启电脑</p>
+<h2 id="公式">公式</h2>
+<pre><code>$$
+\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix} 
+\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+\frac{\partial X}{\partial u} &amp;  \frac{\partial Y}{\partial u} &amp; 0 \\
+\frac{\partial X}{\partial v} &amp;  \frac{\partial Y}{\partial v} &amp; 0 \\
+\end{vmatrix}
+${$tep1}{\style{visibility:hidden}{(x+1)(x+1)}}
+$$
+</code></pre>
+<p class='katex-block katex-error' title='ParseError: KaTeX parse error: Can&#039;t use function &#039;$&#039; in math mode at position 243: …\\\end{vmatrix}$̲{$tep1}{\style{…'>\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix} \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\\frac{\partial X}{\partial u} &amp;  \frac{\partial Y}{\partial u} &amp; 0 \\\frac{\partial X}{\partial v} &amp;  \frac{\partial Y}{\partial v} &amp; 0 \\\end{vmatrix}${$tep1}{\style{visibility:hidden}{(x+1)(x+1)}}
+</p>
+<h2 id="流程图">流程图</h2>
+<h3 id="1-横向流程图源码格式"><strong>1、横向流程图源码格式：</strong></h3>
+<pre><code>​```mermaid
+graph LR
+A[方形] --&gt;B(圆角)
+    B --&gt; C{条件a}
+    C --&gt;|a=1| D[结果1]
+    C --&gt;|a=2| E[结果2]
+    F[横向流程图]
+​```
+</code></pre>
+<pre><code class="language-mermaid">graph LR
+A[方形] --&gt;B(圆角)
+    B --&gt; C{条件a}
+    C --&gt;|a=1| D[结果1]
+    C --&gt;|a=2| E[结果2]
+    F[横向流程图]
+</code></pre>
+<h3 id="2-竖向流程图源码格式"><strong>2、竖向流程图源码格式：</strong></h3>
+<pre><code>​```mermaid
+graph TD
+A[方形] --&gt; B(圆角)
+    B --&gt; C{条件a}
+    C --&gt; |a=1| D[结果1]
+    C --&gt; |a=2| E[结果2]
+    F[竖向流程图]
+​```
+</code></pre>
+<pre><code class="language-mermaid">graph TD
+A[方形] --&gt; B(圆角)
+    B --&gt; C{条件a}
+    C --&gt; |a=1| D[结果1]
+    C --&gt; |a=2| E[结果2]
+    F[竖向流程图]
+</code></pre>
+<h3 id="3-标准流程图源码格式"><strong>3、标准流程图源码格式：</strong></h3>
+<pre><code>​```flow
+st=&gt;start: 开始框
+op=&gt;operation: 处理框
+cond=&gt;condition: 判断框(是或否?)
+sub1=&gt;subroutine: 子流程
+io=&gt;inputoutput: 输入输出框
+e=&gt;end: 结束框
+st-&gt;op-&gt;cond
+cond(yes)-&gt;io-&gt;e
+cond(no)-&gt;sub1(right)-&gt;op
+​```
+</code></pre>
+<pre><code class="language-flow">st=&gt;start: 开始框
+op=&gt;operation: 处理框
+cond=&gt;condition: 判断框(是或否?)
+sub1=&gt;subroutine: 子流程
+io=&gt;inputoutput: 输入输出框
+e=&gt;end: 结束框
+st-&gt;op-&gt;cond
+cond(yes)-&gt;io-&gt;e
+cond(no)-&gt;sub1(right)-&gt;op
+</code></pre>
+<h3 id="4-标准流程图源码格式横向"><strong>4、标准流程图源码格式（横向）：</strong></h3>
+<pre><code>​```flow
+st=&gt;start: 开始框
+op=&gt;operation: 处理框
+cond=&gt;condition: 判断框(是或否?)
+sub1=&gt;subroutine: 子流程
+io=&gt;inputoutput: 输入输出框
+e=&gt;end: 结束框
+st(right)-&gt;op(right)-&gt;cond
+cond(yes)-&gt;io(bottom)-&gt;e
+cond(no)-&gt;sub1(right)-&gt;op
+​```
+</code></pre>
+<pre><code class="language-flow">st=&gt;start: 开始框
+op=&gt;operation: 处理框
+cond=&gt;condition: 判断框(是或否?)
+sub1=&gt;subroutine: 子流程
+io=&gt;inputoutput: 输入输出框
+e=&gt;end: 结束框
+st(right)-&gt;op(right)-&gt;cond
+cond(yes)-&gt;io(bottom)-&gt;e
+cond(no)-&gt;sub1(right)-&gt;op
+</code></pre>
+<h3 id="5-uml时序图源码样例"><strong>5、UML时序图源码样例：</strong></h3>
+<pre><code>​```sequence
+对象A-&gt;对象B: 对象B你好吗?（请求）
+Note right of 对象B: 对象B的描述
+Note left of 对象A: 对象A的描述(提示)
+对象B--&gt;对象A: 我很好(响应)
+对象A-&gt;对象B: 你真的好吗？
+​```
+</code></pre>
+<pre><code class="language-sequence">对象A-&gt;对象B: 对象B你好吗?（请求）
+Note right of 对象B: 对象B的描述
+Note left of 对象A: 对象A的描述(提示)
+对象B--&gt;对象A: 我很好(响应)
+对象A-&gt;对象B: 你真的好吗？
+</code></pre>
+<h3 id="6-uml时序图源码复杂样例"><strong>6、UML时序图源码复杂样例：</strong></h3>
+<pre><code>​```sequence
+Title: 标题：复杂使用
+对象A-&gt;对象B: 对象B你好吗?（请求）
+Note right of 对象B: 对象B的描述
+Note left of 对象A: 对象A的描述(提示)
+对象B--&gt;对象A: 我很好(响应)
+对象B-&gt;小三: 你好吗
+小三--&gt;&gt;对象A: 对象B找我了
+对象A-&gt;对象B: 你真的好吗？
+Note over 小三,对象B: 我们是朋友
+participant C
+Note right of C: 没人陪我玩
+​```
+</code></pre>
+<pre><code class="language-sequence">Title: 标题：复杂使用
+对象A-&gt;对象B: 对象B你好吗?（请求）
+Note right of 对象B: 对象B的描述
+Note left of 对象A: 对象A的描述(提示)
+对象B--&gt;对象A: 我很好(响应)
+对象B-&gt;小三: 你好吗
+小三--&gt;&gt;对象A: 对象B找我了
+对象A-&gt;对象B: 你真的好吗？
+Note over 小三,对象B: 我们是朋友
+participant C
+Note right of C: 没人陪我玩
+</code></pre>
+<h3 id="7-uml标准时序图样例"><strong>7、UML标准时序图样例：</strong></h3>
+<pre><code>​```mermaid
+%% 时序图例子,-&gt; 直线，--&gt;虚线，-&gt;&gt;实线箭头
+  sequenceDiagram
+    participant 张三
+    participant 李四
+    张三-&gt;王五: 王五你好吗？
+    loop 健康检查
+        王五-&gt;王五: 与疾病战斗
+    end
+    Note right of 王五: 合理 食物 &lt;br/&gt;看医生...
+    李四--&gt;&gt;张三: 很好!
+    王五-&gt;李四: 你怎么样?
+    李四--&gt;王五: 很好!
+​```
+</code></pre>
+<pre><code class="language-mermaid">%% 时序图例子,-&gt; 直线，--&gt;虚线，-&gt;&gt;实线箭头
+  sequenceDiagram
+    participant 张三
+    participant 李四
+    张三-&gt;王五: 王五你好吗？
+    loop 健康检查
+        王五-&gt;王五: 与疾病战斗
+    end
+    Note right of 王五: 合理 食物 &lt;br/&gt;看医生...
+    李四--&gt;&gt;张三: 很好!
+    王五-&gt;李四: 你怎么样?
+    李四--&gt;王五: 很好!
+</code></pre>
+<h3 id="8-甘特图样例"><strong>8、甘特图样例：</strong></h3>
+<pre><code>​```mermaid
+%% 语法示例
+        gantt
+        dateFormat  YYYY-MM-DD
+        title 软件开发甘特图
+        section 设计
+        需求                      :done,    des1, 2014-01-06,2014-01-08
+        原型                      :active,  des2, 2014-01-09, 3d
+        UI设计                     :         des3, after des2, 5d
+    未来任务                     :         des4, after des3, 5d
+        section 开发
+        学习准备理解需求                      :crit, done, 2014-01-06,24h
+        设计框架                             :crit, done, after des2, 2d
+        开发                                 :crit, active, 3d
+        未来任务                              :crit, 5d
+        耍                                   :2d
+        section 测试
+        功能测试                              :active, a1, after des3, 3d
+        压力测试                               :after a1  , 20h
+        测试报告                               : 48h
+​```
+</code></pre>
+<pre><code class="language-mermaid">%% 语法示例
+        gantt
+        dateFormat  YYYY-MM-DD
+        title 软件开发甘特图
+        section 设计
+        需求                      :done,    des1, 2014-01-06,2014-01-08
+        原型                      :active,  des2, 2014-01-09, 3d
+        UI设计                     :         des3, after des2, 5d
+    未来任务                     :         des4, after des3, 5d
+        section 开发
+        学习准备理解需求                      :crit, done, 2014-01-06,24h
+        设计框架                             :crit, done, after des2, 2d
+        开发                                 :crit, active, 3d
+        未来任务                              :crit, 5d
+        耍                                   :2d
+        section 测试
+        功能测试                              :active, a1, after des3, 3d
+        压力测试                               :after a1  , 20h
+        测试报告                               : 48h
+</code></pre>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>最牛的蒟蒻 😄 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
 
             </div>
 
             
             <nav class="post-nav">
                 
-                <div class="nav-previous">
-                    <a class="post-nav-link-active" title="Gridea主题食用方法"
-                        href="https://pxv9w1.coding-pages.com/Gridea_themes/">上一篇文章</a>
-                </div>
-                
                 
                 <div class="nav-next">
-                    <a class="post-nav-link-active" title="测试视频播放"
-                        href="https://pxv9w1.coding-pages.com/Gridea_video/">下一篇文章</a>
+                    <a class="post-nav-link-active" title="网站中添加代码高亮js"
+                        href="https://pxv9w1.coding-pages.com/web_blog_highlightjs/">下一篇文章</a>
                     
 
                 </div>
@@ -2712,12 +3121,28 @@ footer {
             <amp-addthis width="320" height="92" layout="responsive"
                 data-pub-id="ra-5e869c8a378741d3"
                 data-widget-id="ycjr" data-widget-type="inline"
-                data-title="Kaios上使用cmd的push注意事项" data-url="https://pxv9w1.coding-pages.com/KaiOS_push_cmd/" data-media="https://pxv9w1.coding-pages.com/post-images/KaiOS_push_cmd.jpg"
-                data-description="前排提示，此问题如若不重视，可能导致手机无限重启
-前言：此问题并非所有人都会遇到，因系统版本和使用cmd或powershell而异
+                data-title="Markdown语法" data-url="https://pxv9w1.coding-pages.com/markdown/" data-media="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1933349499,3243023225&amp;fm=26&amp;gp=0.jpg"
+                data-description="部分在此博客中显示错误，请移步以下链接：
+Markdown学习
 
-判断是否有问题的方式：
-​	使用adb进行pull，pull取任意应用（例如：adb pull /syst...">
+Markdown学习
+
+标题索引
+标题
+文本
+列表
+区块
+代码
+链接
+图片
+表格
+Html元素
+公式
+流程图
+
+1、横向流程图源码格式：
+2、竖向流程图源码格式：
+3、标准流...">
             </amp-addthis>
             
             
@@ -2726,7 +3151,7 @@ footer {
 
             <div class="post-tags">
                 
-                <a href="https://pxv9w1.coding-pages.com/e7uSPFqNN/" rel="tag">KaiOS</a>
+                <a href="https://pxv9w1.coding-pages.com/Study_notes/" rel="tag">学习笔记</a>
                 
             </div>
 

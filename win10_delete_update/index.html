@@ -18,15 +18,17 @@
 <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-<meta name="description" content="这题都不用储存，直接处理。
-要排除开头是 ‘ ）’ 加个flag判断就行。
-括号匹配的问题：
-因为都是成对的，所以找到一个‘ ） ’ 就让‘ （ ’的总数t自减，
-在t为0时，就说明前面没有与现在找到的 ‘  ） ’对应的‘ （ ’，
-可以..." />
+<meta name="description" content="Win10卸载更新
+winbugs的更新每次修复一些bug，添加一些bug。
+有时候更新完的还不如更新前的版本，怎么办呢？
+其实可以选择卸载掉更新，这样可以恢复更新前的状态
+
+点击进入查看更新历史记录，选择卸载更新
+
+就可以看到自己最新更新..." />
 <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js">
 <script async src="https://cdn.ampproject.org/v0.js"></script>
-<title>题解 P1739 【表达式括号匹配】 | Zander Alastor&#39;s blog</title>
+<title>Win10卸载更新 | Zander Alastor&#39;s blog</title>
 <style amp-custom>
 body {
     width: 100vw;
@@ -2515,7 +2517,7 @@ footer {
 </style>
 <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
 <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-<link rel="canonical" href="https://pxv9w1.coding-pages.com/UcK2Xl1RR/" />
+<link rel="canonical" href="https://pxv9w1.coding-pages.com/win10_delete_update/" />
 <link rel="shortcut icon" href="https://pxv9w1.coding-pages.com/favicon.ico?v=1586751485739">
 <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
@@ -2531,7 +2533,7 @@ footer {
   <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
   <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
   
-<link rel="alternate" type="application/atom+xml" title="题解 P1739 【表达式括号匹配】 | Zander Alastor&#39;s blog - Atom Feed" href="https://pxv9w1.coding-pages.com/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Win10卸载更新 | Zander Alastor&#39;s blog - Atom Feed" href="https://pxv9w1.coding-pages.com/atom.xml">
 
   
 
@@ -2643,18 +2645,15 @@ footer {
 
             <div class="article-info">
                 
-                <div class="flex-box meta-category">
-                    <a class="post-cate" href="https://pxv9w1.coding-pages.com/J6wdWycwm/">OIer</a></div>
-                
                 <h2 class="article-title">
-                    <a href="https://pxv9w1.coding-pages.com/UcK2Xl1RR/">题解 P1739 【表达式括号匹配】</a>
+                    <a href="https://pxv9w1.coding-pages.com/win10_delete_update/">Win10卸载更新</a>
                 </h2>
                 <div class="flex-box">
                     <div class="flex-box post-meta-box">
                         <a class="post-meta" href="https://pxv9w1.coding-pages.com"><span
                                 class="iconfont icon-mr-postmeta"></span>Zander Alastor</a>
                         <span class="post-meta"><span
-                                class="iconfont icon-mr-postmeta"></span>2018 年 09	月 30日</span>
+                                class="iconfont icon-mr-postmeta"></span>2020 年 04	月 13日</span>
                         
 
 
@@ -2662,37 +2661,31 @@ footer {
                 </div>
             </div>
             <div class="content">
-                <p>这题都不用储存，直接处理。</p>
-<p>要排除开头是 ‘ ）’ 加个flag判断就行。</p>
-<p>括号匹配的问题：</p>
-<p>因为都是成对的，所以找到一个‘ ） ’ 就让‘ （ ’的总数t自减，</p>
-<p>在t为0时，就说明前面没有与现在找到的 ‘  ） ’对应的‘ （ ’，</p>
-<p>可以直接flag=0。</p>
-<pre><code class="language-c">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-
-int main(){
-	int t=0;
-	bool flag=1;
-	char ch;
-	while((ch=getchar())!='@'){
-		if(ch=='('){
-			t++;
-		} 
-		if(ch==')'){
-			if(t) t--;
-			else flag=0;
-		}
-	}
-	if(t==0&amp;&amp;flag) cout&lt;&lt;&quot;YES&quot;;
-	else cout&lt;&lt;&quot;NO&quot;;
-	return 0;
-}
-</code></pre>
-<p>第一次交题解，没说清楚还请多多包涵 &gt;_&lt;</p>
+                <h1 id="win10卸载更新">Win10卸载更新</h1>
+<p><strong>winbugs</strong>的更新每次修复一些bug，添加一些bug。</p>
+<p>有时候更新完的还不如更新前的版本，怎么办呢？</p>
+<p>其实可以选择卸载掉更新，这样可以恢复更新前的状态</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Zander_Alastor/Figurebed/raw/master/img/image-20200413120723707.png" alt="image-20200413120723707" loading="lazy"></figure>
+<p>点击进入查看更新历史记录，选择卸载更新</p>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/Zander_Alastor/Figurebed/raw/master/img/image-20200413120815677.png" alt="image-20200413120815677" loading="lazy"></figure>
+<p>就可以看到自己最新更新的内容，不需要的话就卸载即可</p>
+<figure data-type="image" tabindex="3"><img src="https://gitee.com/Zander_Alastor/Figurebed/raw/master/img/image-20200413120933048.png" alt="image-20200413120933048" loading="lazy"></figure>
+<p>卸载了的更新还是可以选择安装的，不用担心</p>
+<p>ps：最近微软1909更新优化了一些型号的cpu的速度，我的破电脑因此突然跑得飞快，但是一次03更新后有变卡了，于是我把更新给卸载了 😄</p>
 
             </div>
 
+            
+            <nav class="post-nav">
+                
+                
+                <div class="nav-next">
+                    <a class="post-nav-link-active" title="Typora+PicGo-core插入图片自动上传"
+                        href="https://pxv9w1.coding-pages.com/PicGo-Core_and_Typora/">下一篇文章</a>
+                    
+
+                </div>
+            </nav>
             
 
             
@@ -2702,13 +2695,15 @@ int main(){
             <amp-addthis width="320" height="92" layout="responsive"
                 data-pub-id="ra-5e869c8a378741d3"
                 data-widget-id="ycjr" data-widget-type="inline"
-                data-title="题解 P1739 【表达式括号匹配】" data-url="https://pxv9w1.coding-pages.com/UcK2Xl1RR/" data-media="https://pxv9w1.coding-pages.com/post-images/UcK2Xl1RR.jpg"
-                data-description="这题都不用储存，直接处理。
-要排除开头是 ‘ ）’ 加个flag判断就行。
-括号匹配的问题：
-因为都是成对的，所以找到一个‘ ） ’ 就让‘ （ ’的总数t自减，
-在t为0时，就说明前面没有与现在找到的 ‘  ） ’对应的‘ （ ’，
-可以...">
+                data-title="Win10卸载更新" data-url="https://pxv9w1.coding-pages.com/win10_delete_update/" data-media="https://i.loli.net/2020/04/13/uAlGIEQnNwSUy5D.png"
+                data-description="Win10卸载更新
+winbugs的更新每次修复一些bug，添加一些bug。
+有时候更新完的还不如更新前的版本，怎么办呢？
+其实可以选择卸载掉更新，这样可以恢复更新前的状态
+
+点击进入查看更新历史记录，选择卸载更新
+
+就可以看到自己最新更新...">
             </amp-addthis>
             
             
@@ -2716,8 +2711,6 @@ int main(){
             
 
             <div class="post-tags">
-                
-                <a href="https://pxv9w1.coding-pages.com/J6wdWycwm/" rel="tag">OIer</a>
                 
             </div>
 
@@ -2750,7 +2743,7 @@ int main(){
                     <sup style="color:grey">访问人数<span id="busuanzi_value_site_uv"></span>位</sup>
                 </span>
                 <sup><span style="color:grey" class="post-meta-divider">|</span></sup>
-                <span id='/UcK2Xl1RR/' class="leancloud-visitors view" data-flag-title="题解 P1739 【表达式括号匹配】">
+                <span id='/win10_delete_update/' class="leancloud-visitors view" data-flag-title="Win10卸载更新">
                     <sup style="color:grey" class="post-meta-item-text">阅读量</sup>
                     <sup style="color:grey"><span class="leancloud-visitors-count"></span></sup>
                 </span>

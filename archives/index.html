@@ -1,23 +1,7 @@
 <!doctype html>
 <html amp lang="zh-Hans">
 
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  <head>
+ <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 <meta name="description" content="<a href=https://Alastor.top/welcome/ style=text-align:center>----Welcome to my blog!----</a>
@@ -1659,6 +1643,21 @@
 
 
     
+    <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https'){
+   bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    
     <script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
     <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
     <script type="text/javascript" src="/js/socialism.js"></script>
@@ -1669,7 +1668,7 @@
         @import "/css/Base.css";
     </style>
     
-  </head>
+</head>
 
 <body class="home blog">
   <input type="checkbox" id="header-menu-button">

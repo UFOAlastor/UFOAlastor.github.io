@@ -1,26 +1,30 @@
-<div class="post-container">
-  <% posts.forEach(function(post) { %>
-    <article class="post">
-      <a href="<%= post.link %>">
-        <h2 class="post-title"><%= post.title %></h2>
-      </a>
-      <div class="post-info">
-        <time class="post-time">
-          · <%= post.dateFormat %> ·
-        </time>
-        <% post.tags.forEach(function(tag) { %>
-          <a href="<%= tag.link %>" class="post-tag">
-            # <%= tag.name %>
-          </a>
-        <% }); %>
-      </div>
-      <% if (themeConfig.showFeatureImage && post.feature) { %>
-        <a href="<%= post.link %>" class="post-feature-image" style="background-image: url('<%= post.feature %>')">
-        </a>
-      <% } %>
-      <div class="post-abstract">
-        <%- post.searchedPreview %>
-      </div>
+<div style="text-align: center;">
+    <% posts.forEach(function(post) { %>
+    <HR style="border:3 double #DBB302" width="600px" color=#DBB302 SIZE=5>
+    <article style="text-align: center;">
+        <h1 style="text-align: center;">
+            <a href="<%= post.link %>">
+                <%= post.title %>
+            </a>
+        </h1>
+        <div style="text-align: center;">
+            <sup>
+                <time style="text-align: center;">
+                    <%= post.dateFormat %>
+                </time>
+                <% post.tags.forEach(function(tag) { %>
+                <a href="<%= tag.link %>" style="text-align: center;">
+                    <%= tag.name %>
+                </a>
+                <% }); %>
+            </sup>
+        </div>
+        <% if (themeConfig.showFeatureImage && post.feature) { %>
+        <img src="<%= post.feature %>" style="width:600px;height:auto;text-align: center;">
+        <a href="<%= post.link %>"></a>
+        </img>
+        <% } %>
     </article>
-  <% }); %>
+    <HR style="border:3 double #222222" width="600px" color=#222222 SIZE=50>
+    <% }); %>
 </div>

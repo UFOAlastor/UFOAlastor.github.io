@@ -2,18 +2,31 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pxv9w1.coding-pages.com</id>
     <title>Zander Alastor&apos;s blog</title>
-    <updated>2020-04-15T09:28:05.219Z</updated>
+    <updated>2020-04-15T15:51:01.154Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pxv9w1.coding-pages.com"/>
     <link rel="self" href="https://pxv9w1.coding-pages.com/atom.xml"/>
     <subtitle>&lt;a href=https://Alastor.top/welcome/ style=text-align:center&gt;----Welcome to my blog!----&lt;/a&gt;
 &lt;p style=text-align:center&gt;Zander Alastor~此店不售此书&lt;/p&gt;
-&lt;p style=text-align:center&gt;QQ：1436922125  (∠・ω&lt; )⌒★&lt;/p&gt;
-&lt;p style=text-align:center&gt;ZanderAlastorUFO@gmail.com&lt;/p&gt;
-&lt;iframe style=text-align:center frameborder=no border=0 marginwidth=0 marginheight=0 width=100% height=80 src=//music.163.com/outchain/player?type=2&amp;id=29449499&amp;auto=0&amp;height=66&gt;&lt;/iframe&gt;</subtitle>
+&lt;p style=text-align:center&gt;QQ: 1436922125  (∠・ω&lt; )⌒★&lt;/p&gt;
+&lt;p style=text-align:center&gt;ZanderAlastorUFO@gmail.com&lt;/p&gt;</subtitle>
     <logo>https://pxv9w1.coding-pages.com/images/avatar.png</logo>
     <icon>https://pxv9w1.coding-pages.com/favicon.ico</icon>
     <rights>All rights reserved 2020, Zander Alastor&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[ Github无法加载图片解决]]></title>
+        <id>https://pxv9w1.coding-pages.com/github_pic/</id>
+        <link href="https://pxv9w1.coding-pages.com/github_pic/">
+        </link>
+        <updated>2020-04-15T15:49:49.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ GitHub中国访问加速]]></title>
+        <id>https://pxv9w1.coding-pages.com/github_speed/</id>
+        <link href="https://pxv9w1.coding-pages.com/github_speed/">
+        </link>
+        <updated>2020-04-15T15:44:45.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Win10卸载更新]]></title>
         <id>https://pxv9w1.coding-pages.com/win10_delete_update/</id>
@@ -69,19 +82,5 @@
         <link href="https://pxv9w1.coding-pages.com/web_visitors/">
         </link>
         <updated>2020-04-10T09:14:07.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[初识git——上传文件指令]]></title>
-        <id>https://pxv9w1.coding-pages.com/git_push/</id>
-        <link href="https://pxv9w1.coding-pages.com/git_push/">
-        </link>
-        <updated>2020-04-10T07:05:22.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[kaios端网易云音乐播放器]]></title>
-        <id>https://pxv9w1.coding-pages.com/kaios_Music163/</id>
-        <link href="https://pxv9w1.coding-pages.com/kaios_Music163/">
-        </link>
-        <updated>2020-04-08T16:00:46.000Z</updated>
     </entry>
 </feed>

@@ -20,10 +20,9 @@
             </sup>
         </div>
         <% if (themeConfig.showFeatureImage && post.feature) { %>
-        <a href="<%= post.link %>">
-        <img src="<%= post.feature %>" style="width:600px;height:auto;text-align: center;">
-        </img>
-        </a>
+			<img src="<%= post.feature %>" style="width:600px;height:auto;text-align: center;" onclick="javascript:location.href='<%= post.link %>'">
+			</img>
+        
         <% } %>
     </article>
     <HR style="border:3 double #222222" width="600px" color=#222222 SIZE=50>

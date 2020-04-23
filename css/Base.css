@@ -16,3 +16,28 @@
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: rgba(0, 0, 0, 0.548);
 }
+
+/*打字机效果*/
+ .typed-cursor{
+	opacity: 1;
+	animation: typedjsBlink 0.7s infinite;
+	-webkit-animation: typedjsBlink 0.7s infinite;
+	animation: typedjsBlink 0.7s infinite;
+}
+@keyframes typedjsBlink{
+	50% { opacity: 0.0; }
+}
+@-webkit-keyframes typedjsBlink{
+	0% { opacity: 1; }
+	50% { opacity: 0.0; }
+	100% { opacity: 1; }
+}
+.typed-fade-out{
+	opacity: 0;
+	transition: opacity .25s;
+	-webkit-animation: 0;
+	animation: 0;
+}
+.div {
+	text-align: center;
+}

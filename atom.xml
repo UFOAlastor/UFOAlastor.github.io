@@ -2,15 +2,30 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pxv9w1.coding-pages.com</id>
     <title>Zander Alastor&apos;s blog</title>
-    <updated>2020-04-22T15:22:08.960Z</updated>
+    <updated>2020-04-23T03:17:57.485Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pxv9w1.coding-pages.com"/>
     <link rel="self" href="https://pxv9w1.coding-pages.com/atom.xml"/>
     <subtitle>&lt;a href=https://Alastor.top/welcome/ style=text-align:center&gt;----Welcome to my blog!----&lt;/a&gt;
 &lt;p style=text-align:center&gt;Zander Alastor~此店不售此书&lt;/p&gt;
-&lt;p style=text-align:center&gt;QQ: 1436922125  (∠・ω&lt; )⌒★&lt;/p&gt;
-&lt;p style=text-align:center&gt;ZanderAlastorUFO@gmail.com&lt;/p&gt;
-&lt;HR&gt;&lt;p id=hitokoto style=color:gray&gt;GO FOT IT !&lt;/p&gt;&lt;HR&gt;</subtitle>
+&lt;p style=text-align:center&gt;QQ: 1436922125 (∠・ω&lt; )⌒★&lt;/p&gt; &lt;p style=text-align:center&gt;ZanderAlastorUFO@gmail.com&lt;/p&gt;
+&lt;HR&gt;&lt;span class=element style=color:gray&gt;&lt;/span&gt;
+&lt;HR&gt;
+&lt;script&gt;
+    var xhr = new XMLHttpRequest();
+    xhr.open(&apos;get&apos;, &apos;https://v1.hitokoto.cn&apos;);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            var data = JSON.parse(xhr.responseText);
+            var typed = new Typed(&apos;.element&apos;, {
+                strings: [data.hitokoto],
+                typeSpeed: 100,
+                loop: false
+            });
+        }
+    }
+    xhr.send();
+&lt;/script&gt;</subtitle>
     <logo>https://pxv9w1.coding-pages.com/images/avatar.png</logo>
     <icon>https://pxv9w1.coding-pages.com/favicon.ico</icon>
     <rights>All rights reserved 2020, Zander Alastor&apos;s blog</rights>

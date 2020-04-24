@@ -100,8 +100,8 @@ a {
     text-align: center;
     letter-spacing: 2px;
     color: transparent;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #ffffff;
+    background: linear-gradient(to right, red, blue);
+    -webkit-background-clip: text;
     margin-top: 0px;
     transition: 0.4s ease-in-out 0.4s;
     position: relative;
@@ -113,11 +113,11 @@ a {
 }
 
 .photo:hover .photo__name {
-    color: rgb(255, 106, 106)
+    color: rgb(255, 106, 106);
 }
 
 .photo:hover .photo__describe {
-    color: #ffffff
+    color: #ffffff;
 }
 
 @keyframes move-it {

@@ -45,15 +45,18 @@ a {
     }
 
     .gallery__strip.one {
-        transform: translateY(10px);
+        animation: 5s move-it ease alternate infinite 0.1s;
+        transform: translateY(15px);
     }
 
     .gallery__strip.three {
-        transform: translateY(10px);
+        animation: 6s move-it ease alternate infinite 0.6s;
+        transform: translateY(15px);
     }
 
     .gallery__strip.two {
-        transform: translateY(10px);
+        animation: 7s move-it ease alternate infinite 1.1s;
+        transform: translateY(15px);
     }
 
     .gallery__strip:hover {
@@ -115,4 +118,17 @@ a {
 
 .photo:hover .photo__describe {
     color: #ffffff
+}
+
+@keyframes move-it {
+
+    0%,
+    90%,
+    100% {
+        transform: translateY(15px);
+    }
+
+    45% {
+        transform: translateY(1px);
+    }
 }

@@ -8,9 +8,12 @@
 <body>
     <div class="gallery">
         <h1 style="color:#333;">------------</h1>
-        <a style=" color:darkgray;position:fixed;" href="/friendly_links">互换友链</a>
-        <h1 style="color:pink;position:fixed;">我的朋友们</h1>
-        <a id="back" class="fixed-button" style="color:pink; font-size: 25px;">🠔返回原网页</a>
+        <a style=" color:darkgray;position:fixed;" href="/friendly_links"></a>
+        <h1 style="color:pink;position:fixed;top: 2%;left: 4%">My Friends</h1>
+        <div class="button" style="text-align:center">
+            <button class="pulse" style="position: fixed;top: 75%;left: 4%;"
+                onclick="javascrtpt:window.location.href='/donate'">互换友链</button>
+            <button class="pulse" style="position: fixed;top: 85%;left: 4%;" id="back">返回</button> </div>
         <script>
             var back = document.getElementById('back')
             back.onclick = function () {

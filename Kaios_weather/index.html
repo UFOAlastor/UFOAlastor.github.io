@@ -4,14 +4,17 @@
 <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-<meta name="description" content="前排提示，此问题如若不重视，可能导致手机无限重启
-前言：此问题并非所有人都会遇到，因系统版本和使用cmd或powershell而异
+<meta name="description" content="kaios端天气应用
+示例图片
 
-判断是否有问题的方式：
-​	使用adb进行pull，pull取任意应用（例如：adb pull /syst..." />
+应用介绍
+一款简易的天气应用，定位会自动通过IP获取。
+使用的效果就是直观，简易，没有复杂的设置，打开即用。
+当然比起官方商店里的 Kai weather 还是逊色几分，
+不过 GerdaOS 无法使用 K..." />
 <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js">
 <script async src="https://cdn.ampproject.org/v0.js"></script>
-<title>Kaios上使用cmd的push注意事项 | Zander Alastor&#39;s blog</title>
+<title>kaios端天气应用 | Zander Alastor&#39;s blog</title>
 <style amp-custom>
 body {
     width: 100vw;
@@ -2500,7 +2503,7 @@ footer {
 </style>
 <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
 <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-<link rel="canonical" href="https://pxv9w1.coding-pages.com/KaiOS_push_cmd/" />
+<link rel="canonical" href="https://pxv9w1.coding-pages.com/Kaios_weather/" />
 <link rel="shortcut icon" href="https://pxv9w1.coding-pages.com/favicon.ico?v=1587998423710">
 <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
@@ -2516,7 +2519,7 @@ footer {
   <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
   <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
   
-<link rel="alternate" type="application/atom+xml" title="Kaios上使用cmd的push注意事项 | Zander Alastor&#39;s blog - Atom Feed" href="https://pxv9w1.coding-pages.com/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="kaios端天气应用 | Zander Alastor&#39;s blog - Atom Feed" href="https://pxv9w1.coding-pages.com/atom.xml">
 
   
 
@@ -2640,14 +2643,14 @@ footer {
                     <a class="post-cate" href="https://pxv9w1.coding-pages.com/e7uSPFqNN/">KaiOS</a></div>
                 
                 <h2 class="article-title">
-                    <a href="https://pxv9w1.coding-pages.com/KaiOS_push_cmd/">Kaios上使用cmd的push注意事项</a>
+                    <a href="https://pxv9w1.coding-pages.com/Kaios_weather/">kaios端天气应用</a>
                 </h2>
                 <div class="flex-box">
                     <div class="flex-box post-meta-box">
                         <a class="post-meta" href="https://pxv9w1.coding-pages.com"><span
                                 class="iconfont icon-mr-postmeta"></span>Zander Alastor</a>
                         <span class="post-meta"><span
-                                class="iconfont icon-mr-postmeta"></span>2020 年 04	月 3日</span>
+                                class="iconfont icon-mr-postmeta"></span>2020 年 04	月 27日</span>
                         </span>
                         
 
@@ -2656,32 +2659,22 @@ footer {
                 </div>
             </div>
             <div class="content">
-                <h2 id="前排提示此问题如若不重视可能导致手机无限重启">前排提示，此问题如若不重视，可能导致手机无限重启</h2>
-<h3 id="前言此问题并非所有人都会遇到因系统版本和使用cmd或powershell而异">前言：此问题并非所有人都会遇到，因系统版本和使用cmd或powershell而异</h3>
-<hr>
-<h3 id="判断是否有问题的方式">判断是否有问题的方式：</h3>
-<p>​	使用adb进行pull，pull取任意应用（例如：adb pull /system/b2g/webapps/system.gaiamobile.org）</p>
-<p>​	情况1、如果出现以下情况（红线内部分为pull出的文件），即pull取得到的不是文件夹，而是文件夹内部分，说明你的遇到了这个bug</p>
-<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/04/03/6nPpKYCDd7aAxTS.png" alt="image.png" loading="lazy"></figure>
-<p>​	情况2、如果是出现了“system.gaiamobile.org“文件夹，说明没有问题，一切操作可以参照BH和清水博客内容，无需担忧</p>
-<hr>
-<h2 id="如果是情况1请继续往下看情况2请左转离开">如果是情况1，请继续往下看，情况2请左转离开</h2>
-<h3 id="首先注意我们进行的操作adb-pull-systemb2gwebappssystemgaiamobileorg">首先，注意我们进行的操作：adb pull /system/b2g/webapps/system.gaiamobile.org</h3>
-<h3 id="这个操作的对象是-systemgaiamobileorg-此对象在手机储存中为文件夹形式但是我们pull出的结果确为文件夹内的内容-而正常的情况应当pull出的就是-systemgaiamobileorg-文件夹-说明我们遇到了一种bug">这个操作的对象是 system.gaiamobile.org ，此对象在手机储存中为文件夹形式，但是我们pull出的结果确为文件夹内的内容。而正常的情况应当pull出的就是 system.gaiamobile.org 文件夹。说明我们遇到了一种bug。</h3>
-<h3 id="而且这个bug在push时也会出现当我们从主机向手机push时明明按照正常操作push某文件夹但是却不起作用原因就是我们看似正规操作但是push的结果确实仅仅将我们文件夹内的内容push进手机内存这样的结果导致修改失败甚至在修改系统关键应用时直接导致无限重启">而且！这个bug在push时也会出现，当我们从主机向手机push时，明明按照正常操作push某文件夹，但是却不起作用！原因就是，我们看似正规操作，但是push的结果确实仅仅将我们文件夹内的内容push进手机内存！这样的结果导致修改失败，甚至在修改系统关键应用时直接导致无限重启！</h3>
-<hr>
-<h2 id="解决方法">解决方法：</h2>
-<h3 id="我们搞清楚原因后就十分简单的能够解决这个问题既然push一层文件夹时仅仅会push进去文件夹内的内容那么我们多建立一层文件夹即可解决">我们搞清楚原因后就十分简单的能够解决这个问题！既然push一层文件夹时，仅仅会push进去文件夹内的内容，那么我们多建立一层文件夹，即可解决！</h3>
-<hr>
-<h2 id="具体示例">具体示例：</h2>
-<p>​	目的为push进去system.gaiamobile.org文件夹，</p>
-<p>​	建立new文件夹，将system.gaiamobile.org文件夹复制进new中，</p>
-<p>​	然后push new文件夹，</p>
-<p>​	结果为system.gaiamobile.org被成功push进手机内存</p>
-<hr>
-<h2 id="ps">PS：</h2>
-<p>这个问题害的我几次无限重启，希望遇到同样问题的人可以避免👍</p>
-<p>​</p>
+                <h1 id="kaios端天气应用">kaios端天气应用</h1>
+<h2 id="示例图片">示例图片</h2>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/04/27/jdagKwbChAn2DHO.png" alt="image-20200427222344578" loading="lazy"></figure>
+<h2 id="应用介绍">应用介绍</h2>
+<p>一款简易的天气应用，定位会自动通过IP获取。</p>
+<p>使用的效果就是<strong>直观</strong>，<strong>简易</strong>，没有复杂的设置，打开即用。</p>
+<p>当然比起官方商店里的 Kai weather 还是逊色几分，</p>
+<p>不过 GerdaOS 无法使用 KaiOS 官方的所有应用，因为都有系统检测。</p>
+<p>所以这个天气应用，原本就是给 Gerda 用户（<s>就是我啦</s>）准备的</p>
+<h2 id="使用说明">使用说明</h2>
+<p>打开即用，无需任何配置（当然你得开着网络</p>
+<h2 id="下载地址">下载地址</h2>
+<ul>
+<li>lanzous：<a href="https://ww.lanzous.com/ic0gkkd">https://ww.lanzous.com/ic0gkkd</a> 密码:CDBSCS</li>
+<li>Github：<a href="https://github.com/UFOAlastor/KaiOS_weather.git">https://github.com/UFOAlastor/KaiOS_weather.git</a></li>
+</ul>
 
             </div>
             <div class="button" style="text-align:center">
@@ -2691,15 +2684,10 @@ footer {
             
             <nav class="post-nav">
                 
-                <div class="nav-previous" style="text-align:left">
-                    <a class="post-nav-link-active" title="Gridea主题食用方法"
-                        href="https://pxv9w1.coding-pages.com/Gridea_themes/">上一篇文章</a>
-                </div>
-                
                 
                 <div class="nav-next" style="text-align:right">
-                    <a class="post-nav-link-active" title="测试视频播放"
-                        href="https://pxv9w1.coding-pages.com/Gridea_video/">下一篇文章</a>
+                    <a class="post-nav-link-active" title="互换友链"
+                        href="https://pxv9w1.coding-pages.com/friendly_links/">下一篇文章</a>
                 </div>
                 
             </nav>
@@ -2712,12 +2700,15 @@ footer {
             <amp-addthis width="320" height="92" layout="responsive"
                 data-pub-id="ra-5e869c8a378741d3"
                 data-widget-id="ycjr" data-widget-type="inline"
-                data-title="Kaios上使用cmd的push注意事项" data-url="https://pxv9w1.coding-pages.com/KaiOS_push_cmd/" data-media="https://pxv9w1.coding-pages.com/post-images/KaiOS_push_cmd.jpg"
-                data-description="前排提示，此问题如若不重视，可能导致手机无限重启
-前言：此问题并非所有人都会遇到，因系统版本和使用cmd或powershell而异
+                data-title="kaios端天气应用" data-url="https://pxv9w1.coding-pages.com/Kaios_weather/" data-media="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1588008417360&amp;di=120f35c342dca39d1c968830f03dda49&amp;imgtype=0&amp;src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D1670885468%2C2903682507%26fm%3D214%26gp%3D0.jpg"
+                data-description="kaios端天气应用
+示例图片
 
-判断是否有问题的方式：
-​	使用adb进行pull，pull取任意应用（例如：adb pull /syst...">
+应用介绍
+一款简易的天气应用，定位会自动通过IP获取。
+使用的效果就是直观，简易，没有复杂的设置，打开即用。
+当然比起官方商店里的 Kai weather 还是逊色几分，
+不过 GerdaOS 无法使用 K...">
             </amp-addthis>
             
             
@@ -2783,7 +2774,7 @@ footer {
                 <sup style="color:grey">访问人数<span id="busuanzi_value_site_uv"></span>位</sup>
             </span>
             <sup><span style="color:grey" class="post-meta-divider">|</span></sup>
-            <span id="/KaiOS_push_cmd/" class="leancloud_visitors" data-flag-title="Kaios上使用cmd的push注意事项">
+            <span id="/Kaios_weather/" class="leancloud_visitors" data-flag-title="kaios端天气应用">
                 <sup style="color:grey" class="post-meta-item-text">阅读量</sup>
                 <sup style="color:grey" class="leancloud-visitors-count"></sup>
             </span>

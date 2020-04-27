@@ -7,12 +7,11 @@
 
 <body>
     <div class="gallery">
-        <h1 style="color:#333;">------------</h1>
-        <h1 style="color:pink;position:fixed;top: 2%;left: 4%">My Friends</h1>
-        <div class="button" style="text-align:center">
-            <button class="pulse" style="position: fixed;top: 75%;left: 4%;"
-                onclick="javascrtpt:window.location.href='/friendly_links'">互换友链</button>
-            <button class="pulse" style="position: fixed;top: 85%;left: 4%;" id="back">返回</button> </div>
+        <h1 style="color:pink;position:fixed;top: 2%;left: 4%;">My Friends</h1>
+        <div class="button" style="text-align:center;position: fixed;bottom: 5%;left: 4%;">
+            <button class="pulse" onclick=" javascrtpt:window.location.href='/friendly_links'">互换友链</button>
+            <p><button class=" pulse" id="back">返回页面</button></p>
+        </div>
         <script>
             var back = document.getElementById('back')
             back.onclick = function () {

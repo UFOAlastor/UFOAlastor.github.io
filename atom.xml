@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pxv9w1.coding-pages.com</id>
     <title>Zander Alastor&apos;s blog</title>
-    <updated>2020-05-02T03:14:35.211Z</updated>
+    <updated>2020-05-03T11:42:46.131Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pxv9w1.coding-pages.com"/>
     <link rel="self" href="https://pxv9w1.coding-pages.com/atom.xml"/>
@@ -29,6 +29,13 @@
     <logo>https://pxv9w1.coding-pages.com/images/avatar.png</logo>
     <icon>https://pxv9w1.coding-pages.com/favicon.ico</icon>
     <rights>All rights reserved 2020, Zander Alastor&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[【在线工具】火星文生成器]]></title>
+        <id>https://pxv9w1.coding-pages.com/Martian_converter/</id>
+        <link href="https://pxv9w1.coding-pages.com/Martian_converter/">
+        </link>
+        <updated>2020-05-03T11:41:14.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[[转载]给8110 4G安装OmniSD以安装第三方软件]]></title>
         <id>https://pxv9w1.coding-pages.com/OmniSD/</id>
@@ -91,12 +98,5 @@
         <link href="https://pxv9w1.coding-pages.com/great_web/">
         </link>
         <updated>2020-04-22T00:38:46.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[ kaios端高德地图]]></title>
-        <id>https://pxv9w1.coding-pages.com/KaiOS_map/</id>
-        <link href="https://pxv9w1.coding-pages.com/KaiOS_map/">
-        </link>
-        <updated>2020-04-17T15:42:06.000Z</updated>
     </entry>
 </feed>

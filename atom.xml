@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://pxv9w1.coding-pages.com</id>
+    <id>https://UFOAlastor.github.io</id>
     <title>Zander Alastor&apos;s blog</title>
-    <updated>2020-05-04T11:30:31.755Z</updated>
+    <updated>2020-05-06T01:41:30.458Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://pxv9w1.coding-pages.com"/>
-    <link rel="self" href="https://pxv9w1.coding-pages.com/atom.xml"/>
+    <link rel="alternate" href="https://UFOAlastor.github.io"/>
+    <link rel="self" href="https://UFOAlastor.github.io/atom.xml"/>
     <subtitle>&lt;a href=https://Alastor.top/welcome/ style=text-align:center&gt;----Welcome to my blog!----&lt;/a&gt;
 &lt;p style=text-align:center&gt;Zander Alastor~此店不售此书&lt;/p&gt;
 &lt;p style=text-align:center&gt;QQ: 1436922125 (∠・ω&lt; )⌒★&lt;/p&gt; &lt;p style=text-align:center&gt;ZanderAlastorUFO@gmail.com&lt;/p&gt;
@@ -26,76 +26,76 @@
     }
     xhr.send();
 &lt;/script&gt;</subtitle>
-    <logo>https://pxv9w1.coding-pages.com/images/avatar.png</logo>
-    <icon>https://pxv9w1.coding-pages.com/favicon.ico</icon>
+    <logo>https://UFOAlastor.github.io/images/avatar.png</logo>
+    <icon>https://UFOAlastor.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Zander Alastor&apos;s blog</rights>
     <entry>
         <title type="html"><![CDATA[高中学习必备网站]]></title>
-        <id>https://pxv9w1.coding-pages.com/study/</id>
-        <link href="https://pxv9w1.coding-pages.com/study/">
+        <id>https://UFOAlastor.github.io/study/</id>
+        <link href="https://UFOAlastor.github.io/study/">
         </link>
         <updated>2020-05-04T11:29:05.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[【在线工具】各类临时网盘]]></title>
-        <id>https://pxv9w1.coding-pages.com/seed/</id>
-        <link href="https://pxv9w1.coding-pages.com/seed/">
+        <id>https://UFOAlastor.github.io/seed/</id>
+        <link href="https://UFOAlastor.github.io/seed/">
         </link>
         <updated>2020-05-03T12:16:35.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[【在线工具】火星文生成器]]></title>
-        <id>https://pxv9w1.coding-pages.com/Martian_converter/</id>
-        <link href="https://pxv9w1.coding-pages.com/Martian_converter/">
+        <id>https://UFOAlastor.github.io/Martian_converter/</id>
+        <link href="https://UFOAlastor.github.io/Martian_converter/">
         </link>
         <updated>2020-05-03T11:41:14.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[[转载]给8110 4G安装OmniSD以安装第三方软件]]></title>
-        <id>https://pxv9w1.coding-pages.com/OmniSD/</id>
-        <link href="https://pxv9w1.coding-pages.com/OmniSD/">
+        <id>https://UFOAlastor.github.io/OmniSD/</id>
+        <link href="https://UFOAlastor.github.io/OmniSD/">
         </link>
         <updated>2020-05-02T01:26:50.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[生成可移动显示屏才能看的密文]]></title>
-        <id>https://pxv9w1.coding-pages.com/Generate_ciphertext_for_mobile_display/</id>
-        <link href="https://pxv9w1.coding-pages.com/Generate_ciphertext_for_mobile_display/">
+        <id>https://UFOAlastor.github.io/Generate_ciphertext_for_mobile_display/</id>
+        <link href="https://UFOAlastor.github.io/Generate_ciphertext_for_mobile_display/">
         </link>
         <updated>2020-05-01T12:59:51.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[网站添加存活时间显示]]></title>
-        <id>https://pxv9w1.coding-pages.com/blog_time/</id>
-        <link href="https://pxv9w1.coding-pages.com/blog_time/">
+        <id>https://UFOAlastor.github.io/blog_time/</id>
+        <link href="https://UFOAlastor.github.io/blog_time/">
         </link>
         <updated>2020-05-01T03:33:48.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[我的浏览器美化]]></title>
-        <id>https://pxv9w1.coding-pages.com/browser_beauty/</id>
-        <link href="https://pxv9w1.coding-pages.com/browser_beauty/">
+        <id>https://UFOAlastor.github.io/browser_beauty/</id>
+        <link href="https://UFOAlastor.github.io/browser_beauty/">
         </link>
         <updated>2020-04-29T03:31:11.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[【在线网站】动漫人物特征搜索器]]></title>
-        <id>https://pxv9w1.coding-pages.com/ACG_finding/</id>
-        <link href="https://pxv9w1.coding-pages.com/ACG_finding/">
+        <id>https://UFOAlastor.github.io/ACG_finding/</id>
+        <link href="https://UFOAlastor.github.io/ACG_finding/">
         </link>
         <updated>2020-04-28T01:50:36.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[营销号生成器]]></title>
-        <id>https://pxv9w1.coding-pages.com/yinxiaohao/</id>
-        <link href="https://pxv9w1.coding-pages.com/yinxiaohao/">
+        <id>https://UFOAlastor.github.io/yinxiaohao/</id>
+        <link href="https://UFOAlastor.github.io/yinxiaohao/">
         </link>
         <updated>2020-04-27T14:58:00.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[kaios端天气应用]]></title>
-        <id>https://pxv9w1.coding-pages.com/Kaios_weather/</id>
-        <link href="https://pxv9w1.coding-pages.com/Kaios_weather/">
+        <id>https://UFOAlastor.github.io/Kaios_weather/</id>
+        <link href="https://UFOAlastor.github.io/Kaios_weather/">
         </link>
         <updated>2020-04-27T14:37:51.000Z</updated>
     </entry>

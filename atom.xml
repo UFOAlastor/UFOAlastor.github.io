@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://UFOAlastor.github.io</id>
     <title>Zander Alastor&apos;s blog</title>
-    <updated>2020-05-09T04:06:37.113Z</updated>
+    <updated>2020-05-09T13:40:03.928Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://UFOAlastor.github.io"/>
     <link rel="self" href="https://UFOAlastor.github.io/atom.xml"/>
@@ -29,6 +29,13 @@
     <logo>https://UFOAlastor.github.io/images/avatar.png</logo>
     <icon>https://UFOAlastor.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Zander Alastor&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[测试网易云备用在线站]]></title>
+        <id>https://UFOAlastor.github.io/ixj8Q2CSO/</id>
+        <link href="https://UFOAlastor.github.io/ixj8Q2CSO/">
+        </link>
+        <updated>2020-05-09T13:38:25.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[高中学习必备网站]]></title>
         <id>https://UFOAlastor.github.io/study/</id>
@@ -91,12 +98,5 @@
         <link href="https://UFOAlastor.github.io/yinxiaohao/">
         </link>
         <updated>2020-04-27T14:58:00.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[kaios端天气应用]]></title>
-        <id>https://UFOAlastor.github.io/Kaios_weather/</id>
-        <link href="https://UFOAlastor.github.io/Kaios_weather/">
-        </link>
-        <updated>2020-04-27T14:37:51.000Z</updated>
     </entry>
 </feed>

@@ -4,15 +4,17 @@
 <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-<meta name="description" content="Typora+PicGo-core插入图片自动上传
-注意：请确保node.js版本为新版（大于V8）node.js官网下载地址
-1.安装PicGo-Core
+<meta name="description" content="先来张对比图
 
-上传服务选择PicGo-Core后，点击下载或更新，会自动下载好最新版本
-等待安..." />
+
+然后直接上代码：
+#图片转手绘风
+from PIL import Image
+import numpy as np
+a = np.asarray(Image.open(&quot;绝对路径/a.jpg&quot;).con..." />
 <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js">
 <script async src="https://cdn.ampproject.org/v0.js"></script>
-<title>Typora+PicGo-core插入图片自动上传 | Zander Alastor&#39;s blog</title>
+<title>python小程序：图片转手绘风 | Zander Alastor&#39;s blog</title>
 <style amp-custom>
 body {
     width: 100vw;
@@ -2501,7 +2503,7 @@ footer {
 </style>
 <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
 <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-<link rel="canonical" href="https://UFOAlastor.github.io/PicGo-Core_and_Typora/" />
+<link rel="canonical" href="https://UFOAlastor.github.io/handy_painting/" />
 <link rel="shortcut icon" href="https://UFOAlastor.github.io/favicon.ico?v=1624092590571">
 <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
@@ -2517,7 +2519,7 @@ footer {
   <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
   <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
   
-<link rel="alternate" type="application/atom+xml" title="Typora+PicGo-core插入图片自动上传 | Zander Alastor&#39;s blog - Atom Feed" href="https://UFOAlastor.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="python小程序：图片转手绘风 | Zander Alastor&#39;s blog - Atom Feed" href="https://UFOAlastor.github.io/atom.xml">
 
   
 
@@ -2646,17 +2648,17 @@ footer {
             <div class="article-info">
                 
                 <div class="flex-box meta-category">
-                    <a class="post-cate" href="https://UFOAlastor.github.io/Tools/">工具分享</a></div>
+                    <a class="post-cate" href="https://UFOAlastor.github.io/ifuZwWow1/">python</a></div>
                 
                 <h2 class="article-title">
-                    <a href="https://UFOAlastor.github.io/PicGo-Core_and_Typora/">Typora+PicGo-core插入图片自动上传</a>
+                    <a href="https://UFOAlastor.github.io/handy_painting/">python小程序：图片转手绘风</a>
                 </h2>
                 <div class="flex-box">
                     <div class="flex-box post-meta-box">
                         <a class="post-meta" href="https://UFOAlastor.github.io"><span
                                 class="iconfont icon-mr-postmeta"></span>Zander Alastor</a>
                         <span class="post-meta"><span
-                                class="iconfont icon-mr-postmeta"></span>2020 年 04	月 13日</span>
+                                class="iconfont icon-mr-postmeta"></span>2021 年 06	月 19日</span>
                         </span>
                         
 
@@ -2665,66 +2667,36 @@ footer {
                 </div>
             </div>
             <div class="content">
-                <h1 id="typorapicgo-core插入图片自动上传">Typora+PicGo-core插入图片自动上传</h1>
-<p><strong>注意</strong>：请确保node.js版本为新版（大于V8）<a href="https://nodejs.org/zh-cn/download/">node.js官网下载地址</a></p>
-<h2 id="1安装picgo-core">1.安装PicGo-Core</h2>
-<figure data-type="image" tabindex="1"><img src="https://gitee.com/Zander_Alastor/Figurebed/raw/master/img/image-20200413092859572.png" alt="image-20200413092859572" loading="lazy"></figure>
-<p>上传服务选择PicGo-Core后，点击下载或更新，会自动下载好最新版本</p>
-<p>等待安装完成后，验证图片上传功能，会发现无法使用</p>
-<figure data-type="image" tabindex="2"><img src="https://gitee.com/Zander_Alastor/Figurebed/raw/master/img/dFrkQGtsI6u83Ea.png" alt="image.png" loading="lazy"></figure>
-<h2 id="2-复制下图片中所示的路径打开cmd">2. 复制下图片中所示的路径，打开cmd</h2>
-<pre><code class="language-cmd">cd C:\Users\你的用户名\AppData\Roaming\Typora\picgo\win64
-.\picgo.exe install smms-user
-.\picgo.exe install gitee-uploader
-.\picgo.exe install github-plus
+                <h2 id="先来张对比图">先来张对比图</h2>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2021/06/19/TpdkylICXirw5et.jpg" alt="69940876_p0" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2021/06/19/6o1GVmjeb7RnyHA.jpg" alt="beauty" loading="lazy"></figure>
+<h2 id="然后直接上代码">然后直接上代码：</h2>
+<pre><code class="language-python">#图片转手绘风
+from PIL import Image
+import numpy as np
+a = np.asarray(Image.open(&quot;绝对路径/a.jpg&quot;).convert(&quot;L&quot;)).astype(&quot;float&quot;) 
+#注意python中路径要用&quot;/&quot;(正斜杠)，反斜杠被python识别为转义符号
+depth = 10  #设置深度为10
+grad = np.gradient(a)   #对数组a求梯度
+grad_x, grad_y = grad
+grad_x = grad_x*depth/100
+grad_y = grad_y*depth/100
+A = np.sqrt(grad_x**2 + grad_y**2 + 1.)
+uni_x = grad_x/A
+uni_y = grad_y/A
+uni_z = 1./A
+vec_el = np.pi/2.2  #θ角度
+vec_az = np.pi/4.   #α角度
+dx = np.cos(vec_el)*np.cos(vec_az)
+dy = np.cos(vec_el)*np.sin(vec_az)
+dz = np.sin(vec_el)
+b = 255*(dx*uni_x + dy*uni_y + dz*uni_z)
+b = b.clip(0, 255)
+im = Image.fromarray(b.astype('uint8'))
+im.save(&quot;绝对路径/hand_drawing.jpg&quot;)
 </code></pre>
-<p>执行如上命令（可以看出来是smms，gitee，github的插件安装，按需安装）</p>
-<h2 id="3-配置picgo-core">3. 配置PicGO-Core</h2>
-<p>安装完后，点击<strong>打开配置文件</strong></p>
-<p>复制上以下代码：</p>
-<pre><code class="language-c++">{
-  &quot;picBed&quot;: {
-    &quot;current&quot;: &quot;gitee&quot;,
-    &quot;uploader&quot;: &quot;gitee&quot;,
-    &quot;githubPlus&quot;: {
-      &quot;branch&quot;: &quot;master&quot;,
-      &quot;customUrl&quot;: &quot;https://cdn.jsdelivr.net/gh/用户名/项目名&quot;,
-      &quot;path&quot;: &quot;img/&quot;,
-      &quot;repo&quot;: &quot;github用户名/github仓库名&quot;,
-      &quot;token&quot;: &quot;自己的token&quot;
-    },
-    &quot;gitee&quot;: {
-      &quot;branch&quot;: &quot;master&quot;,
-      &quot;customPath&quot;: &quot;yearMonth&quot;,
-      &quot;customUrl&quot;: &quot;&quot;,
-      &quot;path&quot;: &quot;img/&quot;,
-      &quot;repo&quot;: &quot;gitee用户名/gitee仓库名&quot;,
-      &quot;token&quot;: &quot;自己的token&quot;
-    },
-    &quot;smms-user&quot;: {
-      &quot;Authorization&quot;: &quot;替换成你自己的token&quot;
-    },
-    &quot;transformer&quot;: &quot;path&quot;
-  },
-  &quot;picgoPlugins&quot;: {
-    &quot;picgo-plugin-gitee-uploader&quot;: true,
-    &quot;picgo-plugin-smms-user&quot;: true,
-    &quot;picgo-plugin-github-plus&quot;: true
-  }
-}
-</code></pre>
-<p>注：因国内raw.githubusercontent.com地址被墙，这里github的自定义url为cdn地址&quot;customUrl&quot;: “https://cdn.jsdelivr.net/gh/用户名/项目名”</p>
-<p>如何创建github项目和gitee项目这里不做过多赘述，网上教程很多。这里只拿gitee做个示例。注意下图框选出的红色区域就可以了。</p>
-<figure data-type="image" tabindex="3"><img src="https://gitee.com/Zander_Alastor/Figurebed/raw/master/img/STwRLO758QZxHbK.png" alt="image.png" loading="lazy"></figure>
-<p>进入个人设置，生成令牌token</p>
-<figure data-type="image" tabindex="4"><img src="https://gitee.com/Zander_Alastor/Figurebed/raw/master/img/vghWjNT5QlYHCq4.png" alt="image.png" loading="lazy"></figure>
-<figure data-type="image" tabindex="5"><img src="https://gitee.com/Zander_Alastor/Figurebed/raw/master/img/Q9bthdsXgu87oVy.png" alt="image.png" loading="lazy"></figure>
-<p>注意token只会显示一次，记得立马保存起来</p>
-<p>smms的token在此网页申请： <a href="https://sm.ms/home/apitoken">https://sm.ms/home/apitoken</a></p>
-<h2 id="4-体验上传">4. 体验上传</h2>
-<p>设置好并保存配置文件，再次点击验证图片上传就正常上传了。</p>
-<p>（因为我忘记截图了，再上传一次的提示不一样，就借用下网图展示验证成功的画面，如果侵犯了您的权益请与我联系，一切仅供学习交流）</p>
-<figure data-type="image" tabindex="6"><img src="https://gitee.com/Zander_Alastor/Figurebed/raw/master/img/20200407130748887.png" alt="" loading="lazy"></figure>
+<h3 id="ps">ps：</h3>
+<p>记得安装PIL和numpy的库 😃</p>
 
             </div>
             <div class="button" style="text-align:center">
@@ -2734,15 +2706,10 @@ footer {
             
             <nav class="post-nav">
                 
-                <div class="nav-previous" style="text-align:left">
-                    <a class="post-nav-link-active" title="Win10卸载更新"
-                        href="https://UFOAlastor.github.io/win10_delete_update/">上一篇文章</a>
-                </div>
-                
                 
                 <div class="nav-next" style="text-align:right">
-                    <a class="post-nav-link-active" title="图片按钮"
-                        href="https://UFOAlastor.github.io/pic_button/">下一篇文章</a>
+                    <a class="post-nav-link-active" title="暑假结束"
+                        href="https://UFOAlastor.github.io/holiday_finished/">下一篇文章</a>
                 </div>
                 
             </nav>
@@ -2755,13 +2722,15 @@ footer {
             <amp-addthis width="320" height="92" layout="responsive"
                 data-pub-id="ra-5e869c8a378741d3"
                 data-widget-id="ycjr" data-widget-type="inline"
-                data-title="Typora+PicGo-core插入图片自动上传" data-url="https://UFOAlastor.github.io/PicGo-Core_and_Typora/" data-media="https://gitee.com/Zander_Alastor/Figurebed/raw/master/img/image-20200413092859572.png"
-                data-description="Typora+PicGo-core插入图片自动上传
-注意：请确保node.js版本为新版（大于V8）node.js官网下载地址
-1.安装PicGo-Core
+                data-title="python小程序：图片转手绘风" data-url="https://UFOAlastor.github.io/handy_painting/" data-media="https://i.loli.net/2021/06/19/6NgTQvePDq5ZL7a.jpg"
+                data-description="先来张对比图
 
-上传服务选择PicGo-Core后，点击下载或更新，会自动下载好最新版本
-等待安...">
+
+然后直接上代码：
+#图片转手绘风
+from PIL import Image
+import numpy as np
+a = np.asarray(Image.open(&quot;绝对路径/a.jpg&quot;).con...">
             </amp-addthis>
             
             
@@ -2770,7 +2739,7 @@ footer {
 
             <div class="post-tags">
                 
-                <a href="https://UFOAlastor.github.io/Tools/" rel="tag">工具分享</a>
+                <a href="https://UFOAlastor.github.io/ifuZwWow1/" rel="tag">python</a>
                 
             </div>
 
@@ -2879,7 +2848,7 @@ footer {
                 <sup style="color:grey">访问人数<span id="busuanzi_value_site_uv"></span>位</sup>
             </span>
             <sup><span style="color:grey" class="post-meta-divider">|</span></sup>
-            <span id="/PicGo-Core_and_Typora/" class="leancloud_visitors" data-flag-title="Typora+PicGo-core插入图片自动上传">
+            <span id="/handy_painting/" class="leancloud_visitors" data-flag-title="python小程序：图片转手绘风">
                 <sup style="color:grey" class="post-meta-item-text">阅读量</sup>
                 <sup style="color:grey" class="leancloud-visitors-count"></sup>
             </span>

@@ -2503,7 +2503,7 @@ footer {
 <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
 <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 <link rel="canonical" href="https://UFOAlastor.github.io/study/" />
-<link rel="shortcut icon" href="https://UFOAlastor.github.io/favicon.ico?v=1634482080753">
+<link rel="shortcut icon" href="https://UFOAlastor.github.io/favicon.ico?v=1634807731348">
 <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
 <script async custom-element="amp-audio" src="https://cdn.ampproject.org/v0/amp-audio-0.1.js"></script>
@@ -2583,7 +2583,7 @@ footer {
     <script>
         hljs.initHighlightingOnLoad();
     </script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
     <script type="text/javascript" src="/js/baidu_push.js"></script>
     <script type="text/javascript" src="/js/cilckheart.js"></script>
     <script type="text/javascript" src="/js/socialism.js"></script>
@@ -2592,7 +2592,7 @@ footer {
     <link rel="stylesheet" href="/css/button.css" />
     <link rel="stylesheet" href="/css/Base.css" />
     <!-- requier markdown -->
-    <script type="text/javascript" src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
+    <script type="text/javascript" src="/showdown-master/dist/showdown.min.js"></script>
 </head>
 
 <body>
@@ -2666,7 +2666,7 @@ footer {
                     </div>
                 </div>
             </div>
-            <div class="content">
+            <div class="content" id="content">
                 <p>作为备考的高中党（我真是闲，还更新博客），推荐几个自用的学习网站</p>
 <h2 id="古诗文网">古诗文网</h2>
 <p><a href="https://www.gushiwen.org/">https://www.gushiwen.org/</a></p>
@@ -2863,7 +2863,7 @@ https://www.gushiwen.org/
     <aside id="profile-2" class="widget widget_profile">
         <div class="profile-box">
             <div class="profile-avatar">
-                <amp-img src="https://UFOAlastor.github.io/images/avatar.png?v=1634482080753" alt="avatar"
+                <amp-img src="https://UFOAlastor.github.io/images/avatar.png?v=1634807731348" alt="avatar"
                     layout="fill"></amp-img>
             </div>
             <div class="profile-content">
@@ -2911,6 +2911,12 @@ https://www.gushiwen.org/
             
             
             <li>
+                <a href="https://UFOAlastor.github.io/jxnLliKTj/" aria-current="page">高数知识网络图</a>
+            </li>
+            
+            
+            
+            <li>
                 <a href="https://UFOAlastor.github.io/Z2z_mkBwM/" aria-current="page">让你顿悟树状数组原理与由来</a>
             </li>
             
@@ -2921,10 +2927,6 @@ https://www.gushiwen.org/
             </li>
             
             
-            
-            <li>
-                <a href="https://UFOAlastor.github.io/ewwVR1Gkl/" aria-current="page">论如何惊艳整层楼</a>
-            </li>
             
             
             
@@ -3122,5 +3124,13 @@ https://www.gushiwen.org/
 
     
 </body>
-
+<!-- markdown -->
+<script type="text/javascript">
+    function convert(){
+        var text = document.getElementById("content").value;
+        var converter = new showdown.Converter();
+        var html = converter.makeHtml(text);
+        document.getElementById("content").innerHTML = html;
+    }
+    </script>
 </html>

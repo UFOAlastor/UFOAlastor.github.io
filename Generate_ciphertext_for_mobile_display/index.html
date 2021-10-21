@@ -2502,7 +2502,7 @@ footer {
 <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
 <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 <link rel="canonical" href="https://UFOAlastor.github.io/Generate_ciphertext_for_mobile_display/" />
-<link rel="shortcut icon" href="https://UFOAlastor.github.io/favicon.ico?v=1634482080753">
+<link rel="shortcut icon" href="https://UFOAlastor.github.io/favicon.ico?v=1634807731348">
 <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
 <script async custom-element="amp-audio" src="https://cdn.ampproject.org/v0/amp-audio-0.1.js"></script>
@@ -2582,7 +2582,7 @@ footer {
     <script>
         hljs.initHighlightingOnLoad();
     </script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
     <script type="text/javascript" src="/js/baidu_push.js"></script>
     <script type="text/javascript" src="/js/cilckheart.js"></script>
     <script type="text/javascript" src="/js/socialism.js"></script>
@@ -2591,7 +2591,7 @@ footer {
     <link rel="stylesheet" href="/css/button.css" />
     <link rel="stylesheet" href="/css/Base.css" />
     <!-- requier markdown -->
-    <script type="text/javascript" src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
+    <script type="text/javascript" src="/showdown-master/dist/showdown.min.js"></script>
 </head>
 
 <body>
@@ -2665,7 +2665,7 @@ footer {
                     </div>
                 </div>
             </div>
-            <div class="content">
+            <div class="content" id="content">
                 <h1 id="生成可移动显示屏才能看的密文">生成可移动显示屏才能看的密文</h1>
 <p>大概是几年前在贴吧看到过这种图片</p>
 <figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/05/01/gYGz8ucHNZhsTxi.png" alt="image-20200501205116191" loading="lazy"></figure>
@@ -2961,7 +2961,7 @@ document.getElementById('save').onclick = function () {
     <aside id="profile-2" class="widget widget_profile">
         <div class="profile-box">
             <div class="profile-avatar">
-                <amp-img src="https://UFOAlastor.github.io/images/avatar.png?v=1634482080753" alt="avatar"
+                <amp-img src="https://UFOAlastor.github.io/images/avatar.png?v=1634807731348" alt="avatar"
                     layout="fill"></amp-img>
             </div>
             <div class="profile-content">
@@ -3009,6 +3009,12 @@ document.getElementById('save').onclick = function () {
             
             
             <li>
+                <a href="https://UFOAlastor.github.io/jxnLliKTj/" aria-current="page">高数知识网络图</a>
+            </li>
+            
+            
+            
+            <li>
                 <a href="https://UFOAlastor.github.io/Z2z_mkBwM/" aria-current="page">让你顿悟树状数组原理与由来</a>
             </li>
             
@@ -3019,10 +3025,6 @@ document.getElementById('save').onclick = function () {
             </li>
             
             
-            
-            <li>
-                <a href="https://UFOAlastor.github.io/ewwVR1Gkl/" aria-current="page">论如何惊艳整层楼</a>
-            </li>
             
             
             
@@ -3220,5 +3222,13 @@ document.getElementById('save').onclick = function () {
 
     
 </body>
-
+<!-- markdown -->
+<script type="text/javascript">
+    function convert(){
+        var text = document.getElementById("content").value;
+        var converter = new showdown.Converter();
+        var html = converter.makeHtml(text);
+        document.getElementById("content").innerHTML = html;
+    }
+    </script>
 </html>

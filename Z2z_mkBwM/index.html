@@ -2500,7 +2500,7 @@ footer {
 <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
 <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 <link rel="canonical" href="https://UFOAlastor.github.io/Z2z_mkBwM/" />
-<link rel="shortcut icon" href="https://UFOAlastor.github.io/favicon.ico?v=1634482080753">
+<link rel="shortcut icon" href="https://UFOAlastor.github.io/favicon.ico?v=1634807731348">
 <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
 <script async custom-element="amp-audio" src="https://cdn.ampproject.org/v0/amp-audio-0.1.js"></script>
@@ -2580,7 +2580,7 @@ footer {
     <script>
         hljs.initHighlightingOnLoad();
     </script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
     <script type="text/javascript" src="/js/baidu_push.js"></script>
     <script type="text/javascript" src="/js/cilckheart.js"></script>
     <script type="text/javascript" src="/js/socialism.js"></script>
@@ -2589,7 +2589,7 @@ footer {
     <link rel="stylesheet" href="/css/button.css" />
     <link rel="stylesheet" href="/css/Base.css" />
     <!-- requier markdown -->
-    <script type="text/javascript" src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
+    <script type="text/javascript" src="/showdown-master/dist/showdown.min.js"></script>
 </head>
 
 <body>
@@ -2663,7 +2663,7 @@ footer {
                     </div>
                 </div>
             </div>
-            <div class="content">
+            <div class="content" id="content">
                 <h2 id="引言">引言</h2>
 <p>因为高三备考，一年多没打过代码，现在要参加ACM，赶紧把算法复习一下。</p>
 <p>复习到树状数组的时候，我就在想，我肯定是还没有理解到精髓，不然怎么会仅仅几行的板子都记不住。</p>
@@ -2679,10 +2679,10 @@ footer {
 <figure data-type="image" tabindex="1"><img src="https://i.loli.net/2021/10/17/abT3NvCeZks1JIy.png" alt="image-20211017212421036" loading="lazy"></figure>
 <p>再给它的小圆点标上标记，方便说明：</p>
 <figure data-type="image" tabindex="2"><img src="https://i.loli.net/2021/10/17/cafWBtUIu3YVxP9.png" alt="image-20211017212905834" loading="lazy"></figure>
-<p>如<strong>上图</strong>，比如我们要求前8位的前缀和，非常简单，我们直接存储在**[1,8]**这个元素里了</p>
+<p>如<strong>上图</strong>，比如我们要求前8位的前缀和，非常简单，我们直接存储在 <strong>[1,8]</strong> 这个元素里了</p>
 <p>那如果是前7位的前缀和呢？</p>
 <figure data-type="image" tabindex="3"><img src="https://i.loli.net/2021/10/17/ZW3hdJ9narQ2AtM.png" alt="image-20211017213145220" loading="lazy"></figure>
-<p>前7位的前缀和在这里面，不像前八位可以直接储存在**[1,8]**这个元素里，那么我们要将几个元素相加</p>
+<p>前7位的前缀和在这里面，不像前八位可以直接储存在 <strong>[1,8]</strong> 这个元素里，那么我们要将几个元素相加</p>
 <figure data-type="image" tabindex="4"><img src="https://i.loli.net/2021/10/17/PonUIYKVxJT2Q4y.png" alt="image-20211017213514652" loading="lazy"></figure>
 <p>简单思考可以知道，如上<strong>粉色</strong>标记的元素，相加后就可以得到前七位的前缀和</p>
 <p>我们通过数字标记写出来就是：</p>
@@ -2734,6 +2734,11 @@ footer {
             </div>
             
             <nav class="post-nav">
+                
+                <div class="nav-previous" style="text-align:left">
+                    <a class="post-nav-link-active" title="高数知识网络图"
+                        href="https://UFOAlastor.github.io/jxnLliKTj/">上一篇文章</a>
+                </div>
                 
                 
                 <div class="nav-next" style="text-align:right">
@@ -2885,7 +2890,7 @@ footer {
     <aside id="profile-2" class="widget widget_profile">
         <div class="profile-box">
             <div class="profile-avatar">
-                <amp-img src="https://UFOAlastor.github.io/images/avatar.png?v=1634482080753" alt="avatar"
+                <amp-img src="https://UFOAlastor.github.io/images/avatar.png?v=1634807731348" alt="avatar"
                     layout="fill"></amp-img>
             </div>
             <div class="profile-content">
@@ -2933,6 +2938,12 @@ footer {
             
             
             <li>
+                <a href="https://UFOAlastor.github.io/jxnLliKTj/" aria-current="page">高数知识网络图</a>
+            </li>
+            
+            
+            
+            <li>
                 <a href="https://UFOAlastor.github.io/Z2z_mkBwM/" aria-current="page">让你顿悟树状数组原理与由来</a>
             </li>
             
@@ -2943,10 +2954,6 @@ footer {
             </li>
             
             
-            
-            <li>
-                <a href="https://UFOAlastor.github.io/ewwVR1Gkl/" aria-current="page">论如何惊艳整层楼</a>
-            </li>
             
             
             
@@ -3144,5 +3151,13 @@ footer {
 
     
 </body>
-
+<!-- markdown -->
+<script type="text/javascript">
+    function convert(){
+        var text = document.getElementById("content").value;
+        var converter = new showdown.Converter();
+        var html = converter.makeHtml(text);
+        document.getElementById("content").innerHTML = html;
+    }
+    </script>
 </html>

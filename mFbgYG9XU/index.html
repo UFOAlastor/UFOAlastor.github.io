@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-<meta name="description" content="前排提示，此问题如若不重视，可能导致手机无限重启
-前言：此问题并非所有人都会遇到，因系统版本和使用cmd或powershell而异
-
-判断是否有问题的方式：
-​	使用adb进行pull，pull取任意应用（例如：adb pull /syst..." />
+<meta name="description" content="目标网站：中国国家数字图书馆
+目标任务：获取全部图书书名，计算平均书名长度
+具体过程
+1.分析网站
+​	网站URL“http://read.nlc.cn/allSearch/searchList?searchType=1&amp;showT..." />
 <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js">
 <script async src="https://cdn.ampproject.org/v0.js"></script>
-<title>Kaios上使用cmd的push注意事项 | Zander Alastor&#39;s blog</title>
+<title>图书书名平均长度分析 | Zander Alastor&#39;s blog</title>
 <style amp-custom>
 body {
     width: 100vw;
@@ -2500,7 +2500,7 @@ footer {
 </style>
 <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
 <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-<link rel="canonical" href="https://UFOAlastor.github.io/KaiOS_push_cmd/" />
+<link rel="canonical" href="https://UFOAlastor.github.io/mFbgYG9XU/" />
 <link rel="shortcut icon" href="https://UFOAlastor.github.io/favicon.ico?v=1650789424520">
 <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
@@ -2516,7 +2516,7 @@ footer {
   <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
   <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
   
-<link rel="alternate" type="application/atom+xml" title="Kaios上使用cmd的push注意事项 | Zander Alastor&#39;s blog - Atom Feed" href="https://UFOAlastor.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="图书书名平均长度分析 | Zander Alastor&#39;s blog - Atom Feed" href="https://UFOAlastor.github.io/atom.xml">
 
   
 
@@ -2646,17 +2646,17 @@ footer {
             <div class="article-info">
                 
                 <div class="flex-box meta-category">
-                    <a class="post-cate" href="https://UFOAlastor.github.io/e7uSPFqNN/">KaiOS</a></div>
+                    <a class="post-cate" href="https://UFOAlastor.github.io/gedEdMLxu/">问题解决</a></div>
                 
                 <h2 class="article-title">
-                    <a href="https://UFOAlastor.github.io/KaiOS_push_cmd/">Kaios上使用cmd的push注意事项</a>
+                    <a href="https://UFOAlastor.github.io/mFbgYG9XU/">图书书名平均长度分析</a>
                 </h2>
                 <div class="flex-box">
                     <div class="flex-box post-meta-box">
                         <a class="post-meta" href="https://UFOAlastor.github.io"><span
                                 class="iconfont icon-mr-postmeta"></span>Zander Alastor</a>
                         <span class="post-meta"><span
-                                class="iconfont icon-mr-postmeta"></span>2020 年 04	月 3日</span>
+                                class="iconfont icon-mr-postmeta"></span>2022 年 04	月 24日</span>
                         </span>
                         
 
@@ -2665,32 +2665,62 @@ footer {
                 </div>
             </div>
             <div class="content">
-                <h2 id="前排提示此问题如若不重视可能导致手机无限重启">前排提示，此问题如若不重视，可能导致手机无限重启</h2>
-<h3 id="前言此问题并非所有人都会遇到因系统版本和使用cmd或powershell而异">前言：此问题并非所有人都会遇到，因系统版本和使用cmd或powershell而异</h3>
-<hr>
-<h3 id="判断是否有问题的方式">判断是否有问题的方式：</h3>
-<p>​	使用adb进行pull，pull取任意应用（例如：adb pull /system/b2g/webapps/system.gaiamobile.org）</p>
-<p>​	情况1、如果出现以下情况（红线内部分为pull出的文件），即pull取得到的不是文件夹，而是文件夹内部分，说明你的遇到了这个bug</p>
-<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/04/03/6nPpKYCDd7aAxTS.png" alt="image.png" loading="lazy"></figure>
-<p>​	情况2、如果是出现了“system.gaiamobile.org“文件夹，说明没有问题，一切操作可以参照BH和清水博客内容，无需担忧</p>
-<hr>
-<h2 id="如果是情况1请继续往下看情况2请左转离开">如果是情况1，请继续往下看，情况2请左转离开</h2>
-<h3 id="首先注意我们进行的操作adb-pull-systemb2gwebappssystemgaiamobileorg">首先，注意我们进行的操作：adb pull /system/b2g/webapps/system.gaiamobile.org</h3>
-<h3 id="这个操作的对象是-systemgaiamobileorg-此对象在手机储存中为文件夹形式但是我们pull出的结果确为文件夹内的内容-而正常的情况应当pull出的就是-systemgaiamobileorg-文件夹-说明我们遇到了一种bug">这个操作的对象是 system.gaiamobile.org ，此对象在手机储存中为文件夹形式，但是我们pull出的结果确为文件夹内的内容。而正常的情况应当pull出的就是 system.gaiamobile.org 文件夹。说明我们遇到了一种bug。</h3>
-<h3 id="而且这个bug在push时也会出现当我们从主机向手机push时明明按照正常操作push某文件夹但是却不起作用原因就是我们看似正规操作但是push的结果确实仅仅将我们文件夹内的内容push进手机内存这样的结果导致修改失败甚至在修改系统关键应用时直接导致无限重启">而且！这个bug在push时也会出现，当我们从主机向手机push时，明明按照正常操作push某文件夹，但是却不起作用！原因就是，我们看似正规操作，但是push的结果确实仅仅将我们文件夹内的内容push进手机内存！这样的结果导致修改失败，甚至在修改系统关键应用时直接导致无限重启！</h3>
-<hr>
-<h2 id="解决方法">解决方法：</h2>
-<h3 id="我们搞清楚原因后就十分简单的能够解决这个问题既然push一层文件夹时仅仅会push进去文件夹内的内容那么我们多建立一层文件夹即可解决">我们搞清楚原因后就十分简单的能够解决这个问题！既然push一层文件夹时，仅仅会push进去文件夹内的内容，那么我们多建立一层文件夹，即可解决！</h3>
-<hr>
-<h2 id="具体示例">具体示例：</h2>
-<p>​	目的为push进去system.gaiamobile.org文件夹，</p>
-<p>​	建立new文件夹，将system.gaiamobile.org文件夹复制进new中，</p>
-<p>​	然后push new文件夹，</p>
-<p>​	结果为system.gaiamobile.org被成功push进手机内存</p>
-<hr>
-<h2 id="ps">PS：</h2>
-<p>这个问题害的我几次无限重启，希望遇到同样问题的人可以避免👍</p>
-<p>​</p>
+                <p>目标网站：中国国家数字图书馆</p>
+<p>目标任务：获取全部图书书名，计算平均书名长度</p>
+<h2 id="具体过程">具体过程</h2>
+<h3 id="1分析网站">1.分析网站</h3>
+<p>​	网站URL“http://read.nlc.cn/allSearch/searchList?searchType=1&amp;showType=1&amp;pageNo=1”</p>
+<p>​	包含“pageNo”元素，借此控制页面切换</p>
+<p>​	网页源代码中书名被包含于“&lt;span class=&quot;tt&quot;&gt;书名&lt;/span&gt;”之中，通过string的find函数定位切取出书名</p>
+<p>​	全部书名存放于文件中</p>
+<p>​	爬虫部分的代码：</p>
+<pre><code class="language-py">from stat import S_IFBLK
+import requests
+User_Agent = &quot;随机浏览器识别码&quot;
+fp = open(&quot;./BookName.txt&quot;,&quot;a&quot;,encoding='utf-8') #储存文件
+
+for i in range(6061): #一共6060页，72716本书
+    print(&quot;No. {}&quot;.format(i))
+    PageNo = str(i)
+    Url = &quot;http://read.nlc.cn/allSearch/searchList?searchType=1&amp;showType=1&amp;pageNo=&quot;+PageNo+&quot;&amp;searchWord=&amp;classification=&quot;
+    r = requests.get(
+        Url,
+        headers={'User-Agent':User_Agent}
+        )
+    print(&quot;\t{}&quot;.format(r.status_code))
+    if(r.status_code == 200):
+        r.encoding = &quot;utf-8&quot;
+        Str = r.text
+        while(Str.find(&quot;&lt;span class=\&quot;tt\&quot;&gt;&quot;) != -1):
+            pos1 = Str.find(&quot;&lt;span class=\&quot;tt\&quot;&gt;&quot;)
+            Str = Str[pos1+17:]
+            pos2 = Str.find(&quot;&lt;/span&gt;&quot;)
+            bookName = Str[0:pos2]
+            bookName.replace(&quot;\u200E&quot;,&quot;&quot;)
+            fp.write(bookName+'\n')
+
+    else: #被反爬虫了就弹出并且报出中断位置，下次直接从该位置继续
+        print(&quot;Error! now pageNo is {}&quot;.format(i))
+</code></pre>
+<h3 id="2书名处理">2.书名处理</h3>
+<p>将文件中储存的书名全部读入，累加字符长度，除以书本数量得到平均书名长度</p>
+<p>代码：</p>
+<pre><code class="language-py">fp = open(&quot;./BookName.txt&quot;,'r',encoding=&quot;utf-8&quot;)
+ans, num = 0, 0
+
+while(1):
+    Str = fp.readline()
+    if(Str == &quot;&quot;):
+        break
+    ans += len(Str)
+    num += 1
+
+print(ans/num)
+</code></pre>
+<h3 id="3结果部分">3.结果部分</h3>
+<p>中文一个字和英文一个字母都看作一个长度</p>
+<p>结果为“39.66392540843831”平均长度</p>
+<p>主要还是英文书名拉长了平均长度，另外国家图书馆的书好像书名也基本上挺长的。</p>
 
             </div>
             <div class="button" style="text-align:center">
@@ -2700,15 +2730,10 @@ footer {
             
             <nav class="post-nav">
                 
-                <div class="nav-previous" style="text-align:left">
-                    <a class="post-nav-link-active" title="Gridea主题食用方法"
-                        href="https://UFOAlastor.github.io/Gridea_themes/">上一篇文章</a>
-                </div>
-                
                 
                 <div class="nav-next" style="text-align:right">
-                    <a class="post-nav-link-active" title="测试视频播放"
-                        href="https://UFOAlastor.github.io/Gridea_video/">下一篇文章</a>
+                    <a class="post-nav-link-active" title="解决 Failed to connect to github.com port 443:connection timed out"
+                        href="https://UFOAlastor.github.io/hD2z2GQos/">下一篇文章</a>
                 </div>
                 
             </nav>
@@ -2721,12 +2746,12 @@ footer {
             <amp-addthis width="320" height="92" layout="responsive"
                 data-pub-id="ra-5e869c8a378741d3"
                 data-widget-id="ycjr" data-widget-type="inline"
-                data-title="Kaios上使用cmd的push注意事项" data-url="https://UFOAlastor.github.io/KaiOS_push_cmd/" data-media="https://UFOAlastor.github.io/post-images/KaiOS_push_cmd.jpg"
-                data-description="前排提示，此问题如若不重视，可能导致手机无限重启
-前言：此问题并非所有人都会遇到，因系统版本和使用cmd或powershell而异
-
-判断是否有问题的方式：
-​	使用adb进行pull，pull取任意应用（例如：adb pull /syst...">
+                data-title="图书书名平均长度分析" data-url="https://UFOAlastor.github.io/mFbgYG9XU/" data-media="https://s2.loli.net/2022/04/24/YBT7c43JoV9qjOe.png"
+                data-description="目标网站：中国国家数字图书馆
+目标任务：获取全部图书书名，计算平均书名长度
+具体过程
+1.分析网站
+​	网站URL“http://read.nlc.cn/allSearch/searchList?searchType=1&amp;showT...">
             </amp-addthis>
             
             
@@ -2735,7 +2760,11 @@ footer {
 
             <div class="post-tags">
                 
-                <a href="https://UFOAlastor.github.io/e7uSPFqNN/" rel="tag">KaiOS</a>
+                <a href="https://UFOAlastor.github.io/gedEdMLxu/" rel="tag">问题解决</a>
+                
+                <a href="https://UFOAlastor.github.io/ifuZwWow1/" rel="tag">python</a>
+                
+                <a href="https://UFOAlastor.github.io/Study_notes/" rel="tag">学习笔记</a>
                 
             </div>
 
@@ -2844,7 +2873,7 @@ footer {
                 <sup style="color:grey">访问人数<span id="busuanzi_value_site_uv"></span>位</sup>
             </span>
             <sup><span style="color:grey" class="post-meta-divider">|</span></sup>
-            <span id="/KaiOS_push_cmd/" class="leancloud_visitors" data-flag-title="Kaios上使用cmd的push注意事项">
+            <span id="/mFbgYG9XU/" class="leancloud_visitors" data-flag-title="图书书名平均长度分析">
                 <sup style="color:grey" class="post-meta-item-text">阅读量</sup>
                 <sup style="color:grey" class="leancloud-visitors-count"></sup>
             </span>

@@ -1,0 +1,6 @@
+<p><img src="/cat.gif" onclick="javascript:location.href='/NYAN_CAT/NYAN_CAT.html'"></p>
+<p><a href="https://icp.gov.moe" target="_blank">萌ICP备 </a>
+<img src="https://icp.gov.moe/images/ico64.png" width="10px" height="10px" onclick="javascript:location.href='https://icp.gov.moe/?keyword=20201412'">
+<a href="https://icp.gov.moe/?keyword=20201412" target="_blank"> 20201412号</a></p>
+<p style="text-align:center"><span id="show_date_time"></span></p>
+<p style="text-align:center">Copyright © 2020 Zander Alastor. All rights reserved.</p>

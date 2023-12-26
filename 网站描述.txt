@@ -1,0 +1,20 @@
+<a href=/welcome style=text-align:center>Welcome to my blog!</a>
+<p style=text-align:center>分享工具、教程和记录生活</p>
+<p style=text-align:center>I'm Zander Alastor~此店不售此书</p>
+<HR><span class=element style=color:gray></span>
+<HR>
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', 'https://v1.hitokoto.cn');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            var data = JSON.parse(xhr.responseText);
+            var typed = new Typed('.element', {
+                strings: [data.hitokoto],
+                typeSpeed: 100,
+                loop: false
+            });
+        }
+    }
+    xhr.send();
+</script>

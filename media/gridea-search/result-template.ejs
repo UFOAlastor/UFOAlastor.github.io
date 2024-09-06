@@ -1,0 +1,30 @@
+<div style="text-align: center;">
+    <% posts.forEach(function(post) { %>
+    <HR style="border:3 double #DBB302" width="600px" color=#DBB302 SIZE=5>
+    <article style="text-align: center;">
+        <h1 style="text-align: center;">
+            <a href="<%= post.link %>">
+                <%= post.title %>
+            </a>
+        </h1>
+        <div style="text-align: center;">
+            <sup>
+                <time style="text-align: center;">
+                    <%= post.dateFormat %>
+                </time>
+                <% post.tags.forEach(function(tag) { %>
+                <a href="<%= tag.link %>" style="text-align: center;">
+                    <%= tag.name %>
+                </a>
+                <% }); %>
+            </sup>
+        </div>
+        <% if (themeConfig.showFeatureImage && post.feature) { %>
+			<img src="<%= post.feature %>" style="width:600px;height:auto;text-align: center;" onclick="javascript:location.href='<%= post.link %>'">
+			</img>
+        
+        <% } %>
+    </article>
+    <HR style="border:3 double #222222" width="600px" color=#222222 SIZE=50>
+    <% }); %>
+</div>

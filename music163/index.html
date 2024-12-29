@@ -1,0 +1,52 @@
+<!doctype html>
+<html style="width: 220px;height: 300px;">
+
+<head>
+    <meta charset="utf-8">
+    <title>Nothing</title>
+    <link rel="manifest" href="manifest.webapp" type="application/x-web-app-manifest+json">
+
+    <!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    <!-- require MetingJS -->
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    <script type="text/javascript" src="https://mat1.gtimg.com/libs/jquery/1.9.1/jquery.min.js">
+        < script type = "text/javascript"
+        src = "index.js" / >
+    </script>
+    <link rel="stylesheet" href="style.css">
+
+    <!--页面加载start-->
+    <link rel="stylesheet" type="text/css" href="load.css">
+
+    <script type="text/javascript">
+        // 等待所有加载
+        $(window).load(function () {
+            $('body').addClass('loaded');
+            $('#loader-wrapper .load_title').remove();
+        });
+    </script>
+
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+        <div class="load_title">Loading…</div>
+    </div>
+
+</head>
+
+<body>
+    <meting-js server="netease" type="playlist" id="564535179" list-max-height="200px" theme="66CCFF">
+    </meting-js>
+</body>
+
+<script type="text/javascript">
+    $("#loading").fadeOut(3000)
+</script>
+
+<script type="text/javascript" defer src="button.js"></script>
+
+</html>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://UFOAlastor.github.io</id>
+    <title>Zander Alastor&apos;s blog</title>
+    <updated>2025-01-22T07:44:43.539Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://UFOAlastor.github.io"/>
+    <link rel="self" href="https://UFOAlastor.github.io/atom.xml"/>
+    <subtitle>&lt;a href=/welcome style=text-align:center&gt;Welcome to my blog!&lt;/a&gt;
+&lt;p style=text-align:center&gt;分享工具、教程和记录生活&lt;/p&gt;
+&lt;p style=text-align:center&gt;I&apos;m Zander Alastor~此店不售此书&lt;/p&gt;
+&lt;HR&gt;&lt;span class=element style=color:gray&gt;&lt;/span&gt;
+&lt;HR&gt;
+&lt;script&gt;
+    var xhr = new XMLHttpRequest();
+    xhr.open(&apos;get&apos;, &apos;https://v1.hitokoto.cn&apos;);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            var data = JSON.parse(xhr.responseText);
+            var typed = new Typed(&apos;.element&apos;, {
+                strings: [data.hitokoto],
+                typeSpeed: 100,
+                loop: false
+            });
+        }
+    }
+    xhr.send();
+&lt;/script&gt;</subtitle>
+    <logo>https://UFOAlastor.github.io/images/avatar.png</logo>
+    <icon>https://UFOAlastor.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2025, Zander Alastor&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[win系统CMD设置指令别名]]></title>
+        <id>https://UFOAlastor.github.io/PFVh7siWiZ/</id>
+        <link href="https://UFOAlastor.github.io/PFVh7siWiZ/">
+        </link>
+        <updated>2025-01-22T06:46:23.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[解决bat脚本无法执行conda环境]]></title>
+        <id>https://UFOAlastor.github.io/3BsZpFxPKL/</id>
+        <link href="https://UFOAlastor.github.io/3BsZpFxPKL/">
+        </link>
+        <updated>2024-12-29T05:00:20.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ProtoBuf协议]]></title>
+        <id>https://UFOAlastor.github.io/JFt3l7SWY/</id>
+        <link href="https://UFOAlastor.github.io/JFt3l7SWY/">
+        </link>
+        <updated>2024-09-06T08:36:21.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[数据库-事务]]></title>
+        <id>https://UFOAlastor.github.io/24x6cGKiy/</id>
+        <link href="https://UFOAlastor.github.io/24x6cGKiy/">
+        </link>
+        <updated>2024-09-06T08:22:23.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[quorum与paxos与raft]]></title>
+        <id>https://UFOAlastor.github.io/2lEd0eWPD/</id>
+        <link href="https://UFOAlastor.github.io/2lEd0eWPD/">
+        </link>
+        <updated>2024-09-06T08:20:24.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[校园网AP隔离-内网穿透实现]]></title>
+        <id>https://UFOAlastor.github.io/N6PkLgMlT/</id>
+        <link href="https://UFOAlastor.github.io/N6PkLgMlT/">
+        </link>
+        <updated>2023-12-02T04:59:47.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[给Python Pip install加速的方法总结]]></title>
+        <id>https://UFOAlastor.github.io/f4oNFNm6C/</id>
+        <link href="https://UFOAlastor.github.io/f4oNFNm6C/">
+        </link>
+        <updated>2023-12-02T04:56:23.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Clash共享热点]]></title>
+        <id>https://UFOAlastor.github.io/vFXe4yTCm/</id>
+        <link href="https://UFOAlastor.github.io/vFXe4yTCm/">
+        </link>
+        <updated>2023-12-02T04:54:10.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[全错排问题dp公式详解]]></title>
+        <id>https://UFOAlastor.github.io/dINiyO1Ih/</id>
+        <link href="https://UFOAlastor.github.io/dINiyO1Ih/">
+        </link>
+        <updated>2023-04-06T07:53:46.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ 关于java8安装时点击下一步就消失的bug]]></title>
+        <id>https://UFOAlastor.github.io/gn3K3cu5d/</id>
+        <link href="https://UFOAlastor.github.io/gn3K3cu5d/">
+        </link>
+        <updated>2023-01-01T01:58:45.000Z</updated>
+    </entry>
+</feed>

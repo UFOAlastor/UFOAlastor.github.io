@@ -1,0 +1,23 @@
+﻿{
+  "name": "网易云音乐随机播放器",
+  "description": "一个网易云音乐随机播放器",
+  "type": "web",
+  "launch_path": "/index.html",
+  "icons": {
+    "56": "/icon56.png",
+    "112": "/icon112.png"
+  },
+  "developer": {
+    "name": "此店不售此书(Zander Alastor)"
+  },
+  "locales": {
+    "zh-CN": {
+      "name": "网易云音乐",
+      "subtitle": "一个网易云音乐随机播放器",
+      "description": "一个网易云音乐随机播放器"
+    }
+  },
+  "default_locale": "zh-CN",
+  "cursor": true,
+  "fullscreen": true
+}

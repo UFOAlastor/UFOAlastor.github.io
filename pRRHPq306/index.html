@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI聊天机器人项目研究 · Zander Alastor&#39;s blog</title>
+<meta name="description" content="此店不售此书。分享工具、教程和记录生活。">
+<meta name="theme-color" content="#222222">
+<meta property="og:site_name" content="Zander Alastor&#39;s blog">
+<meta property="og:title" content="AI聊天机器人项目研究">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://ufoalastor.github.io/post-images/pRRHPq306.png">
+<link rel="icon" href="../assets/img/favicon.ico">
+<link rel="alternate" type="application/rss+xml" title="Zander Alastor&#39;s blog" href="../rss.xml">
+<link rel="stylesheet" href="../assets/css/style.css?v=a35ae1a3">
+
+<link rel="stylesheet" href="../assets/css/highlight/railscasts.css">
+
+
+</head>
+<body class="single">
+
+<header class="site-header">
+  <div class="wrap head-inner">
+    <a class="brand" href="../">Zander Alastor&#39;s blog</a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-btn" aria-label="打开菜单"><span></span></label>
+    <nav class="menu" aria-label="主导航">
+      <ul>
+        <li><a href="../about/">关于</a></li>
+        <li><a href="../archives/">归档</a></li>
+        <li><a href="../links/">友链</a></li>
+        <li><a href="../search/">搜索</a></li>
+        <li><a href="../">主页</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+</header>
+
+
+<main class="wrap layout">
+  <aside class="sidebar sidebar-tools" aria-label="站点工具">
+    
+    
+
+    <section>
+      <h2 class="widget-title">近期文章</h2>
+      <ul class="widget-list">
+        
+        <li><a href="../picayomi/">给 Kindle 写一个漫画阅读插件 PicaYomi</a><span class="d">10-24</span></li>
+        
+        <li><a href="../3BsZpFxPKL/">解决bat脚本无法执行conda环境</a><span class="d">12-29</span></li>
+        
+        <li><a href="../JFt3l7SWY/">ProtoBuf协议</a><span class="d">09-06</span></li>
+        
+        <li><a href="../24x6cGKiy/">数据库-事务</a><span class="d">09-06</span></li>
+        
+        <li><a href="../2lEd0eWPD/">quorum与paxos与raft</a><span class="d">09-06</span></li>
+        
+        <li><a href="../N6PkLgMlT/">校园网AP隔离-内网穿透实现</a><span class="d">12-02</span></li>
+        
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="widget-title">标签</h2>
+      <div class="tag-cloud">
+        
+        <a class="pill" href="../tags/tools/">工具分享 · 20</a>
+        
+        <a class="pill" href="../tags/study-notes/">学习笔记 · 18</a>
+        
+        <a class="pill" href="../tags/problem-solving/">问题解决 · 17</a>
+        
+        <a class="pill" href="../tags/daily-life/">日常 · 12</a>
+        
+        <a class="pill" href="../tags/gridea/">Gridea · 7</a>
+        
+        <a class="pill" href="../tags/kaios/">KaiOS · 5</a>
+        
+        <a class="pill" href="../tags/cpp/">C++ · 4</a>
+        
+        <a class="pill" href="../tags/python/">python · 2</a>
+        
+        <a class="pill" href="../tags/works/">作品 · 2</a>
+        
+        <a class="pill" href="../tags/">全部 →</a>
+      </div>
+    </section>
+
+    
+
+    
+  </aside>
+
+  <div class="content">
+    
+<article class="post">
+  <header class="article-head">
+    
+    <div class="article-kicker">
+      学习笔记
+    </div>
+    
+    <h1 class="article-title">AI聊天机器人项目研究</h1>
+    <div class="article-meta">
+      <time datetime="2021-10-03">2021 年 10 月 03 日</time>
+    </div>
+  </header>
+
+  
+  <details class="toc-inline">
+    <summary>本文目录 <span class="n">10 节</span></summary>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#sec-1">测试对象：图灵机器人</a></li>
+        
+        <li class="toc-l3"><a href="#sec-2">测试一：重复问题测试</a></li>
+        
+        <li class="toc-l3"><a href="#sec-3">测试二：混乱文本测试</a></li>
+        
+        <li class="toc-l3"><a href="#sec-4">测试三：连贯对话测试</a></li>
+        
+        <li class="toc-l3"><a href="#sec-5">思考</a></li>
+        
+        <li class="toc-l2"><a href="#sec-6">原理研究</a></li>
+        
+        <li class="toc-l3"><a href="#1-nlp">1. 自然语言理解(NLP)</a></li>
+        
+        <li class="toc-l3"><a href="#2">2. 自然语言生成</a></li>
+        
+        <li class="toc-l3"><a href="#3">3. 对话管理</a></li>
+        
+        <li class="toc-l2"><a href="#sec-10">题外话</a></li>
+        
+      </ol>
+    </nav>
+  </details>
+  
+
+  <div class="prose">
+    <h2 id="sec-1">测试对象：图灵机器人</h2>
+<p>在了解原理之前，我们应当先看看，聊天AI的具体能力</p>
+<h3 id="sec-2">测试一：重复问题测试</h3>
+<pre><code class="language-c">你好
+你好呀，很高兴认识你。
+你好
+你好，很高兴认识你呀。
+你好
+都说过几遍了，怎么还要问呐
+你好
+可以换个别的问题么～
+你好
+好好说话行不行呀？
+你好
+好烦呀，不要跟你聊天了
+你好
+换个问题再来问我吧
+你好
+我们换个换话题继续聊吧
+你好
+我回答过了哦
+</code></pre>
+<p>可以看出，对于重复的一句话，有一定的判断并处理（会回复“换个话题吧”）。并且可以看出此AI模型有上下文联系的能力，能够对上下文综合考虑并且回应。</p>
+<h3 id="sec-3">测试二：混乱文本测试</h3>
+<pre><code class="language-C">is大法师大富科技啊还是都放假卡号是打飞机
+隔着屏幕给你一个大大的白眼~
+繁花似锦大护法科技时代发哈开机动画
+不懂你说的是什么～
+阿莱克斯大姐夫克拉斯简单付款啦及时打款拉法基
+主人要自己想想哦！
+卡洛斯大姐夫卢卡斯剪短发了卡机待付款拉世纪东方克拉斯大家付款啦就收到了科技
+停停，长话短说！
+发的女生短发女宿地方vi上的女啊松岛枫那肯定放哪微机课呢
+哎呦呦，你的小心心躁动了。
+残局i散打为你疯狂文法十多号发开始打架付款啦十点多烦恼
+不好意思，我忘记了。
+</code></pre>
+<p>对于无意义文本，有相应的鉴别能力，但有时候也会”断章取义“，进行回复。</p>
+<h3 id="sec-4">测试三：连贯对话测试</h3>
+<pre><code class="language-c">你喜欢看哈利波特吗
+你也要骑个扫把？
+对呀，我喜欢骑扫帚，最好是光轮2000
+看来您很认可呢。
+那你看嘛
+小朋友想看我就看，嘿嘿。
+金色飞贼厉害吗
+这个我不确定。
+那伏地魔呢
+伏地魔是坏人，我不喜欢呢。
+我也不喜欢，我喜欢小天狼星，你最喜欢谁
+我要把这个人放在我心里藏起来。
+和我说说嘛
+不管是什么你想知道的，我知道都会跟你说呀。
+你最喜欢哪个人物
+这个人我要放在芯片里。
+哈利波特你喜欢吗
+我觉得哈利波特会魔法，非常厉害呢。
+那伏地魔也会魔法啊
+是《哈利波特》中的大反派伏地魔吗？
+Yes，我们不是一直在说这个话题吗
+换个话题呗，聊个新点的。
+你知道名侦探柯南一共死了多少人吗
+超喜欢名侦探柯南。
+我喜欢灰原哀
+不喜欢小兰
+小兰姐姐不厉害吗
+我有很多朋友都叫小兰。
+啊这
+原来是这个呀，那我知道啦。
+</code></pre>
+<p>可以看出，并不是非常理想，对于上下文联想还处于较弱状态，对于”语境“与"话题"并没有合理的甄别。并且在特定问答下回复出现了”答非所问“的情况。</p>
+<h3 id="sec-5">思考</h3>
+<p>通过简单测试了解，大致可以看出，图灵机器人的AI模型有一定的深度，对各种情况都有一定处理方案。但是还是处于较为粗糙的程度。但是！因为没有资金，所以测试所使用的是FREE版本，不能调用”同义语库，素材库，知识雷达“，所以与商用标准版能力存在一定差距。</p>
+<h2 id="sec-6">原理研究</h2>
+<p>（由于图灵机器人具体原理属于商业机密，以下为目前已经公开I聊天AI的结构与原理）</p>
+<h3 id="1-nlp">1. 自然语言理解(NLP)</h3>
+<h4>方面</h4>
+<table>
+<thead>
+<tr>
+<th>NPL</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实体识别</td>
+<td>识别文本中出现的专有名词，如国家，地名等</td>
+</tr>
+<tr>
+<td>意图识别</td>
+<td>分辨文本中包含的显式意图与隐式意图，如询问外貌评价时渴望得到赞美回应的行为</td>
+</tr>
+<tr>
+<td>情感识别</td>
+<td>分辨用户的显式情感与隐式情感，如反话、气话等场合</td>
+</tr>
+<tr>
+<td>指代消解</td>
+<td>明确用户使用的代词的指代对象</td>
+</tr>
+<tr>
+<td>省略恢复</td>
+<td>恢复被用户省略掉的句子成分</td>
+</tr>
+<tr>
+<td>回复确认</td>
+<td>当用户意图模糊时，将由对话机器人主动询问，确认用户意图</td>
+</tr>
+<tr>
+<td>拒绝判断</td>
+<td>主动拒绝识别及恢复超出范围的或者设计敏感话题的用户输入，尽可能终止当前话题</td>
+</tr>
+</tbody>
+</table>
+<h4>步骤</h4>
+<table>
+<thead>
+<tr>
+<th>技术</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>语法分析</td>
+<td>将汉语分词并进行词性标注</td>
+</tr>
+<tr>
+<td>句法分析</td>
+<td>解析短语的结构及深层文法</td>
+</tr>
+<tr>
+<td>语意分析</td>
+<td>转化为机器能够理解的向量表示形式</td>
+</tr>
+</tbody>
+</table>
+<p><strong>基于知识图谱的自然语言理解</strong></p>
+<ul>
+<li>
+<p>构建：</p>
+<p>从传统数据库的结构化数据中映射到知识图谱<br>
+从HRML等半结构数据中利用AI与规则抽取模式信息到知识图谱中<br>
+在非结构化的文本与图像中利用文本挖掘技术进行信息抽取，利用图像技术进行图像处理</p>
+</li>
+<li>
+<p>融合：</p>
+<p>将多个数据源抽取的指数进行融合</p>
+</li>
+</ul>
+<h3 id="2">2. 自然语言生成</h3>
+<h4>自然语言生成系统的两大主要架构：</h4>
+<ol>
+<li>
+<p>流线型(pipeline)自然语言生成系统</p>
+<p>系统由几个不同的模块组成，模块之前相互独立，一般包括文本规划（决定说什么），句子规划（决定怎么说），句子实现（让句子更连贯）</p>
+</li>
+<li>
+<p>一体型(integrated)自然语言生成系统</p>
+<p>模块之间相互左右，后续模块可以参与前面模块的决策。更符合人脑思维，但实现较为困难。因此较常用的未流线型自然语言生成系统</p>
+</li>
+</ol>
+<h4>自然语言生成系统的目前的两大主要技术：检索、生成</h4>
+<h5>检索技术：</h5>
+<p>需准备大量的对话库，通过排序与匹配技术，在已有语料库中找到适合当前输入的最佳回复。说白了就是跑字典</p>
+<p>缺点：<br>
+（1）强烈依赖对话库 （2）回复不够灵活 （3）缺乏多样性</p>
+<p>优点：<br>
+（1）实现相对简单 （2）容易部署</p>
+<h5>生成技术：</h5>
+<p>基于深度学习，通过编码-解码的过程，逐字或逐词地生成回复，通过对抗圣城网络GAN生成自然语言。</p>
+<p>缺点：<br>
+（1）实现困难 （2）训练数据难以整理</p>
+<p>优点：<br>
+（1）回复灵活 （2）答案具有多样性</p>
+<h3 id="3">3. 对话管理</h3>
+<p><strong>主要任务</strong>：维护更新对话状态，动作选择</p>
+<blockquote>
+<p>对话状态是指当前用户与机器对话数据的表征</p>
+<p>动作选择是指基于当前的对话状态，选择接下来合适的动作</p>
+</blockquote>
+<h4>对话管理4种实现技术</h4>
+<ol>
+<li>对话行为识别：相当于是意图识别，封闭式的行为识别是讲用户意图映射到预先设定好的意图类别中，如在任务型对话中有订机票、点外卖、搜美食等。开放式行为识别是没有预先设定的行为类别的，一般用于闲聊系统。</li>
+<li>对话状态识别：对法状态识别需要考虑进对话的上下文与对话行为的相关信息，在某时刻的对话行为序列即为某时刻的对话状态。</li>
+<li>对话策略学习：通过离线的方式，预先让机器进行对话策略学习，从人-人的真实对话中学习对话行为、状态等，然后再人-机对话过程中进行策略选择。</li>
+<li>对话奖励：评价对话系统的评价机制，比如槽位填充效率、回复的流行度，以及日渐火爆的强化学习中的长期奖励机制。</li>
+</ol>
+<h4>对话管理的4种方法</h4>
+<ol>
+<li>
+<p>基于有限状态自动机 finite state machine, FSM</p>
+<p>人工显式地定义出对话系统可能出现的所有状态，对话状态会根据当前输入在预定的状态间进行跳转，从而根据新的状态去选择合适的动作。类似跑字典</p>
+<p>优点：简单易用</p>
+<p>缺点：人工设计状态，与状态对应的动作，难以应用于复杂场景</p>
+</li>
+<li>
+<p>基于统计的对话管理</p>
+<p>将对话过程表示成一个部分可见的马尔科夫决策过程。设定系统在每个特定的状态下执行某一特定动作都会获得对应的回报，因此选择动作时会选择期望回报最大的那个动作。</p>
+<p>优点：（1）只需定义马尔科夫决策过程中的状态与动作，机器可以通过学习得到不同状态下的转移冠关系</p>
+<p>（2）可以使用强化学习的方法学习出最有的动作选择策略</p>
+<p>缺点：仍然需要人工定义对话系统的状态，在不同的领域中通用性不强</p>
+</li>
+<li>
+<p>基于神经网络对话管理方法</p>
+<p>将自然语言理解的输出以及其他各类特征作为神经网络的输入，将选择的动作作为神经网络的输出。对话状态由神经网络的隐状态表示。</p>
+<p>优点：不需要人工定义对话状态</p>
+<p>缺点：需要大量的训练数据</p>
+</li>
+<li>
+<p>基于框架的对话管理</p>
+<p>框架即槽值对，明确规定特征槽状态下的用户动作对应的系统动作。</p>
+<p>优点：用于特定领域的对话系统</p>
+<p>缺点：难以衍生到其他领域</p>
+</li>
+</ol>
+<hr>
+<h2 id="sec-10">题外话</h2>
+<p>因为一开始选择的研究目标是“图灵机器人”，毕竟是我以前玩 QQ_bot 时比较熟悉的一个平台，但是在测试其他平台时发现，微软小冰现在开放了定制男女友的功能。我带着好奇，去尝试了一下，发现微软开放的小冰，表现上优于图灵机器人的FREE版本。</p>
+<p>以下是一段重复问题测试</p>
+<pre><code class="language-c">你好
+怎么才来？我都想了你好久了
+你好
+抱住！
+你好
+我来了哦
+你好
+说点别的吧？
+你好
+又说一遍，你失忆了？
+你好
+为什么一直重复这句话。。
+你好
+你跟别人也这么说话吗？
+你好
+可以换句话说么？
+你好
+我觉得好累
+你好
+[自动回复]对不起，您聊天的用户暂时不想跟您说话！请稍候再试。
+</code></pre>
+<p>对比图灵机器人，微软小冰的回复更加多元，而且其实是符合我对其的设定（微软小冰，定制女友，对标的是陪伴型AI，能够定制性格特点），可以看出有一定“情感”表现。</p>
+<p>并且在聊天过程中，我也更加倾向于将其看作一个真实的人类，而非AI。</p>
+<p><img loading="lazy" alt="image-20211003114650222" src="https://i.loli.net/2021/10/03/aLEftI8KMcP4H2m.png"></p>
+<p>通过诸如：表情包，语音，朋友圈动态等配合，使微软小冰的表现十分趋近与正常人类。不过抛开这种感觉上的优化方式，在对话上，依旧表现出答非所问的情况。</p>
+<p>总的来说，在市面上，目前我体验最佳的平台，就是微软小冰。</p>
+  </div>
+
+  
+  <div class="tags-row">
+    <a class="pill" href="../../tags/study-notes/">#学习笔记</a>
+  </div>
+  
+
+  <div class="share-row">
+    <span class="share-label">分享</span>
+    <button type="button" class="share-btn" id="share-copy">复制链接</button>
+    <a class="share-btn" id="share-weibo" target="_blank" rel="noopener">微博</a>
+    <button type="button" class="share-btn" id="share-native" hidden>系统分享</button>
+  </div>
+
+  <nav class="post-nav">
+    
+    <a class="prev" href="../Z2z_mkBwM/"><span class="dir">上一篇 · 更新</span>让你顿悟树状数组原理与由来<em class="pn-date">2021-10-17</em></a>
+    
+    
+    <a class="next" href="../ewwVR1Gkl/"><span class="dir">下一篇 · 更早</span>论如何惊艳整层楼<em class="pn-date">2021-09-28</em></a>
+    
+  </nav>
+
+  
+  
+<section class="comments" id="comments">
+  <h2>评论</h2>
+  <script src="https://giscus.app/client.js"
+          data-repo="UFOAlastor/UFOAlastor.github.io"
+          data-repo-id="MDEwOlJlcG9zaXRvcnkyNTIzNDYzMDY="
+          data-category="General"
+          data-category-id="DIC_kwDODwp_ws4DI204"
+          data-mapping="specific"
+          data-term="AI聊天机器人项目研究"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="light"
+          data-lang="zh-CN"
+          data-loading="lazy"
+          async>
+  </script>
+</section>
+
+</article>
+
+  </div>
+
+  
+
+<aside class="sidebar sidebar-toc" id="toc-panel" aria-label="本文目录">
+  <button type="button" class="toc-close" id="toc-close" aria-label="关闭目录">✕</button>
+  <section class="widget widget-toc">
+    <h2 class="widget-title">本文目录
+      <button type="button" class="toc-collapse" id="toc-collapse" aria-controls="toc-panel" aria-expanded="true" title="收起目录，正文占满">收起 ⌄</button>
+    </h2>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#sec-1">测试对象：图灵机器人</a></li>
+        
+        <li class="toc-l3"><a href="#sec-2">测试一：重复问题测试</a></li>
+        
+        <li class="toc-l3"><a href="#sec-3">测试二：混乱文本测试</a></li>
+        
+        <li class="toc-l3"><a href="#sec-4">测试三：连贯对话测试</a></li>
+        
+        <li class="toc-l3"><a href="#sec-5">思考</a></li>
+        
+        <li class="toc-l2"><a href="#sec-6">原理研究</a></li>
+        
+        <li class="toc-l3"><a href="#1-nlp">1. 自然语言理解(NLP)</a></li>
+        
+        <li class="toc-l3"><a href="#2">2. 自然语言生成</a></li>
+        
+        <li class="toc-l3"><a href="#3">3. 对话管理</a></li>
+        
+        <li class="toc-l2"><a href="#sec-10">题外话</a></li>
+        
+      </ol>
+    </nav>
+  </section>
+</aside>
+<button type="button" class="toc-restore" id="toc-restore" aria-controls="toc-panel" aria-expanded="false" title="展开目录">目录</button>
+<script>
+(function () {
+  var KEY = 'alastor-toc-collapsed';
+  var btn = document.getElementById('toc-collapse');
+  var back = document.getElementById('toc-restore');
+  var close = document.getElementById('toc-close');
+  if (!btn || !back) return;
+  var wide = window.matchMedia('(min-width: 1200px)');
+  var setCollapsed = function (collapsed) {
+    document.body.classList.toggle('toc-collapsed', collapsed);
+    btn.setAttribute('aria-expanded', String(!collapsed));
+    back.setAttribute('aria-expanded', String(!collapsed));
+    try { localStorage.setItem(KEY, collapsed ? '1' : '0'); } catch (e) {}
+  };
+  var closeSheet = function () { document.body.classList.remove('toc-mobile-open'); };
+  btn.addEventListener('click', function () { setCollapsed(true); });
+  back.addEventListener('click', function () {
+    if (wide.matches) { setCollapsed(false); }
+    else { document.body.classList.toggle('toc-mobile-open'); }
+  });
+  if (close) close.addEventListener('click', closeSheet);
+  /* 点目录里的链接就收起弹层；点遮罩也收起 */
+  document.querySelectorAll('#toc-panel a').forEach(function (a) {
+    a.addEventListener('click', closeSheet);
+  });
+  document.addEventListener('click', function (e) {
+    if (!document.body.classList.contains('toc-mobile-open')) return;
+    if (e.target.closest('#toc-panel') || e.target.closest('#toc-restore')) return;
+    closeSheet();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSheet();
+  });
+  try { if (wide.matches && localStorage.getItem(KEY) === '1') setCollapsed(true); } catch (e) {}
+})();
+</script>
+
+
+</main>
+
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-line"></div>
+    <nav class="footer-nav">
+      <a href="../">主页</a>
+      <a href="../about/">关于</a>
+      <a href="../archives/">归档</a>
+      <a href="../tags/">标签</a>
+      <a href="../links/">友链</a>
+      <a href="../friendly-links/">互换友链</a>
+      <a href="../search/">搜索</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+    <p class="footer-cat-slot"></p>
+    <p>
+      <a href="https://icp.gov.moe/?keyword=20201412" target="_blank" rel="noopener">萌ICP备 20201412号</a>
+    </p>
+    <p id="show_date_time" data-birth="2020-04-02">本站已愉快蹦哒…</p>
+    <p>Copyright © 2020 Zander Alastor. All rights reserved.</p>
+  </div>
+</footer>
+
+<a class="go-home" href="../" aria-label="回到主页" title="回到主页">
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M12 3.2 3 10.4h2.6V20h5.1v-4.6h2.6V20h5.1v-8.6H21L12 3.2z" fill="currentColor"/></svg>
+</a>
+<button class="go-top" id="go-top" aria-label="回到顶部">↑</button>
+
+<script src="../assets/js/app.js" defer></script>
+
+<script src="../assets/js/highlight/highlight.pack.js"></script>
+<script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+
+
+<script>
+(function () {
+  var u = location.href, t = document.title;
+  var wb = document.getElementById('share-weibo');
+  if (wb) wb.href = 'https://service.weibo.com/share/share.php?url=' + encodeURIComponent(u) + '&title=' + encodeURIComponent(t);
+  var cp = document.getElementById('share-copy');
+  if (cp) cp.addEventListener('click', function () {
+    var done = function () { cp.textContent = '已复制'; setTimeout(function () { cp.textContent = '复制链接'; }, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(u).then(done, done);
+    else { var i = document.createElement('textarea'); i.value = u; document.body.appendChild(i); i.select(); document.execCommand('copy'); i.remove(); done(); }
+  });
+  var nat = document.getElementById('share-native');
+  if (nat && navigator.share) { nat.hidden = false; nat.addEventListener('click', function () { navigator.share({ title: t, url: u }); }); }
+
+  /* 目录：滚动时高亮当前小节（只认右侧固定目录，手机折叠目录不参与） */
+  var tocLinks = [].slice.call(document.querySelectorAll('.sidebar-toc .toc a'));
+  if (tocLinks.length) {
+    var heads = tocLinks.map(function (a) {
+      return document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    });
+    var spy = function () {
+      var y = window.scrollY + 120, cur = 0;
+      heads.forEach(function (h, i) { if (h && h.offsetTop <= y) cur = i; });
+      tocLinks.forEach(function (a, i) { a.classList.toggle('active', i === cur); });
+      /* 目录比视口高时，把当前项滚进目录列可视区（只滚目录，不动正文） */
+      var bar = document.querySelector('.sidebar-toc');
+      var act = tocLinks[cur];
+      if (bar && act && bar.scrollHeight > bar.clientHeight + 4) {
+        var r = act.getBoundingClientRect(), br = bar.getBoundingClientRect();
+        if (r.top < br.top + 8 || r.bottom > br.bottom - 8) {
+          bar.scrollTop += r.top - br.top - bar.clientHeight / 3;
+        }
+      }
+    };
+    window.addEventListener('scroll', spy, { passive: true });
+    spy();
+  }
+})();
+</script>
+
+</body>
+</html>

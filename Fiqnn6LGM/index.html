@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>题解 P3393 【逃离僵尸岛】 · Zander Alastor&#39;s blog</title>
+<meta name="description" content="此店不售此书。分享工具、教程和记录生活。">
+<meta name="theme-color" content="#222222">
+<meta property="og:site_name" content="Zander Alastor&#39;s blog">
+<meta property="og:title" content="题解 P3393 【逃离僵尸岛】">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://alastor.top/assets/img/post-images/Fiqnn6LGM.jpg">
+<link rel="icon" href="../assets/img/favicon.ico">
+<link rel="alternate" type="application/rss+xml" title="Zander Alastor&#39;s blog" href="../rss.xml">
+<link rel="stylesheet" href="../assets/css/style.css?v=a35ae1a3">
+
+<link rel="stylesheet" href="../assets/css/highlight/railscasts.css">
+
+
+</head>
+<body class="single">
+
+<header class="site-header">
+  <div class="wrap head-inner">
+    <a class="brand" href="../">Zander Alastor&#39;s blog</a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-btn" aria-label="打开菜单"><span></span></label>
+    <nav class="menu" aria-label="主导航">
+      <ul>
+        <li><a href="../about/">关于</a></li>
+        <li><a href="../archives/">归档</a></li>
+        <li><a href="../links/">友链</a></li>
+        <li><a href="../search/">搜索</a></li>
+        <li><a href="../">主页</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+</header>
+
+
+<main class="wrap layout">
+  <aside class="sidebar sidebar-tools" aria-label="站点工具">
+    
+    
+
+    <section>
+      <h2 class="widget-title">近期文章</h2>
+      <ul class="widget-list">
+        
+        <li><a href="../picayomi/">给 Kindle 写一个漫画阅读插件 PicaYomi</a><span class="d">10-24</span></li>
+        
+        <li><a href="../3BsZpFxPKL/">解决bat脚本无法执行conda环境</a><span class="d">12-29</span></li>
+        
+        <li><a href="../JFt3l7SWY/">ProtoBuf协议</a><span class="d">09-06</span></li>
+        
+        <li><a href="../24x6cGKiy/">数据库-事务</a><span class="d">09-06</span></li>
+        
+        <li><a href="../2lEd0eWPD/">quorum与paxos与raft</a><span class="d">09-06</span></li>
+        
+        <li><a href="../N6PkLgMlT/">校园网AP隔离-内网穿透实现</a><span class="d">12-02</span></li>
+        
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="widget-title">标签</h2>
+      <div class="tag-cloud">
+        
+        <a class="pill" href="../tags/tools/">工具分享 · 20</a>
+        
+        <a class="pill" href="../tags/study-notes/">学习笔记 · 18</a>
+        
+        <a class="pill" href="../tags/problem-solving/">问题解决 · 17</a>
+        
+        <a class="pill" href="../tags/daily-life/">日常 · 12</a>
+        
+        <a class="pill" href="../tags/gridea/">Gridea · 7</a>
+        
+        <a class="pill" href="../tags/kaios/">KaiOS · 5</a>
+        
+        <a class="pill" href="../tags/cpp/">C++ · 4</a>
+        
+        <a class="pill" href="../tags/python/">python · 2</a>
+        
+        <a class="pill" href="../tags/works/">作品 · 2</a>
+        
+        <a class="pill" href="../tags/">全部 →</a>
+      </div>
+    </section>
+
+    
+
+    
+  </aside>
+
+  <div class="content">
+    
+<article class="post">
+  <header class="article-head">
+    
+    <div class="article-kicker">
+      学习笔记
+    </div>
+    
+    <h1 class="article-title">题解 P3393 【逃离僵尸岛】</h1>
+    <div class="article-meta">
+      <time datetime="2019-01-23">2019 年 01 月 23 日</time>
+    </div>
+  </header>
+
+  
+  <details class="toc-inline">
+    <summary>本文目录 <span class="n">2 节</span></summary>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#k-tat">K个城市已经被僵尸控制了，如果贸然闯入就会被感染TAT...所以不能进入！！！</a></li>
+        
+        <li class="toc-l3"><a href="#sec-2">讲下做法：</a></li>
+        
+      </ol>
+    </nav>
+  </details>
+  
+
+  <div class="prose">
+    <h2 id="k-tat">K个城市已经被僵尸控制了，如果贸然闯入就会被感染TAT...所以不能进入！！！</h2>
+<p><strong>首先，注意几个细节！</strong></p>
+<ol>
+<li>
+<p>如上方大字，不能进入被控制的城市（qwq）</p>
+</li>
+<li>
+<p>dis距离开<strong>long long</strong>，最大值也要开的足够大！（数据超int了）</p>
+</li>
+<li>
+<p>将点值附在边权上的同志们，记得最后到n点减去，然后<strong>n点可以是危险城市！</strong></p>
+</li>
+</ol>
+<h3 id="sec-2">讲下做法：</h3>
+<p>大部分dalao们都是bfs或者将k点全部看做0点来做的</p>
+<p>本蒟蒻就直接更新k次，把每个被控制城市附近的危险城市标记</p>
+<p>然而直接来肯定会T的飞起qwq</p>
+<p>所以要剪枝</p>
+<h4>见代码：</h4>
+<pre><code class="language-c">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define ll long long
+#define res register int
+const int MAXN=100000+100;
+const ll INF=0x3f3f3f3f3f3f3f3f;//dis最大值要足够大才行
+int n,m,k,s,P,Q,cnt=1,head[MAXN],vis[MAXN],ban[MAXN]; 
+ll dis[MAXN];//dis开long long
+struct EDGE{int to,next;}edge[MAXN&lt;&lt;2];
+queue&lt;int&gt; bad;
+
+inline void E_add(int u,int v){edge[cnt]=(EDGE){v,head[u]};head[u]=cnt++;}
+
+void spfa_flag(int S){
+    queue&lt;int&gt; q;
+    for(res i=1;i&lt;=n;++i) dis[i]=INF;
+    memset(vis,0,sizeof(vis));
+    q.push(S),dis[S]=0;
+    while(q.size()){
+        int x=q.front();q.pop();
+        vis[x]=0;
+        for(res i=head[x];i;i=edge[i].next){
+            int y=edge[i].to,z=1;
+            if(ban[y]!=2&amp;&amp;dis[y]&gt;dis[x]+z){
+//此处注意！当y点被标记为2，说明y点是另一个被控制的城市，
+//我们就不用管它，跳过
+                dis[y]=dis[x]+1;
+                if(dis[y]&lt;=s) ban[y]=1;
+                //当y点到x点（一个被控城市）的距离小于s，
+                //就标记为1，表示危险城市
+                if(!vis[y]&amp;&amp;dis[y]&lt;s) vis[y]=1,q.push(y);
+                //此处注意！
+//当y点到x点距离小于s才把y点加入队列，
+//因为如果y点到x点距离大于或等于s时，说明y点在x的危险范围的边缘，
+//再用y点更新最短路就没有意义，因为肯定没有距离小于s的点在y点外面
+            }
+        }
+    }
+}
+
+void spfa(){
+    queue&lt;int&gt; q;
+    for(res i=1;i&lt;=n;++i) dis[i]=INF;
+    memset(vis,0,sizeof(vis));
+    q.push(1),dis[1]=0;
+    while(q.size()){
+        int x=q.front();q.pop();
+        vis[x]=0;
+        for(res i=head[x];i;i=edge[i].next){
+            int y=edge[i].to,z=(ban[y]?Q:P);
+            if(ban[y]!=2&amp;&amp;dis[y]&gt;dis[x]+z){//此处注意！
+//当y为被控城市时不能走！！！
+//（qwq我眼瞎，错了近十次才看清题目）
+                dis[y]=dis[x]+z;
+                if(!vis[y]) vis[y]=1,q.push(y);
+            }
+        }
+    }
+}
+
+int main(){
+    scanf(&quot;%d%d%d%d%d%d&quot;,&amp;n,&amp;m,&amp;k,&amp;s,&amp;P,&amp;Q);
+    for(res i=1;i&lt;=k;++i){
+        int x; scanf(&quot;%d&quot;,&amp;x);ban[x]=2,bad.push(x);
+    }//被控制城市标记为2，然后存bad队列中
+    for(res i=1;i&lt;=m;++i){
+        int x,y; scanf(&quot;%d %d&quot;,&amp;x,&amp;y);
+        E_add(x,y),E_add(y,x);
+    }
+    while(bad.size()){
+        spfa_flag(bad.front());bad.pop();
+    }
+    spfa();
+    if(ban[n]) dis[n]-=Q;//在n点减去花费，以为n点不收钱
+    else dis[n]-=P;//还有一件事，n点可以为危险城市！！
+    printf(&quot;%lld&quot;,dis[n]);
+    return 0;
+}
+</code></pre>
+  </div>
+
+  
+  <div class="tags-row">
+    <a class="pill" href="../../tags/study-notes/">#学习笔记</a>
+  </div>
+  
+
+  <div class="share-row">
+    <span class="share-label">分享</span>
+    <button type="button" class="share-btn" id="share-copy">复制链接</button>
+    <a class="share-btn" id="share-weibo" target="_blank" rel="noopener">微博</a>
+    <button type="button" class="share-btn" id="share-native" hidden>系统分享</button>
+  </div>
+
+  <nav class="post-nav">
+    
+    <a class="prev" href="../about/"><span class="dir">上一篇 · 更新</span>关于<em class="pn-date">2019-01-25</em></a>
+    
+    
+    <a class="next" href="../HrF64BtBr/"><span class="dir">下一篇 · 更早</span>题解 P1978 【集合】<em class="pn-date">2019-01-20</em></a>
+    
+  </nav>
+
+  
+  
+<section class="comments" id="comments">
+  <h2>评论</h2>
+  <script src="https://giscus.app/client.js"
+          data-repo="UFOAlastor/UFOAlastor.github.io"
+          data-repo-id="MDEwOlJlcG9zaXRvcnkyNTIzNDYzMDY="
+          data-category="General"
+          data-category-id="DIC_kwDODwp_ws4DI204"
+          data-mapping="specific"
+          data-term="题解 P3393 【逃离僵尸岛】"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="light"
+          data-lang="zh-CN"
+          data-loading="lazy"
+          async>
+  </script>
+</section>
+
+</article>
+
+  </div>
+
+  
+
+<aside class="sidebar sidebar-toc" id="toc-panel" aria-label="本文目录">
+  <button type="button" class="toc-close" id="toc-close" aria-label="关闭目录">✕</button>
+  <section class="widget widget-toc">
+    <h2 class="widget-title">本文目录
+      <button type="button" class="toc-collapse" id="toc-collapse" aria-controls="toc-panel" aria-expanded="true" title="收起目录，正文占满">收起 ⌄</button>
+    </h2>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#k-tat">K个城市已经被僵尸控制了，如果贸然闯入就会被感染TAT...所以不能进入！！！</a></li>
+        
+        <li class="toc-l3"><a href="#sec-2">讲下做法：</a></li>
+        
+      </ol>
+    </nav>
+  </section>
+</aside>
+<button type="button" class="toc-restore" id="toc-restore" aria-controls="toc-panel" aria-expanded="false" title="展开目录">目录</button>
+<script>
+(function () {
+  var KEY = 'alastor-toc-collapsed';
+  var btn = document.getElementById('toc-collapse');
+  var back = document.getElementById('toc-restore');
+  var close = document.getElementById('toc-close');
+  if (!btn || !back) return;
+  var wide = window.matchMedia('(min-width: 1200px)');
+  var setCollapsed = function (collapsed) {
+    document.body.classList.toggle('toc-collapsed', collapsed);
+    btn.setAttribute('aria-expanded', String(!collapsed));
+    back.setAttribute('aria-expanded', String(!collapsed));
+    try { localStorage.setItem(KEY, collapsed ? '1' : '0'); } catch (e) {}
+  };
+  var closeSheet = function () { document.body.classList.remove('toc-mobile-open'); };
+  btn.addEventListener('click', function () { setCollapsed(true); });
+  back.addEventListener('click', function () {
+    if (wide.matches) { setCollapsed(false); }
+    else { document.body.classList.toggle('toc-mobile-open'); }
+  });
+  if (close) close.addEventListener('click', closeSheet);
+  /* 点目录里的链接就收起弹层；点遮罩也收起 */
+  document.querySelectorAll('#toc-panel a').forEach(function (a) {
+    a.addEventListener('click', closeSheet);
+  });
+  document.addEventListener('click', function (e) {
+    if (!document.body.classList.contains('toc-mobile-open')) return;
+    if (e.target.closest('#toc-panel') || e.target.closest('#toc-restore')) return;
+    closeSheet();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSheet();
+  });
+  try { if (wide.matches && localStorage.getItem(KEY) === '1') setCollapsed(true); } catch (e) {}
+})();
+</script>
+
+
+</main>
+
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-line"></div>
+    <nav class="footer-nav">
+      <a href="../">主页</a>
+      <a href="../about/">关于</a>
+      <a href="../archives/">归档</a>
+      <a href="../tags/">标签</a>
+      <a href="../links/">友链</a>
+      <a href="../friendly-links/">互换友链</a>
+      <a href="../search/">搜索</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+    <p class="footer-cat-slot"></p>
+    <p>
+      <a href="https://icp.gov.moe/?keyword=20201412" target="_blank" rel="noopener">萌ICP备 20201412号</a>
+    </p>
+    <p id="show_date_time" data-birth="2020-04-02">本站已愉快蹦哒…</p>
+    <p>Copyright © 2020 Zander Alastor. All rights reserved.</p>
+  </div>
+</footer>
+
+<a class="go-home" href="../" aria-label="回到主页" title="回到主页">
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M12 3.2 3 10.4h2.6V20h5.1v-4.6h2.6V20h5.1v-8.6H21L12 3.2z" fill="currentColor"/></svg>
+</a>
+<button class="go-top" id="go-top" aria-label="回到顶部">↑</button>
+
+<script src="../assets/js/app.js" defer></script>
+
+<script src="../assets/js/highlight/highlight.pack.js"></script>
+<script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+
+
+<script>
+(function () {
+  var u = location.href, t = document.title;
+  var wb = document.getElementById('share-weibo');
+  if (wb) wb.href = 'https://service.weibo.com/share/share.php?url=' + encodeURIComponent(u) + '&title=' + encodeURIComponent(t);
+  var cp = document.getElementById('share-copy');
+  if (cp) cp.addEventListener('click', function () {
+    var done = function () { cp.textContent = '已复制'; setTimeout(function () { cp.textContent = '复制链接'; }, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(u).then(done, done);
+    else { var i = document.createElement('textarea'); i.value = u; document.body.appendChild(i); i.select(); document.execCommand('copy'); i.remove(); done(); }
+  });
+  var nat = document.getElementById('share-native');
+  if (nat && navigator.share) { nat.hidden = false; nat.addEventListener('click', function () { navigator.share({ title: t, url: u }); }); }
+
+  /* 目录：滚动时高亮当前小节（只认右侧固定目录，手机折叠目录不参与） */
+  var tocLinks = [].slice.call(document.querySelectorAll('.sidebar-toc .toc a'));
+  if (tocLinks.length) {
+    var heads = tocLinks.map(function (a) {
+      return document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    });
+    var spy = function () {
+      var y = window.scrollY + 120, cur = 0;
+      heads.forEach(function (h, i) { if (h && h.offsetTop <= y) cur = i; });
+      tocLinks.forEach(function (a, i) { a.classList.toggle('active', i === cur); });
+      /* 目录比视口高时，把当前项滚进目录列可视区（只滚目录，不动正文） */
+      var bar = document.querySelector('.sidebar-toc');
+      var act = tocLinks[cur];
+      if (bar && act && bar.scrollHeight > bar.clientHeight + 4) {
+        var r = act.getBoundingClientRect(), br = bar.getBoundingClientRect();
+        if (r.top < br.top + 8 || r.bottom > br.bottom - 8) {
+          bar.scrollTop += r.top - br.top - bar.clientHeight / 3;
+        }
+      }
+    };
+    window.addEventListener('scroll', spy, { passive: true });
+    spy();
+  }
+})();
+</script>
+
+</body>
+</html>

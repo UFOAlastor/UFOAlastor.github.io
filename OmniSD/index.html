@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>[转载]给8110 4G安装OmniSD以安装第三方软件 · Zander Alastor&#39;s blog</title>
+<meta name="description" content="此店不售此书。分享工具、教程和记录生活。">
+<meta name="theme-color" content="#222222">
+<meta property="og:site_name" content="Zander Alastor&#39;s blog">
+<meta property="og:title" content="[转载]给8110 4G安装OmniSD以安装第三方软件">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://i.loli.net/2020/05/02/tzGRuYJOHA6ZyIU.png">
+<link rel="icon" href="../assets/img/favicon.ico">
+<link rel="alternate" type="application/rss+xml" title="Zander Alastor&#39;s blog" href="../rss.xml">
+<link rel="stylesheet" href="../assets/css/style.css?v=07210bad">
+
+<link rel="stylesheet" href="../assets/css/highlight/railscasts.css">
+
+
+</head>
+<body class="single">
+
+<header class="site-header">
+  <div class="wrap head-inner">
+    <a class="brand" href="../">Zander Alastor&#39;s blog</a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-btn" aria-label="打开菜单"><span></span></label>
+    <nav class="menu" aria-label="主导航">
+      <ul>
+        <li><a href="../about/">关于</a></li>
+        <li><a href="../archives/">归档</a></li>
+        <li><a href="../links/">友链</a></li>
+        <li><a href="../search/">搜索</a></li>
+        <li><a href="../">主页</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+</header>
+
+
+<main class="wrap layout">
+  <aside class="sidebar sidebar-tools" aria-label="站点工具">
+    
+    
+
+    <section>
+      <h2 class="widget-title">近期文章</h2>
+      <ul class="widget-list">
+        
+        <li><a href="../picayomi/">给 Kindle 写一个漫画阅读插件 PicaYomi</a><span class="d">10-24</span></li>
+        
+        <li><a href="../3BsZpFxPKL/">解决bat脚本无法执行conda环境</a><span class="d">12-29</span></li>
+        
+        <li><a href="../JFt3l7SWY/">ProtoBuf协议</a><span class="d">09-06</span></li>
+        
+        <li><a href="../24x6cGKiy/">数据库-事务</a><span class="d">09-06</span></li>
+        
+        <li><a href="../2lEd0eWPD/">quorum与paxos与raft</a><span class="d">09-06</span></li>
+        
+        <li><a href="../N6PkLgMlT/">校园网AP隔离-内网穿透实现</a><span class="d">12-02</span></li>
+        
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="widget-title">标签</h2>
+      <div class="tag-cloud">
+        
+        <a class="pill" href="../tags/tools/">工具分享 · 20</a>
+        
+        <a class="pill" href="../tags/study-notes/">学习笔记 · 18</a>
+        
+        <a class="pill" href="../tags/problem-solving/">问题解决 · 17</a>
+        
+        <a class="pill" href="../tags/daily-life/">日常 · 12</a>
+        
+        <a class="pill" href="../tags/gridea/">Gridea · 7</a>
+        
+        <a class="pill" href="../tags/kaios/">KaiOS · 5</a>
+        
+        <a class="pill" href="../tags/cpp/">C++ · 4</a>
+        
+        <a class="pill" href="../tags/python/">python · 2</a>
+        
+        <a class="pill" href="../tags/works/">作品 · 2</a>
+        
+        <a class="pill" href="../tags/">全部 →</a>
+      </div>
+    </section>
+
+    
+
+    
+  </aside>
+
+  <div class="content">
+    
+<article class="post">
+  <header class="article-head">
+    
+    <div class="article-kicker">
+      KaiOS
+    </div>
+    
+    <h1 class="article-title">[转载]给8110 4G安装OmniSD以安装第三方软件</h1>
+    <div class="article-meta">
+      <time datetime="2020-05-02">2020 年 05 月 02 日</time>
+      <span class="article-readcount" id="vercount_value_page_pv"></span>
+    </div>
+  </header>
+
+  
+  <details class="toc-inline">
+    <summary>本文目录 <span class="n">7 节</span></summary>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#sec-1">前排提示建议去 清水博客 观看原文~</a></li>
+        
+        <li class="toc-l2"><a href="#sec-2">推荐使用 此教程 中的一键安装工具。如果该工具无法使用，再使用本教程。</a></li>
+        
+        <li class="toc-l2"><a href="#luxferre-wallace-toolbox-omnisd-wallace-">由Luxferre开发的 Wallace Toolbox 在集成了OmniSD的功能的同时，增加了其他实用的小工具。建议用 Wallace Toolbox 替代OmniSD。</a></li>
+        
+        <li class="toc-l2"><a href="#sec-4">一、较为安全的方法</a></li>
+        
+        <li class="toc-l2"><a href="#sec-5">二、略微激进的方法</a></li>
+        
+        <li class="toc-l2"><a href="#q-a">三、Q&amp;A</a></li>
+        
+        <li class="toc-l2"><a href="#sec-7">本文链接：</a></li>
+        
+      </ol>
+    </nav>
+  </details>
+  
+
+  <div class="prose">
+    <h2 id="sec-1">前排提示建议去<a href="https://www.heppy.wang/archives/13/">清水博客</a>观看原文~</h2>
+<p><img loading="lazy" alt="image-20200502092525071" src="https://i.loli.net/2020/05/02/tzGRuYJOHA6ZyIU.png"></p>
+<h2 id="sec-2">推荐使用<a href="http://www.heppy.wang/archives/94/">此教程</a>中的一键安装工具。如果该工具无法使用，再使用本教程。</h2>
+<p>这个教程适用于不想刷GerdaOS而需要安装第三方APP的同学。</p>
+<p><strong>刷机有风险，操作需谨慎。请务必备份好您的所有数据。这会删除您的所有数据。本人不对本内容产生的问题承担任何责任。</strong></p>
+<h2 id="luxferre-wallace-toolbox-omnisd-wallace-">由Luxferre开发的<a href="http://www.heppy.wang/archives/45/">Wallace Toolbox</a>在集成了OmniSD的功能的同时，增加了其他实用的小工具。建议用<a href="http://www.heppy.wang/archives/45/">Wallace Toolbox</a>替代OmniSD。</h2>
+<h2 id="sec-4">一、较为安全的方法</h2>
+<p>此方法不会影响手机接收OTA更新。如果您的手机无法连接Firefox或者此方法不起作用，可以尝试第二种方法，不过它会影响手机的OTA更新。</p>
+<ul>
+<li>Windows的朋友们请先把驱动搞定。</li>
+<li>1.<a href="https://pan.baidu.com/s/1FwoQeAbucs7R8eZH7E57WA">点此</a> (提取码: p5pg)下载旧版Pale Moon。Pale Moon是FireFox的一个分支，最新版的Pale Moon已经移除了下文所需的WebIDE。</li>
+<li><a href="https://www.lanzous.com/b623501/">https://www.lanzous.com/b623501/</a> (密码2xra) 或https://<a href="http://www.lanzous.com/i4mylmd">www.lanzous.com/i4mylmd</a>（汉化版）下载OmniJB.zip。</li>
+<li>3.在拨号盘上拨<em>#</em>#33284#<em>#</em>启用开发者模式。</li>
+<li>4.通过USB连接手机到电脑上。打开WebIDE。</li>
+<li>如果WebIDE中没有出现你的设备，请<a href="https://www.coolapk.com/feed/16691768?shareKey=ODAzYjU2ZmQxOWJlNWU3Mzk4MzI~&amp;shareUid=1998781&amp;shareFrom=com.coolapk.app_2.5">下载ADB工具包</a>，在工具包目录右键打开命令提示符，运行命令： adb forward tcp:6000 localfilesystem:/data/local/debugger-socket ，然后WebIDE中选择“远程运行环境”确认端口与命令中相同后回车，不出意外的话即可看到你的“远程运行环境”。对于V13及以下的系统，如果不小心断开，请重启手机再重复上述操作。在V16中此bug已修复。</li>
+<li>5.解压OmniJB.zip，使用Firefox WebIDE的“打开打包式应用”（“Open packaged app”）打开该文件夹。</li>
+<li>6.点击绿色运行键运行omnijb。</li>
+<li>7.【【【【注意：这会删除你的所有数据，请做好备份！！！】】】】在手机上按下井号键，执行恢复出厂操作。</li>
+<li>8.进入设置，找到开发者菜单，调试器选“ADB和开发工具”。</li>
+<li>9.重复第4~6步，OmniSD安装完成。<br>
+<a href="http://www.heppy.wang/usr/uploads/2020/01/1650466368.png"><img loading="lazy" alt="无标题-688x332.png" src="http://www.heppy.wang/usr/uploads/2020/01/1650466368.png"></a></li>
+</ul>
+<p><a href="http://www.heppy.wang/usr/uploads/2020/01/1853916531.png"><img loading="lazy" alt="2019-03-09-11-01-09.png" src="http://www.heppy.wang/usr/uploads/2020/01/1853916531.png"></a></p>
+<p><a href="http://www.heppy.wang/usr/uploads/2020/01/3518680225.png"><img loading="lazy" alt="2019-03-09-10-59-32.png" src="http://www.heppy.wang/usr/uploads/2020/01/3518680225.png"></a></p>
+<h2 id="sec-5">二、略微激进的方法</h2>
+<p>这会破坏你的OTA更新。请在第一种方法无效时使用此方法。</p>
+<ul>
+<li>1.如果你已经升级到V13系统，请先参照http://<a href="http://www.heppy.wang/gerdaos-flash/降级Recovery">www.heppy.wang/gerdaos-flash/降级Recovery</a>。</li>
+<li>2.从 <a href="https://www.lanzous.com/b623501/">https://www.lanzous.com/b623501/</a> (密码2xra) 下载omnijb-final.zip，放在存储卡根目录下；</li>
+<li>3.进入recovery，选中Apply update from SD Card；</li>
+<li>4.选择omnijb-final.zip，等待完成；</li>
+<li>5.【【【【注意：这会删除你的所有数据，请做好备份！！！】】】】选择Wipe data/factory reset双清；</li>
+<li>6.选择Reboot system now重启。<br>
+    不出意外的话，你就可以在菜单里看到OmniSD的图标了。</li>
+</ul>
+<h2 id="q-a">三、Q&amp;A</h2>
+<ul>
+<li>Q: 使用OmniSD安装APP时报错：invalid privilege level</li>
+<li>A:请按#键重置手机（会删除所有数据）</li>
+</ul>
+<h2 id="sec-7">本文链接：</h2>
+<p>转至清水博客<a href="https://www.heppy.wang/archives/13/">https://www.heppy.wang/archives/13/</a></p>
+  </div>
+
+  
+  <div class="tags-row">
+    <a class="pill" href="../../tags/kaios/">#KaiOS</a>
+  </div>
+  
+
+  <div class="share-row">
+    <span class="share-label">分享</span>
+    <button type="button" class="share-btn" id="share-copy">复制链接</button>
+    <a class="share-btn" id="share-weibo" target="_blank" rel="noopener">微博</a>
+    <button type="button" class="share-btn" id="share-native" hidden>系统分享</button>
+  </div>
+
+  <nav class="post-nav">
+    
+    <a class="prev" href="../Martian_converter/"><span class="dir">上一篇 · 更新</span>【在线工具】火星文生成器<em class="pn-date">2020-05-03</em></a>
+    
+    
+    <a class="next" href="../Generate_ciphertext_for_mobile_display/"><span class="dir">下一篇 · 更早</span>生成可移动显示屏才能看的密文<em class="pn-date">2020-05-01</em></a>
+    
+  </nav>
+
+  
+  
+<section class="comments" id="comments">
+  <h2>评论</h2>
+  <script src="https://giscus.app/client.js"
+          data-repo="UFOAlastor/UFOAlastor.github.io"
+          data-repo-id="MDEwOlJlcG9zaXRvcnkyNTIzNDYzMDY="
+          data-category="General"
+          data-category-id="DIC_kwDODwp_ws4DI204"
+          data-mapping="specific"
+          data-term="[转载]给8110 4G安装OmniSD以安装第三方软件"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="light"
+          data-lang="zh-CN"
+          data-loading="lazy"
+          async>
+  </script>
+</section>
+
+</article>
+
+  </div>
+
+  
+
+<aside class="sidebar sidebar-toc" id="toc-panel" aria-label="本文目录">
+  <button type="button" class="toc-close" id="toc-close" aria-label="关闭目录">✕</button>
+  <section class="widget widget-toc">
+    <h2 class="widget-title">本文目录
+      <button type="button" class="toc-collapse" id="toc-collapse" aria-controls="toc-panel" aria-expanded="true" title="收起目录，正文占满">收起 ⌄</button>
+    </h2>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#sec-1">前排提示建议去 清水博客 观看原文~</a></li>
+        
+        <li class="toc-l2"><a href="#sec-2">推荐使用 此教程 中的一键安装工具。如果该工具无法使用，再使用本教程。</a></li>
+        
+        <li class="toc-l2"><a href="#luxferre-wallace-toolbox-omnisd-wallace-">由Luxferre开发的 Wallace Toolbox 在集成了OmniSD的功能的同时，增加了其他实用的小工具。建议用 Wallace Toolbox 替代OmniSD。</a></li>
+        
+        <li class="toc-l2"><a href="#sec-4">一、较为安全的方法</a></li>
+        
+        <li class="toc-l2"><a href="#sec-5">二、略微激进的方法</a></li>
+        
+        <li class="toc-l2"><a href="#q-a">三、Q&amp;A</a></li>
+        
+        <li class="toc-l2"><a href="#sec-7">本文链接：</a></li>
+        
+      </ol>
+    </nav>
+  </section>
+</aside>
+<button type="button" class="toc-restore" id="toc-restore" aria-controls="toc-panel" aria-expanded="false" title="展开目录">目录</button>
+<script>
+(function () {
+  var KEY = 'alastor-toc-collapsed';
+  var btn = document.getElementById('toc-collapse');
+  var back = document.getElementById('toc-restore');
+  var close = document.getElementById('toc-close');
+  if (!btn || !back) return;
+  var wide = window.matchMedia('(min-width: 1200px)');
+  var setCollapsed = function (collapsed) {
+    document.body.classList.toggle('toc-collapsed', collapsed);
+    btn.setAttribute('aria-expanded', String(!collapsed));
+    back.setAttribute('aria-expanded', String(!collapsed));
+    try { localStorage.setItem(KEY, collapsed ? '1' : '0'); } catch (e) {}
+  };
+  var closeSheet = function () { document.body.classList.remove('toc-mobile-open'); };
+  btn.addEventListener('click', function () { setCollapsed(true); });
+  back.addEventListener('click', function () {
+    if (wide.matches) { setCollapsed(false); }
+    else { document.body.classList.toggle('toc-mobile-open'); }
+  });
+  if (close) close.addEventListener('click', closeSheet);
+  /* 点目录里的链接就收起弹层；点遮罩也收起 */
+  document.querySelectorAll('#toc-panel a').forEach(function (a) {
+    a.addEventListener('click', closeSheet);
+  });
+  document.addEventListener('click', function (e) {
+    if (!document.body.classList.contains('toc-mobile-open')) return;
+    if (e.target.closest('#toc-panel') || e.target.closest('#toc-restore')) return;
+    closeSheet();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSheet();
+  });
+  try { if (wide.matches && localStorage.getItem(KEY) === '1') setCollapsed(true); } catch (e) {}
+})();
+</script>
+
+
+</main>
+
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-line"></div>
+    <nav class="footer-nav">
+      <a href="../">主页</a>
+      <a href="../about/">关于</a>
+      <a href="../archives/">归档</a>
+      <a href="../tags/">标签</a>
+      <a href="../links/">友链</a>
+      <a href="../search/">搜索</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+    <p class="footer-cat-slot"></p>
+    <p>
+      <a href="https://icp.gov.moe/?keyword=20201412" target="_blank" rel="noopener">萌ICP备 20201412号</a>
+    </p>
+    <p id="show_date_time" data-birth="2020-04-02">本站已愉快蹦哒…</p>
+    <p>Copyright © 2020 Zander Alastor. All rights reserved.</p>
+  </div>
+</footer>
+
+<a class="go-home" href="../" aria-label="回到主页" title="回到主页">
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M12 3.2 3 10.4h2.6V20h5.1v-4.6h2.6V20h5.1v-8.6H21L12 3.2z" fill="currentColor"/></svg>
+</a>
+<button class="go-top" id="go-top" aria-label="回到顶部">↑</button>
+
+<script src="../assets/js/app.js" defer></script>
+<script>
+/* Vercount 访问统计：国内直连，无需注册，POST 上报 + 自动写入 span */
+(function () {
+  var host = location.hostname;
+  if (host !== 'alastor.top' && host !== 'www.alastor.top' && host !== 'ufoalastor.github.io') return;
+  var s = document.createElement('script');
+  s.src = 'https://events.vercount.one/js';
+  s.defer = true;
+  document.head.appendChild(s);
+})();
+</script>
+
+<script src="../assets/js/highlight/highlight.pack.js"></script>
+<script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+
+
+<script>
+(function () {
+  var u = location.href, t = document.title;
+  var wb = document.getElementById('share-weibo');
+  if (wb) wb.href = 'https://service.weibo.com/share/share.php?url=' + encodeURIComponent(u) + '&title=' + encodeURIComponent(t);
+  var cp = document.getElementById('share-copy');
+  if (cp) cp.addEventListener('click', function () {
+    var done = function () { cp.textContent = '已复制'; setTimeout(function () { cp.textContent = '复制链接'; }, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(u).then(done, done);
+    else { var i = document.createElement('textarea'); i.value = u; document.body.appendChild(i); i.select(); document.execCommand('copy'); i.remove(); done(); }
+  });
+  var nat = document.getElementById('share-native');
+  if (nat && navigator.share) { nat.hidden = false; nat.addEventListener('click', function () { navigator.share({ title: t, url: u }); }); }
+
+  /* 目录：滚动时高亮当前小节（只认右侧固定目录，手机折叠目录不参与） */
+  var tocLinks = [].slice.call(document.querySelectorAll('.sidebar-toc .toc a'));
+  if (tocLinks.length) {
+    var heads = tocLinks.map(function (a) {
+      return document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    });
+    var spy = function () {
+      var y = window.scrollY + 120, cur = 0;
+      heads.forEach(function (h, i) { if (h && h.offsetTop <= y) cur = i; });
+      tocLinks.forEach(function (a, i) { a.classList.toggle('active', i === cur); });
+      /* 目录比视口高时，把当前项滚进目录列可视区（只滚目录，不动正文） */
+      var bar = document.querySelector('.sidebar-toc');
+      var act = tocLinks[cur];
+      if (bar && act && bar.scrollHeight > bar.clientHeight + 4) {
+        var r = act.getBoundingClientRect(), br = bar.getBoundingClientRect();
+        if (r.top < br.top + 8 || r.bottom > br.bottom - 8) {
+          bar.scrollTop += r.top - br.top - bar.clientHeight / 3;
+        }
+      }
+    };
+    window.addEventListener('scroll', spy, { passive: true });
+    spy();
+  }
+})();
+</script>
+
+</body>
+</html>

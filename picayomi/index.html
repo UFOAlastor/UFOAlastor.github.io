@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>给 Kindle 写一个漫画阅读插件 PicaYomi · Zander Alastor&#39;s blog</title>
+<meta name="description" content="此店不售此书。分享工具、教程和记录生活。">
+<meta name="theme-color" content="#222222">
+<meta property="og:site_name" content="Zander Alastor&#39;s blog">
+<meta property="og:title" content="给 Kindle 写一个漫画阅读插件 PicaYomi">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://files.seeusercontent.com/2026/10/24/9vXc/picayomi-home-1200w.webp">
+<link rel="icon" href="../assets/img/favicon.ico">
+<link rel="alternate" type="application/rss+xml" title="Zander Alastor&#39;s blog" href="../rss.xml">
+<link rel="stylesheet" href="../assets/css/style.css?v=07210bad">
+
+<link rel="stylesheet" href="../assets/css/highlight/railscasts.css">
+
+
+</head>
+<body class="single">
+
+<header class="site-header">
+  <div class="wrap head-inner">
+    <a class="brand" href="../">Zander Alastor&#39;s blog</a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-btn" aria-label="打开菜单"><span></span></label>
+    <nav class="menu" aria-label="主导航">
+      <ul>
+        <li><a href="../about/">关于</a></li>
+        <li><a href="../archives/">归档</a></li>
+        <li><a href="../links/">友链</a></li>
+        <li><a href="../search/">搜索</a></li>
+        <li><a href="../">主页</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+</header>
+
+
+<main class="wrap layout">
+  <aside class="sidebar sidebar-tools" aria-label="站点工具">
+    
+    
+
+    <section>
+      <h2 class="widget-title">近期文章</h2>
+      <ul class="widget-list">
+        
+        <li><a href="../picayomi/">给 Kindle 写一个漫画阅读插件 PicaYomi</a><span class="d">10-24</span></li>
+        
+        <li><a href="../3BsZpFxPKL/">解决bat脚本无法执行conda环境</a><span class="d">12-29</span></li>
+        
+        <li><a href="../JFt3l7SWY/">ProtoBuf协议</a><span class="d">09-06</span></li>
+        
+        <li><a href="../24x6cGKiy/">数据库-事务</a><span class="d">09-06</span></li>
+        
+        <li><a href="../2lEd0eWPD/">quorum与paxos与raft</a><span class="d">09-06</span></li>
+        
+        <li><a href="../N6PkLgMlT/">校园网AP隔离-内网穿透实现</a><span class="d">12-02</span></li>
+        
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="widget-title">标签</h2>
+      <div class="tag-cloud">
+        
+        <a class="pill" href="../tags/tools/">工具分享 · 20</a>
+        
+        <a class="pill" href="../tags/study-notes/">学习笔记 · 18</a>
+        
+        <a class="pill" href="../tags/problem-solving/">问题解决 · 17</a>
+        
+        <a class="pill" href="../tags/daily-life/">日常 · 12</a>
+        
+        <a class="pill" href="../tags/gridea/">Gridea · 7</a>
+        
+        <a class="pill" href="../tags/kaios/">KaiOS · 5</a>
+        
+        <a class="pill" href="../tags/cpp/">C++ · 4</a>
+        
+        <a class="pill" href="../tags/python/">python · 2</a>
+        
+        <a class="pill" href="../tags/works/">作品 · 2</a>
+        
+        <a class="pill" href="../tags/">全部 →</a>
+      </div>
+    </section>
+
+    
+
+    
+  </aside>
+
+  <div class="content">
+    
+<article class="post">
+  <header class="article-head">
+    
+    <h1 class="article-title">给 Kindle 写一个漫画阅读插件 PicaYomi</h1>
+    <div class="article-meta">
+      <time datetime="2026-10-24">2026 年 10 月 24 日</time>
+      <span class="article-readcount" id="vercount_value_page_pv"></span>
+    </div>
+  </header>
+
+  
+  <details class="toc-inline">
+    <summary>本文目录 <span class="n">9 节</span></summary>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#1">1. 一段闲话</a></li>
+        
+        <li class="toc-l2"><a href="#2">2. 前言</a></li>
+        
+        <li class="toc-l2"><a href="#3">3. 主页</a></li>
+        
+        <li class="toc-l2"><a href="#4">4. 浏览与列表</a></li>
+        
+        <li class="toc-l2"><a href="#5">5. 详情与阅读</a></li>
+        
+        <li class="toc-l2"><a href="#6">6. 源与插件</a></li>
+        
+        <li class="toc-l2"><a href="#7">7. 安装</a></li>
+        
+        <li class="toc-l2"><a href="#8">8. 未来规划</a></li>
+        
+        <li class="toc-l2"><a href="#9">9. 致谢</a></li>
+        
+      </ol>
+    </nav>
+  </details>
+  
+
+  <div class="prose">
+    <h2 id="1">1. 一段闲话</h2>
+<p>多年没有更新网站, 这个高中竞赛期间忙里偷闲搭建的网站, 也是被遗忘吃灰了. (所幸当年偷懒用 GitHub Pages 建的网站, 还能保证至少可以访问)</p>
+<p>时代发展真快, 之前靠 Ctrl+C, Ctrl+V, 到处串门偷抄别人网站, 东拼西凑数周才逐渐搭好的博客, 如今 AI 大人一下午就能修缮如新, 甚至优化一番. </p>
+<p>以前感觉日子快, 其实一点不快. 一杯茶, 一抖腿, 一段代码就是敲半天. 现在哪还打代码, 连看都不看了, C++ 更是一两年没碰过, 老本都忘了. 代码能力已经退化成"离开 AI 大人就是天才程序员的陨落", 如今那是连个平衡树都写不来了(</p>
+<p>工作已有一年, 在成都过得还算自在, 一个人平日就是周末拍拍照(尼康佬), 打打游戏, 偶尔去天府红看看美女, 采购点动漫周边. 闲来无事, 还是要做点项目, 维护下博客, 无论是信息发布, 生活分享, 还是知识记录, 都发一点, 算是充实下生活.</p>
+<p>闲话到此. </p>
+<h2 id="2">2. 前言</h2>
+<p>几年前买了个 Kpw6, 本来是想看看书啥的, 不过天性浮躁, 偶能遇到一本对胃口的书还可以静下来看看, 看完后就是长久的吃灰. (本INFJ安利下赫尔曼黑塞的书)</p>
+<p>但是只有正经事用 Kindle, 应用范围还是太小了. 平日专门用 ipad mini5 看哔咔漫画, 这电子书, 不更是天生的漫画圣体吗?</p>
+<p>一年前, 其实已经想到过用 AI 做这样一个项目, 移植 <a href="https://github.com/wgh136/PicaComic">PicaComic</a> 到 Kindle 上. 但是当时 agent 还不够成熟, 调试繁琐, 页面绘制也总遇卡点, 仅仅开了个头, 最终暂时搁置.</p>
+<p>如今不到一周, 用 deepseek-v4.1-flash + gpt6.1-sol 配合, 也是顺利开发完成, 有了第一个正式版发布, 能力基本完善, 页面简洁美观, 性能也有优化, 使用体验上尽量对齐手机应用体验. </p>
+<p>为了兼顾普通漫画的阅读, 也顺带搞了拷贝漫画的支持, 并且设计为漫画源形式, 便于后续增加新的漫画平台, 或是维护已有源的接口.</p>
+<p>以下是项目展示.</p>
+<h2 id="3">3. 主页</h2>
+<p>主页是一排菜单. 顶上显示当前漫画源, 点一下就能换; 下面依次是最新, 分类, 排行, 收藏, 历史, 已下载, 搜索, 账号和设置. 漫画源支持的能力就会显示, 否则自动隐藏. 目前还比较简陋, 后续可能优化下主页样式, 感觉加点历史或者收藏的预览出来比较好.</p>
+<p><img loading="lazy" alt="PicaYomi 主页" src="https://files.seeusercontent.com/2026/10/24/9vXc/picayomi-home-1200w.webp"></p>
+<p>目前支持哔咔, 绅士, 禁漫, 拷贝共 4 个源. </p>
+<h2 id="4">4. 浏览与列表</h2>
+<p>列表一行一本, 带有封面预览, 有些源的接口有作者, 话数, 页数之类的回参, 就也会显示出来. 底部一排是上页, 下页, 跳页, 排序, 也支持滑动的手势交互, 这样单手也能翻(</p>
+<p><img loading="lazy" alt="漫画列表" src="https://files.seeusercontent.com/2026/10/24/nCd3/picayomi-list-1200w.webp"></p>
+<p>分类页是标签直接铺开, 点进去就是这个分类的列表.</p>
+<p><img loading="lazy" alt="分类浏览" src="https://files.seeusercontent.com/2026/10/24/jiV1/picayomi-categories-1200w.webp"></p>
+<h2 id="5">5. 详情与阅读</h2>
+<p>漫画详情页顶部是封面和标题, 都可以点击, 封面可以放大显示, 标题可以复制, 包括描述部分也是可以点击展开看完整内容的.</p>
+<p>标签和作者可点击, 用于关键词搜索.</p>
+<p><img loading="lazy" alt="作品详情" src="https://files.seeusercontent.com/2026/10/24/m0Cz/picayomi-detail-1200w.webp"></p>
+<p>阅读页基于 KOReader, 增加了边缘滑动退出的能力, 对齐手机体验. 以及性能上, AI 大人搞了一些大尺寸图片的压缩策略, 保证 Kindle 的小内存不会爆, 不过只能说尽量可用, 毕竟原理上我审核不到, 这块图片压缩算法不是很懂.</p>
+<p>图片是按需下载的, 翻到哪页下哪页, 后面几张提前预取. 追更的时候不用等整章下完才能看第一页. 想离线看的章节, 在详情页批量勾选下载, 之后从"已下载"进去就是本地阅读, 断网也不影响.</p>
+<p>特别对版式做了下兼容设计. 漫画毕竟分为竖版, 韩式条漫, 还有 CG 类的横版几种常见类型, Kindle 这种设备毕竟不方便缩放和翻转, 所以加上了自动检测机制. 逻辑倒是简单, 直接从中间页分析漫画页面的比例, 看属于竖版, 横版, 还是条漫. 单行本竖屏翻页, 条漫上下滚动, 横屏则自动翻转屏幕. 默认自动判断, 判不准的话在详情页按单本手动循环切换.</p>
+<h2 id="6">6. 源与插件</h2>
+<p>不想每加一个源就重发一版插件, 所以源搞成独立的包, 走独立仓库分发, 插件里支持更新漫画源能力, 从漫画源仓库直接拉取最新版本. </p>
+<p>目前漫画源能自动检测并更新. 我看 <a href="https://github.com/readest/readest">readest</a> 这个项目也做了插件本身的更新能力, 后续可以学习下, 把插件本体的自动更新也加上. </p>
+<h2 id="7">7. 安装</h2>
+<p>在 GitHub Releases 下载 <code>picayomi.koplugin-x.x.x.zip</code>, 解压后把 <code>picayomi.koplugin</code> 文件夹丢进设备的 <code>koreader/plugins/</code> 目录, 重启 KOReader 就能在工具菜单里看到. 注意自动生成的 Source code 压缩包是源码归档, 不是安装包, 别下错了.</p>
+<p>项目地址 <a href="https://github.com/UFOAlastor/koreader_PicaYomi">https://github.com/UFOAlastor/koreader_PicaYomi</a></p>
+<h2 id="8">8. 未来规划</h2>
+<p>从空目录到能用, 一周左右. 真是 AI 神力, 一年前还在流口水, 现在立马就能落地, 确实方便.</p>
+<p>后续可能可以拓展下项目范围, 把轻小说也搞进来, 这样也省去小说同步给 Kindle 的步骤, 直接在线看还是方便许多.</p>
+<h2 id="9">9. 致谢</h2>
+<p>感谢项目参考:</p>
+<ul>
+<li><a href="https://github.com/wgh136/PicaComic">https://github.com/wgh136/PicaComic</a> (原作)</li>
+<li><a href="https://github.com/hanatsumi/rakuyomi">https://github.com/hanatsumi/rakuyomi</a> (原作)</li>
+<li>另有以上项目的 fork 版本同样参考过: Pacalini/PicaComic, tachibana-shin/rakuyomi</li>
+</ul>
+<p>另外, 推荐一个看书的多平台同步软件, 页面设计不错, 而且目前对 Kindle 的支持很好, 能够将手机上的阅读书籍本体以及进度, 批注, 划线都同步到 Kindle 上 -- <a href="https://github.com/readest/readest">Readest</a>.</p>
+  </div>
+
+  
+
+  <div class="share-row">
+    <span class="share-label">分享</span>
+    <button type="button" class="share-btn" id="share-copy">复制链接</button>
+    <a class="share-btn" id="share-weibo" target="_blank" rel="noopener">微博</a>
+    <button type="button" class="share-btn" id="share-native" hidden>系统分享</button>
+  </div>
+
+  <nav class="post-nav single">
+    
+    
+    <a class="next" href="../3BsZpFxPKL/"><span class="dir">下一篇 · 更早</span>解决bat脚本无法执行conda环境<em class="pn-date">2024-12-29</em></a>
+    
+  </nav>
+
+  
+  
+<section class="comments" id="comments">
+  <h2>评论</h2>
+  <script src="https://giscus.app/client.js"
+          data-repo="UFOAlastor/UFOAlastor.github.io"
+          data-repo-id="MDEwOlJlcG9zaXRvcnkyNTIzNDYzMDY="
+          data-category="General"
+          data-category-id="DIC_kwDODwp_ws4DI204"
+          data-mapping="specific"
+          data-term="给 Kindle 写一个漫画阅读插件 PicaYomi"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="light"
+          data-lang="zh-CN"
+          data-loading="lazy"
+          async>
+  </script>
+</section>
+
+</article>
+
+  </div>
+
+  
+
+<aside class="sidebar sidebar-toc" id="toc-panel" aria-label="本文目录">
+  <button type="button" class="toc-close" id="toc-close" aria-label="关闭目录">✕</button>
+  <section class="widget widget-toc">
+    <h2 class="widget-title">本文目录
+      <button type="button" class="toc-collapse" id="toc-collapse" aria-controls="toc-panel" aria-expanded="true" title="收起目录，正文占满">收起 ⌄</button>
+    </h2>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#1">1. 一段闲话</a></li>
+        
+        <li class="toc-l2"><a href="#2">2. 前言</a></li>
+        
+        <li class="toc-l2"><a href="#3">3. 主页</a></li>
+        
+        <li class="toc-l2"><a href="#4">4. 浏览与列表</a></li>
+        
+        <li class="toc-l2"><a href="#5">5. 详情与阅读</a></li>
+        
+        <li class="toc-l2"><a href="#6">6. 源与插件</a></li>
+        
+        <li class="toc-l2"><a href="#7">7. 安装</a></li>
+        
+        <li class="toc-l2"><a href="#8">8. 未来规划</a></li>
+        
+        <li class="toc-l2"><a href="#9">9. 致谢</a></li>
+        
+      </ol>
+    </nav>
+  </section>
+</aside>
+<button type="button" class="toc-restore" id="toc-restore" aria-controls="toc-panel" aria-expanded="false" title="展开目录">目录</button>
+<script>
+(function () {
+  var KEY = 'alastor-toc-collapsed';
+  var btn = document.getElementById('toc-collapse');
+  var back = document.getElementById('toc-restore');
+  var close = document.getElementById('toc-close');
+  if (!btn || !back) return;
+  var wide = window.matchMedia('(min-width: 1200px)');
+  var setCollapsed = function (collapsed) {
+    document.body.classList.toggle('toc-collapsed', collapsed);
+    btn.setAttribute('aria-expanded', String(!collapsed));
+    back.setAttribute('aria-expanded', String(!collapsed));
+    try { localStorage.setItem(KEY, collapsed ? '1' : '0'); } catch (e) {}
+  };
+  var closeSheet = function () { document.body.classList.remove('toc-mobile-open'); };
+  btn.addEventListener('click', function () { setCollapsed(true); });
+  back.addEventListener('click', function () {
+    if (wide.matches) { setCollapsed(false); }
+    else { document.body.classList.toggle('toc-mobile-open'); }
+  });
+  if (close) close.addEventListener('click', closeSheet);
+  /* 点目录里的链接就收起弹层；点遮罩也收起 */
+  document.querySelectorAll('#toc-panel a').forEach(function (a) {
+    a.addEventListener('click', closeSheet);
+  });
+  document.addEventListener('click', function (e) {
+    if (!document.body.classList.contains('toc-mobile-open')) return;
+    if (e.target.closest('#toc-panel') || e.target.closest('#toc-restore')) return;
+    closeSheet();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSheet();
+  });
+  try { if (wide.matches && localStorage.getItem(KEY) === '1') setCollapsed(true); } catch (e) {}
+})();
+</script>
+
+
+</main>
+
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-line"></div>
+    <nav class="footer-nav">
+      <a href="../">主页</a>
+      <a href="../about/">关于</a>
+      <a href="../archives/">归档</a>
+      <a href="../tags/">标签</a>
+      <a href="../links/">友链</a>
+      <a href="../search/">搜索</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+    <p class="footer-cat-slot"></p>
+    <p>
+      <a href="https://icp.gov.moe/?keyword=20201412" target="_blank" rel="noopener">萌ICP备 20201412号</a>
+    </p>
+    <p id="show_date_time" data-birth="2020-04-02">本站已愉快蹦哒…</p>
+    <p>Copyright © 2020 Zander Alastor. All rights reserved.</p>
+  </div>
+</footer>
+
+<a class="go-home" href="../" aria-label="回到主页" title="回到主页">
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M12 3.2 3 10.4h2.6V20h5.1v-4.6h2.6V20h5.1v-8.6H21L12 3.2z" fill="currentColor"/></svg>
+</a>
+<button class="go-top" id="go-top" aria-label="回到顶部">↑</button>
+
+<script src="../assets/js/app.js" defer></script>
+<script>
+/* Vercount 访问统计：国内直连，无需注册，POST 上报 + 自动写入 span */
+(function () {
+  var host = location.hostname;
+  if (host !== 'alastor.top' && host !== 'www.alastor.top' && host !== 'ufoalastor.github.io') return;
+  var s = document.createElement('script');
+  s.src = 'https://events.vercount.one/js';
+  s.defer = true;
+  document.head.appendChild(s);
+})();
+</script>
+
+<script src="../assets/js/highlight/highlight.pack.js"></script>
+<script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+
+
+<script>
+(function () {
+  var u = location.href, t = document.title;
+  var wb = document.getElementById('share-weibo');
+  if (wb) wb.href = 'https://service.weibo.com/share/share.php?url=' + encodeURIComponent(u) + '&title=' + encodeURIComponent(t);
+  var cp = document.getElementById('share-copy');
+  if (cp) cp.addEventListener('click', function () {
+    var done = function () { cp.textContent = '已复制'; setTimeout(function () { cp.textContent = '复制链接'; }, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(u).then(done, done);
+    else { var i = document.createElement('textarea'); i.value = u; document.body.appendChild(i); i.select(); document.execCommand('copy'); i.remove(); done(); }
+  });
+  var nat = document.getElementById('share-native');
+  if (nat && navigator.share) { nat.hidden = false; nat.addEventListener('click', function () { navigator.share({ title: t, url: u }); }); }
+
+  /* 目录：滚动时高亮当前小节（只认右侧固定目录，手机折叠目录不参与） */
+  var tocLinks = [].slice.call(document.querySelectorAll('.sidebar-toc .toc a'));
+  if (tocLinks.length) {
+    var heads = tocLinks.map(function (a) {
+      return document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    });
+    var spy = function () {
+      var y = window.scrollY + 120, cur = 0;
+      heads.forEach(function (h, i) { if (h && h.offsetTop <= y) cur = i; });
+      tocLinks.forEach(function (a, i) { a.classList.toggle('active', i === cur); });
+      /* 目录比视口高时，把当前项滚进目录列可视区（只滚目录，不动正文） */
+      var bar = document.querySelector('.sidebar-toc');
+      var act = tocLinks[cur];
+      if (bar && act && bar.scrollHeight > bar.clientHeight + 4) {
+        var r = act.getBoundingClientRect(), br = bar.getBoundingClientRect();
+        if (r.top < br.top + 8 || r.bottom > br.bottom - 8) {
+          bar.scrollTop += r.top - br.top - bar.clientHeight / 3;
+        }
+      }
+    };
+    window.addEventListener('scroll', spy, { passive: true });
+    spy();
+  }
+})();
+</script>
+
+</body>
+</html>

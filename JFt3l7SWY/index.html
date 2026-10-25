@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ProtoBuf协议 · Zander Alastor&#39;s blog</title>
+<meta name="description" content="此店不售此书。分享工具、教程和记录生活。">
+<meta name="theme-color" content="#222222">
+<meta property="og:site_name" content="Zander Alastor&#39;s blog">
+<meta property="og:title" content="ProtoBuf协议">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://s2.loli.net/2024/08/09/mxAIMgy89jbfwXD.png">
+<link rel="icon" href="../assets/img/favicon.ico">
+<link rel="alternate" type="application/rss+xml" title="Zander Alastor&#39;s blog" href="../rss.xml">
+<link rel="stylesheet" href="../assets/css/style.css?v=07210bad">
+
+<link rel="stylesheet" href="../assets/css/highlight/railscasts.css">
+
+
+</head>
+<body class="single">
+
+<header class="site-header">
+  <div class="wrap head-inner">
+    <a class="brand" href="../">Zander Alastor&#39;s blog</a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-btn" aria-label="打开菜单"><span></span></label>
+    <nav class="menu" aria-label="主导航">
+      <ul>
+        <li><a href="../about/">关于</a></li>
+        <li><a href="../archives/">归档</a></li>
+        <li><a href="../links/">友链</a></li>
+        <li><a href="../search/">搜索</a></li>
+        <li><a href="../">主页</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+</header>
+
+
+<main class="wrap layout">
+  <aside class="sidebar sidebar-tools" aria-label="站点工具">
+    
+    
+
+    <section>
+      <h2 class="widget-title">近期文章</h2>
+      <ul class="widget-list">
+        
+        <li><a href="../picayomi/">给 Kindle 写一个漫画阅读插件 PicaYomi</a><span class="d">10-24</span></li>
+        
+        <li><a href="../3BsZpFxPKL/">解决bat脚本无法执行conda环境</a><span class="d">12-29</span></li>
+        
+        <li><a href="../JFt3l7SWY/">ProtoBuf协议</a><span class="d">09-06</span></li>
+        
+        <li><a href="../24x6cGKiy/">数据库-事务</a><span class="d">09-06</span></li>
+        
+        <li><a href="../2lEd0eWPD/">quorum与paxos与raft</a><span class="d">09-06</span></li>
+        
+        <li><a href="../N6PkLgMlT/">校园网AP隔离-内网穿透实现</a><span class="d">12-02</span></li>
+        
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="widget-title">标签</h2>
+      <div class="tag-cloud">
+        
+        <a class="pill" href="../tags/tools/">工具分享 · 20</a>
+        
+        <a class="pill" href="../tags/study-notes/">学习笔记 · 18</a>
+        
+        <a class="pill" href="../tags/problem-solving/">问题解决 · 17</a>
+        
+        <a class="pill" href="../tags/daily-life/">日常 · 12</a>
+        
+        <a class="pill" href="../tags/gridea/">Gridea · 7</a>
+        
+        <a class="pill" href="../tags/kaios/">KaiOS · 5</a>
+        
+        <a class="pill" href="../tags/cpp/">C++ · 4</a>
+        
+        <a class="pill" href="../tags/python/">python · 2</a>
+        
+        <a class="pill" href="../tags/works/">作品 · 2</a>
+        
+        <a class="pill" href="../tags/">全部 →</a>
+      </div>
+    </section>
+
+    
+
+    
+  </aside>
+
+  <div class="content">
+    
+<article class="post">
+  <header class="article-head">
+    
+    <div class="article-kicker">
+      问题解决
+    </div>
+    
+    <h1 class="article-title">ProtoBuf协议</h1>
+    <div class="article-meta">
+      <time datetime="2024-09-06">2024 年 09 月 06 日</time>
+      <span class="article-readcount" id="vercount_value_page_pv"></span>
+    </div>
+  </header>
+
+  
+  <details class="toc-inline">
+    <summary>本文目录 <span class="n">18 节</span></summary>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#1">1. 数据存储</a></li>
+        
+        <li class="toc-l3"><a href="#1-1-tag">1.1. Tag(标签)字段</a></li>
+        
+        <li class="toc-l3"><a href="#1-2-length-value">1.2. Length(长度)字段以及Value(数值)字段</a></li>
+        
+        <li class="toc-l3"><a href="#1-3-varint-zigzag">1.3. 优化措施: Varint, ZigZag</a></li>
+        
+        <li class="toc-l2"><a href="#2">2. 简介</a></li>
+        
+        <li class="toc-l2"><a href="#3-protoc">3. 安装protoc</a></li>
+        
+        <li class="toc-l3"><a href="#3-1-protocol-buffers-v21-12-protobuf-3-2">3.1. Protocol Buffers v21.12([protobuf-3.21.12)版本</a></li>
+        
+        <li class="toc-l3"><a href="#3-2-c">3.2. 最新版(c++编译报错)</a></li>
+        
+        <li class="toc-l2"><a href="#4-protocol-buffers">4. 编译Protocol Buffers</a></li>
+        
+        <li class="toc-l2"><a href="#5-proto">5. proto文件</a></li>
+        
+        <li class="toc-l3"><a href="#5-1">5.1. 枚举类型</a></li>
+        
+        <li class="toc-l3"><a href="#5-2-proto">5.2. proto的引用导入</a></li>
+        
+        <li class="toc-l3"><a href="#5-3-package">5.3. 包(package)</a></li>
+        
+        <li class="toc-l2"><a href="#6">6. 序列化和反序列化</a></li>
+        
+        <li class="toc-l3"><a href="#6-1-xxx-pb-h">6.1. xxx.pb.h 头文件</a></li>
+        
+        <li class="toc-l3"><a href="#6-2">6.2. 序列化</a></li>
+        
+        <li class="toc-l3"><a href="#6-3">6.3. 反序列化</a></li>
+        
+        <li class="toc-l2"><a href="#7">7. 反射机制</a></li>
+        
+      </ol>
+    </nav>
+  </details>
+  
+
+  <div class="prose">
+    <h2 id="1">1. 数据存储</h2>
+<p>数据采用TagLengthValue方式存储, 一条数据在protobuf二进制中的存储分为三段: Tag(标签), Length(长度), Value(数值).</p>
+<p>每段最短都占用一个byte, 也能够每段占用多个byte, 在protobuf中每个byte最高位是一个控制位, 用来表示后续byte是否和自己属于同一个字段.</p>
+<h3 id="1-1-tag">1.1. Tag(标签)字段</h3>
+<p>其中Tag(标签)存储了数据类型以及数据编号, 其编码格式为<code>控制位 | (编号 &lt;&lt; 3) | 类型</code>.</p>
+<p>例如 <code>0 | 0001 | 010</code> 表示:</p>
+<ul>
+<li>0: 后续byte和自己不属于同一个字段</li>
+<li>1(0001): 数据编号为1</li>
+<li>3(010): 数据类型为3</li>
+</ul>
+<p>或者也可能为 <code>1 | 0010 | 010 00000001</code> 表示:</p>
+<ul>
+<li>1: 后续byte和自己属于同一个字段 (后续byte就是指的<code>00000001</code>)</li>
+<li>18(00000001 0010): 数据编号为18 (因为pb是小端法, 要换成大端法表示)</li>
+<li>3(010): 数据类型为3 </li>
+</ul>
+<p>pb定义的数据类型种类如下:<br>
+<img loading="lazy" alt="image.png|900" src="https://s2.loli.net/2024/08/09/mxAIMgy89jbfwXD.png"></p>
+<h3 id="1-2-length-value">1.2. Length(长度)字段以及Value(数值)字段</h3>
+<p>然后Length(长度)字段以及Value(数值)字段一样的, 开头是控制位, 置1就表示后续byte和自己是一个字段, 这样就能用多个byte表示一个字段.</p>
+<h3 id="1-3-varint-zigzag">1.3. 优化措施: Varint, ZigZag</h3>
+<p>其中, pb为了优化编码后的二进制长度, 还引入了Varint以及ZigZag方式进行压缩.</p>
+<p>对于Varint编码, 其能够有效压缩小整数, 但是无法处理大整数以及负数.</p>
+<p>方案先利用ZigZag将所有整数映射成无符号整数, 然后再采用Varint编码方式编码.</p>
+<h4>1.3.1. ZigZag</h4>
+<p>ZigZag的基本思想是负数和正数进行交错编码, 使得负数映射为奇数.</p>
+<p>处理为 <code>0 -&gt; 0, -1 -&gt; 1, 1 -&gt; 2, -2 -&gt; 3</code> . </p>
+<p>这样的好处是: 无论正负, 数值的绝对大小都能较为紧凑地表示. </p>
+<p>具体的映射方式如下:</p>
+<pre><code class="language-c++">(n &lt;&lt; 1) ^ (n &gt;&gt; 31) // 32 bit 
+(n &lt;&lt; 1) ^ (n &gt;&gt; 63) // 64 bit
+</code></pre>
+<p>启用方式要在proto文件定义中采用sintN类型, 比如sint32, sint64.</p>
+<p>当负数比较多的情况下就应该采用sinN类型进行定义声明.</p>
+<h4>1.3.2. Varint</h4>
+<p>和pb的开头控制位类似, Varint的最高位也是控制位, 表示后续byte是否属于这个数值的编码.</p>
+<p>每个字节剩余的七位则用于表示实际的数字(对于小整数能够压缩, 但是大整数反而会多消耗).</p>
+<p>作用是省略掉编码中纯0的byte, 比如int32存储数值1, 前三个byte就全是0, 就能够省略.</p>
+<p>举个例子:</p>
+<pre><code class="language-c++">10010110 00000001 // pb的原始二进制字节流 
+// 10010110 开头的 1 说明后面字节 00000001 也是编码的一部分 
+0010110 0000001 // 丢弃每个byte开头第一位的信息位 
+0000001 0010110 // 由于 varint 编码时采用小端法，我们需要将其调换顺序转换为大端法 
+00000010010110  // 链接有效载荷 
+128 + 16 + 4 + 2 = 150 // 解释为无符号 64 位整数
+</code></pre>
+<h2 id="2">2. 简介</h2>
+<p>protobuf是Google提出的一种数据交换的格式，是一套类似JSON或者XML的数据传输格式和规范，用于不同应用或进程之间进行通信。</p>
+<p>特点如下:</p>
+<ol>
+<li>语言无关，平台无关；Protobuf支持Java、 C++,、Python、JavaScript等多种语言，支持跨多个平台。</li>
+<li>高效；比XML更小（3~10倍），更快（20 ~ 100倍），更为简单。</li>
+<li>扩展性，兼容性好；可以更新数据结构，而不影响和破坏原有的旧程序。</li>
+</ol>
+<p>Protobuf<strong>数据包</strong>是一种<strong>二进制</strong>的格式，相对于文本格式的数据交换（JSON、XML）来说，速度要快很多。</p>
+<p>Protobuf的<strong>编码</strong>过程为：使用预先定义的Message数据结构将实际的传输数据进行打包，然后<strong>编码成二进制</strong>的码流进行传输或者存储。</p>
+<p>Protobuf的<strong>解码</strong>过程则刚好与编码过程相反：将<strong>二进制码流解码</strong>成Protobuf自己定义的Message结构。</p>
+<p><img loading="lazy" alt="img" src="https://s2.loli.net/2024/03/02/kh76cf91vT5bs3o.png"></p>
+<p>protobuf的功能是序列化&amp;反序列化, 属于应用层(表示层).</p>
+<p><img loading="lazy" alt="image-20200813153427229" src="https://s2.loli.net/2024/03/05/5CNlh64YxDRJc8o.png"></p>
+<h2 id="3-protoc">3. 安装protoc</h2>
+<h3 id="3-1-protocol-buffers-v21-12-protobuf-3-2">3.1. Protocol Buffers v21.12([protobuf-3.21.12)版本</h3>
+<p><a href="https://www.cnblogs.com/WindSun/p/12543066.html">protobuf编译、安装和简单使用C++ (Windows+VS平台) - WindSun - 博客园</a></p>
+<p><a href="https://blog.csdn.net/qq_43190806/article/details/130210412">win10系统下使用mingw编译protobuf，并且在vscode中使用cmake配置应用_cmake编译protobuf时 vscode选什么-CSDN博客</a></p>
+<p>下载: <a href="https://github.com/protocolbuffers/protobuf/releases/download/v21.12/protobuf-cpp-3.21.12.tar.gz">https://github.com/protocolbuffers/protobuf/releases/download/v21.12/protobuf-cpp-3.21.12.tar.gz</a></p>
+<pre><code class="language-bash">./autogen.sh
+  ./configure
+make &amp;&amp; make install
+ sudo ldconfig /usr/local/lib /usr/local/lib64
+protoc --version
+</code></pre>
+<h3 id="3-2-c">3.2. 最新版(c++编译报错)</h3>
+<p>github发布页<a href="https://github.com/protocolbuffers/protobuf/releases/tag/v25.3">Release Protocol Buffers v25.3 · protocolbuffers/protobuf (github.com)</a></p>
+<p>其他语言可以直接安装二进制文件到PATH中, 但是c++需要编译安装: <a href="https://github.com/protocolbuffers/protobuf/blob/main/src/README.md">protobuf/src/README.md 位于 main · protocolbuffers/protobuf --- protobuf/src/README.md at main · protocolbuffers/protobuf (github.com)</a></p>
+<p>要从源代码构建 protobuf，需要以下工具：</p>
+<ul>
+<li>bazel</li>
+<li>git</li>
+<li>g++</li>
+</ul>
+<p>centos下需要升级g++，使用较新的g++编译器:</p>
+<pre><code class="language-bash">yum install devtoolset-8-gcc devtoolset-8-gcc-c++
+echo &quot;source /opt/rh/devtoolset-8/enable&quot; &gt;&gt; /etc/bashrc
+source /etc/bashrc
+</code></pre>
+<p>bazel安装可以参考官方给的脚本:<a href="https://github.com/bazelbuild/bazel/releases/tag/7.0.2">Release 7.0.2 · bazelbuild/bazel (github.com)</a></p>
+<p>获取源代码，请在发布页面下载发布.tar.gz或.zip包：</p>
+<p><code>https://github.com/protocolbuffers/protobuf/releases/latest</code></p>
+<p>构建 C++ Protocol Buffer 运行时和 Protocol Buffer 编译器 (protoc)，请执行以下命令：</p>
+<p><code>bazel build :protoc :protobuf</code></p>
+<p>然后可以安装编译器，例如在 Linux 上：</p>
+<p><code>cp bazel-bin/protoc /usr/local/bin</code></p>
+<p>可以成功安装, 但是c++编译报错:</p>
+<pre><code class="language-bash">Person.pb.h:13:10: fatal error: google/protobuf/port_def.inc: No such file or directory
+ #include &quot;google/protobuf/port_def.inc&quot;
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+</code></pre>
+<h2 id="4-protocol-buffers">4. 编译Protocol Buffers</h2>
+<ol>
+<li>
+<p>确定数据格式，比如：</p>
+<pre><code class="language-c++">struct Person
+{
+    int id;
+    string name;
+    string sex;
+    int age;
+};
+</code></pre>
+</li>
+<li>
+<p>根据protobuf的语法, 编辑.proto文件</p>
+<pre><code class="language-protobuf">// Person.proto
+syntax = "proto3";
+
+// 在该文件中对要序列化的结构体进行描述
+message Person
+{
+    int32 id = 1;
+    repeated bytes name = 2;
+    bytes sex = 3;  
+    int32 age = 4;
+}
+</code></pre>
+</li>
+<li>
+<p>使用 protoc 命令将 .proto 文件转化为相应的 C++ 文件 </p>
+<ol>
+<li><code>$ protoc -I /path/Person.proto --cpp_out=输出路径(存储生成的c++文件)</code></li>
+<li>源文件: xxx.pb.cc –&gt; xxx对应的名字和 .proto文件名相同</li>
+<li>头文件: xxx.pb.h –&gt; xxx对应的名字和 .proto文件名相同</li>
+<li>在 protoc 命令中，<code>-I</code> 参数后面可以跟随一个或多个路径，用于告诉编译器在哪些路径下查找导入的文件或依赖的文件，使用绝对路径或相对路径都是没问题的。<code>protoc -I path1 -I path2</code> 或 <code>protoc -I path1:path2</code> 都表示告诉编译器在 path1 和 path2 路径下查找导入的文件或依赖的文件。</li>
+</ol>
+</li>
+<li>
+<p>需要将生成的c++文件添加到项目中, 通过文件中提供的类 API 实现数据的序列化/反序列化</p>
+</li>
+<li>
+<p>编译cpp文件: <code>g++ MyTest.cpp Person.pb.cc -o MyTest -lprotobuf -std=c++11 -lpthread</code></p>
+</li>
+</ol>
+<h2 id="5-proto">5. proto文件</h2>
+<p>Protobuf使用proto文件来预先定义的消息格式。数据包是按照proto文件所定义的消息格式完成二进制码流的编码和解码。proto文件简单地说，就是一个消息的协议文件，这个协议文件的后缀文件名为“.proto”。</p>
+<pre><code class="language-protobuf">// [开始头部声明]
+syntax = &quot;proto3&quot;;
+package tutorial;
+// [结束头部声明]
+// [开始 java 选项配置] (c++不需要定义包)
+option java_package = &quot;tutorial&quot;; // 生成类的包名
+option java_outer_classname = &quot;MsgProtos&quot;; // 生成类的类名
+// [结束 java 选项配置]
+// [开始消息定义]
+message Msg {
+     optional uint32 id = 1; //消息 ID
+     optional string content = 2 [default = &quot;hello world&quot;];//消息内容
+}
+// [结束消息定义]
+</code></pre>
+<ul>
+<li><code>optional</code> ：该字段可以设置也可以不设置。如果未设置可选字段值，则使用默认值。对于简单类型，您可以指定自己的默认值，就像我们在示例中为电话号码 <code>type</code> 所做的那样。否则，使用系统默认值：数字类型为零，字符串为空字符串，布尔值为 false。对于嵌入消息，默认值始终是消息的“默认实例”或“原型”，其未设置任何字段。调用访问器来获取尚未显式设置的可选（或必填）字段的值始终返回该字段的默认值。</li>
+<li><code>repeated</code> ：该字段可以重复任意次数（包括零次）。重复值的顺序将保留在协议缓冲区中。将重复字段视为动态大小的数组。</li>
+<li><code>required</code>：必须提供该字段的值，否则消息将被视为“未初始化”。如果 libprotobuf 在调试模式下编译，序列化未初始化的消息将导致断言失败。在优化版本中，会跳过检查，并且无论如何都会写入消息。但是，解析未初始化的消息总是会失败（通过从解析方法返回 false ）。除此之外，必填字段的行为与可选字段完全相同。<code>required</code> 字段受到强烈反对；proto2 语法中定义的大多数消息仅使用 <code>optional</code> 和 <code>repeated</code>（Proto3 根本不支持 <code>required</code> 字段。）</li>
+</ul>
+<h3 id="5-1">5.1. 枚举类型</h3>
+<pre><code class="language-c++">// 要序列化的数据
+// 枚举
+enum Color
+{
+    Red = 5,    // 可以不给初始值, 默认为0
+    Green,
+    Yellow,
+    Blue
+};
+
+// 要序列化的数据
+struct Person
+{
+    int id;
+    string name[10];
+    string sex; 
+    int age;
+    // 枚举类型
+    Color color;
+};
+</code></pre>
+<p>—&gt;.proto:</p>
+<pre><code class="language-protobuf">// 定义枚举类型
+enum Color
+{
+    Red = 0;
+    Green = 3;      // 第一个元素以外的元素值可以随意指定
+    Yellow = 6;
+    Blue = 9;
+}
+// 在该文件中对要序列化的结构体进行描述
+message Person
+{
+    int32 id = 1;
+    repeated bytes name = 2;
+    bytes sex = 3;  
+    int32 age = 4;
+    // 枚举类型
+    Color color = 5;
+}
+</code></pre>
+<p><strong>proto3 中的第一个枚举值必须为 0，第一个元素以外的元素值可以随意指定。</strong></p>
+<h3 id="5-2-proto">5.2. proto的引用导入</h3>
+<p>在 Protocol Buffers 中，可以使用import语句在当前.ptoto中导入其它的.proto文件。这样就可以在一个.proto文件中引用并使用其它文件中定义的消息类型和枚举类型。</p>
+<pre><code class="language-protobuf">syntax = &quot;proto3&quot;;
+// 使用另外一个proto文件中的数类型, 需要导入这个文件
+import &quot;Address.proto&quot;;
+
+// 在该文件中对要序列化的结构体进行描述
+// 定义枚举类型
+enum Color
+{
+    Red = 0;
+    Green = 3;      // 第一个元素以外的元素值可以随意指定
+    Yellow = 6;
+    Blue = 9;
+}
+// 在该文件中对要序列化的结构体进行描述
+message Person
+{
+    int32 id = 1;
+    repeated bytes name = 2;
+    bytes sex = 3;  
+    int32 age = 4;
+    // 枚举类型
+    Color color = 5;
+    // 添加地址信息, 使用的是外部proto文件中定义的数据类型
+    Address addr = 6;
+}
+</code></pre>
+<ul>
+<li>
+<p>import语句中指定的文件路径可以是相对路径或绝对路径。如果文件在相同的目录中，只需指定文件名即可。</p>
+</li>
+<li>
+<p>导入的文件需要会在编译时与当前文件一起被编译 <code>protoc A.proto B.proto --cpp_out=.</code>。</p>
+</li>
+<li>
+<p>导入的文件也可以继续导入其他文件，形成一个文件依赖的层次结构。</p>
+</li>
+<li>
+<p>c++的api调用引用文件时格式为<code>mutable_addr()-&gt;set_addr("北京")</code>, 即<code>mutable_消息名()-&gt;同理</code></p>
+</li>
+</ul>
+<h3 id="5-3-package">5.3. 包(package)</h3>
+<p>在 Protobuf 中，可以使用package关键字来定义一个消息所属的包（package）。包是用于组织和命名消息类型的一种机制，类似于命名空间的概念。</p>
+<p>使用包可以避免不同.proto文件中的消息类型名称冲突，同时也可以更好地组织和管理大型项目中的消息定义。可以将消息类型的名称定义在特定的包中，并使用限定名来引用这些类型。</p>
+<p>下面有两个proto文件，分别给他们添加一个package：</p>
+<ul>
+<li>
+<p>proto文件 - Address.proto:</p>
+<pre><code class="language-protobuf">syntax = "proto3";
+// 添加命名空间 Dabing
+package Dabing;
+
+// 地址信息, 这个Address类属于命名空间: Dabing
+message Address
+{
+    bytes addr = 1;
+    bytes number = 2;
+}
+</code></pre>
+</li>
+<li>
+<p>proto文件 - Person.proto:</p>
+<pre><code class="language-protobuf">syntax = "proto3";
+// 使用另外一个proto文件中的数类型, 需要导入这个文件
+import "Address.proto";
+// 指定命名空间 ErBing
+package ErBing;
+
+// 以下的类 Person 属于命名空间 ErBing, 在该文件中对要序列化的结构体进行描述
+message Person
+{
+    int32 id = 1;
+    repeated bytes name = 2;
+    bytes sex = 3;  
+    int32 age = 4;
+    // 添加地址信息, 使用的是外部proto文件中定义的数据类型
+    // 如果这个外边类型属于某个命名空间, 语法格式:
+    Dabing.Address addr = 6;
+}
+</code></pre>
+</li>
+</ul>
+<h2 id="6">6. 序列化和反序列化</h2>
+<h3 id="6-1-xxx-pb-h">6.1. xxx.pb.h 头文件</h3>
+<p>通过protoc 命令对.proto文件的转换，得到的头文件中有一个类，这个类的名字和 .proto文件中message关键字后边指定的名字相同，.proto文件中message消息体的成员就是生成的类的私有成员。</p>
+<p>调用生成的类提供的公共成员函数访问生成的类的私有成员，这些函数格式如下：</p>
+<ul>
+<li>清空(初始化) 私有成员的值: <code>clear_变量名()</code></li>
+<li>获取类私有成员的值: <code>变量名()</code></li>
+<li>给私有成员进行值的设置: <code>set_变量名(参数)</code></li>
+<li>得到类私有成员的地址, 通过这块地址读/写当前私有成员变量的值: <code>mutable_变量名()</code></li>
+<li>如果这个变量是数组类型:<ul>
+<li>数组中元素的个数: <code>变量名_size()</code></li>
+<li>添加一块内存, 存储新的元素数据: <code>add_变量名()</code> 、<code>add_变量名(参数)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="6-2">6.2. 序列化</h3>
+<p>序列化是指将数据结构或对象转换为可以在储存或传输中使用的二进制格式的过程。在计算机科学中，序列化通常用于将内存中的对象持久化存储到磁盘上，或者在分布式系统中进行数据传输和通信。</p>
+<p>Protobuf 中为我们提供了相关的用于数据序列化的 API，如下所示：</p>
+<pre><code class="language-c++">// 头文件目录: google\protobuf\message_lite.h
+// --- 将序列化的数据 数据保存到内存中
+// 将类对象中的数据序列化为字符串, c++ 风格的字符串, 参数是一个传出参数
+bool SerializeToString(std::string* output) const;
+// 将类对象中的数据序列化为字符串, c 风格的字符串, 参数 data 是一个传出参数
+bool SerializeToArray(void* data, int size) const;
+
+// ------ 写磁盘文件, 只需要调用这个函数, 数据自动被写入到磁盘文件中
+// -- 需要提供流对象/文件描述符关联一个磁盘文件
+// 将数据序列化写入到磁盘文件中, c++ 风格
+// ostream 子类 ofstream -&gt; 写文件
+bool SerializeToOstream(std::ostream* output) const;
+// 将数据序列化写入到磁盘文件中, c 风格
+bool SerializeToFileDescriptor(int file_descriptor) const;
+</code></pre>
+<h3 id="6-3">6.3. 反序列化</h3>
+<p>反序列化是指将序列化后的二进制数据重新转换为原始的数据结构或对象的过程。通过反序列化，我们可以将之前序列化的数据重新还原为其原始的形式，以便进行数据的读取、操作和处理。</p>
+<p>Protobuf 中为我们提供了相关的用于数据序列化的 API，如下所示：</p>
+<pre><code class="language-c++">// 头文件目录: google\protobuf\message_lite.h
+bool ParseFromString(const std::string&amp; data) ;
+bool ParseFromArray(const void* data, int size);
+// istream -&gt; 子类 ifstream -&gt; 读操作
+// wo ri
+// w-&gt;写 o: ofstream , r-&gt;读 i: ifstream
+bool ParseFromIstream(std::istream* input);
+bool ParseFromFileDescriptor(int file_descriptor);
+</code></pre>
+<h2 id="7">7. 反射机制</h2>
+<p>通过.proto文件实现. </p>
+<p>.proto文件里存储了元信息, 也就是数据名称, 类型, 以及嵌套关系之类的信息.</p>
+<p>xxx.pb.cc里存储了序列化处理后的.proto内容, 以硬编码的方式保存.</p>
+<p>硬编码的.proto元信息内容以懒加载的方式被DescriptorDatabase加载, 解析, 并缓存到DescriptorPool中.</p>
+<p>通过反射机制, 可以自动遍历.proto中定义的数据. 这样代码编写更容易, 同时灵活性更高, 更新.proto内容后, 代码也不需要修改.</p>
+  </div>
+
+  
+  <div class="tags-row">
+    <a class="pill" href="../../tags/problem-solving/">#问题解决</a>
+  </div>
+  
+
+  <div class="share-row">
+    <span class="share-label">分享</span>
+    <button type="button" class="share-btn" id="share-copy">复制链接</button>
+    <a class="share-btn" id="share-weibo" target="_blank" rel="noopener">微博</a>
+    <button type="button" class="share-btn" id="share-native" hidden>系统分享</button>
+  </div>
+
+  <nav class="post-nav">
+    
+    <a class="prev" href="../3BsZpFxPKL/"><span class="dir">上一篇 · 更新</span>解决bat脚本无法执行conda环境<em class="pn-date">2024-12-29</em></a>
+    
+    
+    <a class="next" href="../24x6cGKiy/"><span class="dir">下一篇 · 更早</span>数据库-事务<em class="pn-date">2024-09-06</em></a>
+    
+  </nav>
+
+  
+  
+<section class="comments" id="comments">
+  <h2>评论</h2>
+  <script src="https://giscus.app/client.js"
+          data-repo="UFOAlastor/UFOAlastor.github.io"
+          data-repo-id="MDEwOlJlcG9zaXRvcnkyNTIzNDYzMDY="
+          data-category="General"
+          data-category-id="DIC_kwDODwp_ws4DI204"
+          data-mapping="specific"
+          data-term="ProtoBuf协议"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="light"
+          data-lang="zh-CN"
+          data-loading="lazy"
+          async>
+  </script>
+</section>
+
+</article>
+
+  </div>
+
+  
+
+<aside class="sidebar sidebar-toc" id="toc-panel" aria-label="本文目录">
+  <button type="button" class="toc-close" id="toc-close" aria-label="关闭目录">✕</button>
+  <section class="widget widget-toc">
+    <h2 class="widget-title">本文目录
+      <button type="button" class="toc-collapse" id="toc-collapse" aria-controls="toc-panel" aria-expanded="true" title="收起目录，正文占满">收起 ⌄</button>
+    </h2>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#1">1. 数据存储</a></li>
+        
+        <li class="toc-l3"><a href="#1-1-tag">1.1. Tag(标签)字段</a></li>
+        
+        <li class="toc-l3"><a href="#1-2-length-value">1.2. Length(长度)字段以及Value(数值)字段</a></li>
+        
+        <li class="toc-l3"><a href="#1-3-varint-zigzag">1.3. 优化措施: Varint, ZigZag</a></li>
+        
+        <li class="toc-l2"><a href="#2">2. 简介</a></li>
+        
+        <li class="toc-l2"><a href="#3-protoc">3. 安装protoc</a></li>
+        
+        <li class="toc-l3"><a href="#3-1-protocol-buffers-v21-12-protobuf-3-2">3.1. Protocol Buffers v21.12([protobuf-3.21.12)版本</a></li>
+        
+        <li class="toc-l3"><a href="#3-2-c">3.2. 最新版(c++编译报错)</a></li>
+        
+        <li class="toc-l2"><a href="#4-protocol-buffers">4. 编译Protocol Buffers</a></li>
+        
+        <li class="toc-l2"><a href="#5-proto">5. proto文件</a></li>
+        
+        <li class="toc-l3"><a href="#5-1">5.1. 枚举类型</a></li>
+        
+        <li class="toc-l3"><a href="#5-2-proto">5.2. proto的引用导入</a></li>
+        
+        <li class="toc-l3"><a href="#5-3-package">5.3. 包(package)</a></li>
+        
+        <li class="toc-l2"><a href="#6">6. 序列化和反序列化</a></li>
+        
+        <li class="toc-l3"><a href="#6-1-xxx-pb-h">6.1. xxx.pb.h 头文件</a></li>
+        
+        <li class="toc-l3"><a href="#6-2">6.2. 序列化</a></li>
+        
+        <li class="toc-l3"><a href="#6-3">6.3. 反序列化</a></li>
+        
+        <li class="toc-l2"><a href="#7">7. 反射机制</a></li>
+        
+      </ol>
+    </nav>
+  </section>
+</aside>
+<button type="button" class="toc-restore" id="toc-restore" aria-controls="toc-panel" aria-expanded="false" title="展开目录">目录</button>
+<script>
+(function () {
+  var KEY = 'alastor-toc-collapsed';
+  var btn = document.getElementById('toc-collapse');
+  var back = document.getElementById('toc-restore');
+  var close = document.getElementById('toc-close');
+  if (!btn || !back) return;
+  var wide = window.matchMedia('(min-width: 1200px)');
+  var setCollapsed = function (collapsed) {
+    document.body.classList.toggle('toc-collapsed', collapsed);
+    btn.setAttribute('aria-expanded', String(!collapsed));
+    back.setAttribute('aria-expanded', String(!collapsed));
+    try { localStorage.setItem(KEY, collapsed ? '1' : '0'); } catch (e) {}
+  };
+  var closeSheet = function () { document.body.classList.remove('toc-mobile-open'); };
+  btn.addEventListener('click', function () { setCollapsed(true); });
+  back.addEventListener('click', function () {
+    if (wide.matches) { setCollapsed(false); }
+    else { document.body.classList.toggle('toc-mobile-open'); }
+  });
+  if (close) close.addEventListener('click', closeSheet);
+  /* 点目录里的链接就收起弹层；点遮罩也收起 */
+  document.querySelectorAll('#toc-panel a').forEach(function (a) {
+    a.addEventListener('click', closeSheet);
+  });
+  document.addEventListener('click', function (e) {
+    if (!document.body.classList.contains('toc-mobile-open')) return;
+    if (e.target.closest('#toc-panel') || e.target.closest('#toc-restore')) return;
+    closeSheet();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSheet();
+  });
+  try { if (wide.matches && localStorage.getItem(KEY) === '1') setCollapsed(true); } catch (e) {}
+})();
+</script>
+
+
+</main>
+
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-line"></div>
+    <nav class="footer-nav">
+      <a href="../">主页</a>
+      <a href="../about/">关于</a>
+      <a href="../archives/">归档</a>
+      <a href="../tags/">标签</a>
+      <a href="../links/">友链</a>
+      <a href="../search/">搜索</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+    <p class="footer-cat-slot"></p>
+    <p>
+      <a href="https://icp.gov.moe/?keyword=20201412" target="_blank" rel="noopener">萌ICP备 20201412号</a>
+    </p>
+    <p id="show_date_time" data-birth="2020-04-02">本站已愉快蹦哒…</p>
+    <p>Copyright © 2020 Zander Alastor. All rights reserved.</p>
+  </div>
+</footer>
+
+<a class="go-home" href="../" aria-label="回到主页" title="回到主页">
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M12 3.2 3 10.4h2.6V20h5.1v-4.6h2.6V20h5.1v-8.6H21L12 3.2z" fill="currentColor"/></svg>
+</a>
+<button class="go-top" id="go-top" aria-label="回到顶部">↑</button>
+
+<script src="../assets/js/app.js" defer></script>
+<script>
+/* Vercount 访问统计：国内直连，无需注册，POST 上报 + 自动写入 span */
+(function () {
+  var host = location.hostname;
+  if (host !== 'alastor.top' && host !== 'www.alastor.top' && host !== 'ufoalastor.github.io') return;
+  var s = document.createElement('script');
+  s.src = 'https://events.vercount.one/js';
+  s.defer = true;
+  document.head.appendChild(s);
+})();
+</script>
+
+<script src="../assets/js/highlight/highlight.pack.js"></script>
+<script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+
+
+<script>
+(function () {
+  var u = location.href, t = document.title;
+  var wb = document.getElementById('share-weibo');
+  if (wb) wb.href = 'https://service.weibo.com/share/share.php?url=' + encodeURIComponent(u) + '&title=' + encodeURIComponent(t);
+  var cp = document.getElementById('share-copy');
+  if (cp) cp.addEventListener('click', function () {
+    var done = function () { cp.textContent = '已复制'; setTimeout(function () { cp.textContent = '复制链接'; }, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(u).then(done, done);
+    else { var i = document.createElement('textarea'); i.value = u; document.body.appendChild(i); i.select(); document.execCommand('copy'); i.remove(); done(); }
+  });
+  var nat = document.getElementById('share-native');
+  if (nat && navigator.share) { nat.hidden = false; nat.addEventListener('click', function () { navigator.share({ title: t, url: u }); }); }
+
+  /* 目录：滚动时高亮当前小节（只认右侧固定目录，手机折叠目录不参与） */
+  var tocLinks = [].slice.call(document.querySelectorAll('.sidebar-toc .toc a'));
+  if (tocLinks.length) {
+    var heads = tocLinks.map(function (a) {
+      return document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    });
+    var spy = function () {
+      var y = window.scrollY + 120, cur = 0;
+      heads.forEach(function (h, i) { if (h && h.offsetTop <= y) cur = i; });
+      tocLinks.forEach(function (a, i) { a.classList.toggle('active', i === cur); });
+      /* 目录比视口高时，把当前项滚进目录列可视区（只滚目录，不动正文） */
+      var bar = document.querySelector('.sidebar-toc');
+      var act = tocLinks[cur];
+      if (bar && act && bar.scrollHeight > bar.clientHeight + 4) {
+        var r = act.getBoundingClientRect(), br = bar.getBoundingClientRect();
+        if (r.top < br.top + 8 || r.bottom > br.bottom - 8) {
+          bar.scrollTop += r.top - br.top - bar.clientHeight / 3;
+        }
+      }
+    };
+    window.addEventListener('scroll', spy, { passive: true });
+    spy();
+  }
+})();
+</script>
+
+</body>
+</html>

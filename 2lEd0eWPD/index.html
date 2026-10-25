@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>quorum与paxos与raft · Zander Alastor&#39;s blog</title>
+<meta name="description" content="此店不售此书。分享工具、教程和记录生活。">
+<meta name="theme-color" content="#222222">
+<meta property="og:site_name" content="Zander Alastor&#39;s blog">
+<meta property="og:title" content="quorum与paxos与raft">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://s2.loli.net/2024/09/06/pMKNHehkOjaoYLG.png">
+<link rel="icon" href="../assets/img/favicon.ico">
+<link rel="alternate" type="application/rss+xml" title="Zander Alastor&#39;s blog" href="../rss.xml">
+<link rel="stylesheet" href="../assets/css/style.css?v=07210bad">
+
+<link rel="stylesheet" href="../assets/css/highlight/railscasts.css">
+
+
+</head>
+<body class="single">
+
+<header class="site-header">
+  <div class="wrap head-inner">
+    <a class="brand" href="../">Zander Alastor&#39;s blog</a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-btn" aria-label="打开菜单"><span></span></label>
+    <nav class="menu" aria-label="主导航">
+      <ul>
+        <li><a href="../about/">关于</a></li>
+        <li><a href="../archives/">归档</a></li>
+        <li><a href="../links/">友链</a></li>
+        <li><a href="../search/">搜索</a></li>
+        <li><a href="../">主页</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+</header>
+
+
+<main class="wrap layout">
+  <aside class="sidebar sidebar-tools" aria-label="站点工具">
+    
+    
+
+    <section>
+      <h2 class="widget-title">近期文章</h2>
+      <ul class="widget-list">
+        
+        <li><a href="../picayomi/">给 Kindle 写一个漫画阅读插件 PicaYomi</a><span class="d">10-24</span></li>
+        
+        <li><a href="../3BsZpFxPKL/">解决bat脚本无法执行conda环境</a><span class="d">12-29</span></li>
+        
+        <li><a href="../JFt3l7SWY/">ProtoBuf协议</a><span class="d">09-06</span></li>
+        
+        <li><a href="../24x6cGKiy/">数据库-事务</a><span class="d">09-06</span></li>
+        
+        <li><a href="../2lEd0eWPD/">quorum与paxos与raft</a><span class="d">09-06</span></li>
+        
+        <li><a href="../N6PkLgMlT/">校园网AP隔离-内网穿透实现</a><span class="d">12-02</span></li>
+        
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="widget-title">标签</h2>
+      <div class="tag-cloud">
+        
+        <a class="pill" href="../tags/tools/">工具分享 · 20</a>
+        
+        <a class="pill" href="../tags/study-notes/">学习笔记 · 18</a>
+        
+        <a class="pill" href="../tags/problem-solving/">问题解决 · 17</a>
+        
+        <a class="pill" href="../tags/daily-life/">日常 · 12</a>
+        
+        <a class="pill" href="../tags/gridea/">Gridea · 7</a>
+        
+        <a class="pill" href="../tags/kaios/">KaiOS · 5</a>
+        
+        <a class="pill" href="../tags/cpp/">C++ · 4</a>
+        
+        <a class="pill" href="../tags/python/">python · 2</a>
+        
+        <a class="pill" href="../tags/works/">作品 · 2</a>
+        
+        <a class="pill" href="../tags/">全部 →</a>
+      </div>
+    </section>
+
+    
+
+    
+  </aside>
+
+  <div class="content">
+    
+<article class="post">
+  <header class="article-head">
+    
+    <div class="article-kicker">
+      学习笔记
+    </div>
+    
+    <h1 class="article-title">quorum与paxos与raft</h1>
+    <div class="article-meta">
+      <time datetime="2024-09-06">2024 年 09 月 06 日</time>
+      <span class="article-readcount" id="vercount_value_page_pv"></span>
+    </div>
+  </header>
+
+  
+  <details class="toc-inline">
+    <summary>本文目录 <span class="n">13 节</span></summary>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#1-quorum">1. quorum是什么</a></li>
+        
+        <li class="toc-l2"><a href="#2-quorum">2. quorum解决什么问题</a></li>
+        
+        <li class="toc-l2"><a href="#3-quorum">3. quorum如何解决问题</a></li>
+        
+        <li class="toc-l3"><a href="#3-1">3.1. 投票机制</a></li>
+        
+        <li class="toc-l2"><a href="#1-paxos">1. paxos是什么</a></li>
+        
+        <li class="toc-l2"><a href="#2-paxos">2. paxos解决什么问题</a></li>
+        
+        <li class="toc-l2"><a href="#3-paxos">3. paxos如何解决问题</a></li>
+        
+        <li class="toc-l2"><a href="#1-multi-paxos">1. multi-paxos是什么</a></li>
+        
+        <li class="toc-l2"><a href="#2-multi-paxos">2. multi-paxos解决什么问题</a></li>
+        
+        <li class="toc-l2"><a href="#3-multi-paxos">3. multi-paxos如何解决问题</a></li>
+        
+        <li class="toc-l2"><a href="#1-raft">1. raft是什么</a></li>
+        
+        <li class="toc-l2"><a href="#2-raft">2. raft解决什么问题</a></li>
+        
+        <li class="toc-l2"><a href="#3-raft">3. raft如何解决问题</a></li>
+        
+      </ol>
+    </nav>
+  </details>
+  
+
+  <div class="prose">
+    <h1>总结</h1>
+<ul>
+<li>quorum问题: 脏读 -&gt; 多数派读解决</li>
+<li>多数派读写问题: 丢失修改(未提交数据覆盖已提交数据) -&gt; paxos解决</li>
+<li>paxos问题: 活锁 -&gt; multi-paxos解决</li>
+<li>multi-paxos问题: 数据可用性低(没有数据追赶) -&gt; raft解决</li>
+</ul>
+<h1>quorum</h1>
+<h2 id="1-quorum">1. quorum是什么</h2>
+<p>quorum是一个利用投票机制保证数据冗余以及强一致性的算法.</p>
+<p>与多数派读写的区别在于, 多数派读时要求读取到占多数的相同数据才认定是最新成功提交的数据; 而quorum读取超过半数的容灾单元至少能读到一个最新数据, 数据新旧的区分没有规定, 可以采用版本号等方式.</p>
+<h2 id="2-quorum">2. quorum解决什么问题</h2>
+<p>分布式系统中需要冗余数据保证数据可靠性, 如果没有[[数据冗余]], 搭载数据的节点掉线就会导致数据无法访问.</p>
+<h2 id="3-quorum">3. quorum如何解决问题</h2>
+<p>quorum要求每次写入时超过半数容灾单元成功写入, 即可认为写入操作成功. 牺牲一定读操作性能, 每次读取超过半数的冗杂单元就能保证至少读到一个最新数据. </p>
+<p>但是纯粹的多数派决议会引入新的问题, quorum制定了投票机制进行解决.</p>
+<h3 id="3-1">3.1. 投票机制</h3>
+<h4>3.1.1. 投票机制是什么</h4>
+<p>投票机制是保证数据写入串行化以及针对同一数据不会同时发生读写操作而制定规则.</p>
+<h4>3.1.2. 投票机制解决什么问题</h4>
+<p>如果仅仅采用普通<strong>多数派决议方案</strong>, 当数据写入如果没有串行化, 也就是并发执行时, 会导致如下问题, 假设一个场景:  </p>
+<p>有A, B, C三台容灾单元, 此时客户端发来三个提案, 针对同一个变量x进行写入:  </p>
+<ol>
+<li>提案一: 写入x=1</li>
+<li>提案二: 写入x=2</li>
+<li>
+<p>提案三: 写入x=3<br>
+三个提案同时并发提交申请, 由于网络传输存在延迟, 这时可能发生如下先后顺序:  </p>
+</li>
+<li>
+<p>提案一x=1写入容灾单元B, 提案x=1还没有满足多数派写入, 等待其他节点回应</p>
+</li>
+<li>提案二x=2写入B, C, x=2覆盖了B上的x=1, 提案x=2满足多数派写入, 返回提案通过</li>
+<li>x=3写入C, A, x=3覆盖了C上的x=2, 提案x=3满足多数派写入, 返回提案通过</li>
+<li>迟到的提案一x=1写入A, 其中x=1覆盖了A上的x=3, 提案x=1满足多数派写入, 返回提案通过<br>
+三个提案都返回写入成功, 但是三台容灾单元上分别存储了x=1, x=2, x=3.<br>
+进行多数派读写时发现读不出任何数据, 任何一个提案都不满足多数派读取.<br>
+导致了<strong>三个提案都返回写入成功, 却无法正确读取其中任何一个提案提交的数据</strong>.</li>
+</ol>
+<p>同一条数据同时发生读写, 会发生以下问题, 考虑一个场景:  </p>
+<p>有A, B, C三台容灾单元, 同时针对数据x进行读写请求, 原始数据如下:  </p>
+<ol>
+<li>A, B上x=1, C上x=3</li>
+<li>写入x=2, 将x=2写入B</li>
+<li>同时发生读取请求, 读取到A, B, C上分别是x=1, x=2, x=3, 读取失败<br>
+如果在读取与写入并行发生时就阻止其中一个操作, 那么另一个操作只需要等待重试;<br>
+但是并发执行读写时, 读取操作要等待完全部容灾单元回应后才能发现数据不满足多数派读, 造成了<strong>额外的开销</strong>.</li>
+</ol>
+<h4>3.1.3. 投票机制如何解决问题</h4>
+<p>quorum规定了一个投票机制, 要求如下:  </p>
+<ul>
+<li>每个容灾单元针对一条数据持有一票, 每次读写某一数据需要投票决策.</li>
+<li>针对一个数据的投票限制如下:  <ol>
+<li>写入准许票数 &gt; 容灾单元数/2</li>
+<li>读取准许票数 &gt; 容灾单元数 - 写入准许票数</li>
+</ol>
+</li>
+</ul>
+<p>这两个规定中, 第一点限制要求了每次写入操作需要获得超过半数的容灾单元投票准许, 保证了同一数据写入的串行化;  第二点限制保证了针对同一数据, 读取操作和写入操作不会同时发生.</p>
+<h1>paxos</h1>
+<h2 id="1-paxos">1. paxos是什么</h2>
+<p>paxos是采用三段式提交(Three-Phase Commit)的多数派决议来保证数据一致性的算法.</p>
+<p>基础的paxos协议存在活锁问题, 由后续multi-paxos通过串行化解决.</p>
+<h2 id="2-paxos">2. paxos解决什么问题</h2>
+<p>已知普通多数派协议存在问题[[quorum与paxos与raft#3.1.2. 投票机制解决什么问题]], 如果在<strong>仅仅普通多数派协议基础上添加提案编号</strong>也依旧存在问题, 考虑以下场景:  </p>
+<p>A, B, C三个容灾单元, 此时提出三个提案, 内容都为修改x数值:  </p>
+<ol>
+<li>提案一: 编号=1, 修改x=1</li>
+<li>提案二: 编号=2, 修改x=2</li>
+<li>
+<p>提案三: 编号=3, 修改x=3<br>
+考虑两段式提交, 第一阶段发起提案, 第二阶段接收到提案后立马回应:  </p>
+</li>
+<li>
+<p>提案一x=1写入A, B, 满足多数派决议, 提案一确认通过</p>
+</li>
+<li>提案二x=2写入B, C, 满足多数派决议, 提案二确认通过</li>
+<li>提案三x=3写入C, 但发生丢包而未达到A, B, 不满足多数派, 提案三未通过<br>
+对于已经通过的两个提案而言, 由于A, B, C三分别存储的x=1, 2, 3, 读取时会发现尽管有两个修改x的提案通过, 但是读取时无法读到多数派结果, 造成错误.</li>
+</ol>
+<p>原因是<strong>带编号的多数派协议</strong>仅规定只要当前提案编号大于容灾单元曾经接受的最大编号, 就会直接将当前提案写入容灾单元, 可能造成<strong>最终不满足多数派决议的脏数据被直接写入节点</strong>. (丢失修改)</p>
+<h2 id="3-paxos">3. paxos如何解决问题</h2>
+<p>paxos定义了三种角色, proposer(提议者), acceptor(决议者), learner(学习者).</p>
+<p>对于一个proposal(提案), 除了第一阶段(发起阶段), paxos还分为prepare(准备阶段)和accept(批准阶段).</p>
+<p>在准备阶段中, 由proposal向所有acceptor发送一个提案编号, 然后等待acceptor回应.<br>
+acceptor收到提案编号, 进行比较, 如果该编号大于曾经收到的最大提案编号, 就记录下该编号, 并对这个提案做出承诺:  遇到不大于该提案编号的其他提案会直接拒绝; 否则拒绝这个提案.<br>
+如果proposal得到了多数acceptor接受的回应, 进入下一阶段; 否则提案失败.</p>
+<p>在批准阶段中, proposal将带有编号的提案发送给所有acceptor, 等待回应.<br>
+acceptor接受到带有编号的提案后, 如果编号大于曾经收到的最大编号, 这时才接受提案, 并以leaner身份学习提案; 如果编号不大于曾经收到的最大编号, 就忽略该提案.<br>
+proposal收到多数派的acceptor接受回应后, 才认为提案通过.</p>
+<p>这里的思路就是, 第一轮准备阶段, 提案本身并不会被执行, 甚至不需要发送, 而是先通过提案编号进行“占坑”, 当“占坑”通过后才进入批准阶段, 发送提案本身.</p>
+<h1>multi-paxos</h1>
+<h2 id="1-multi-paxos">1. multi-paxos是什么</h2>
+<p>multi-paxos是在paxos协议基础上, 添加了leader概念保证决议过程串行化.</p>
+<p>multi-paxos作为强一致性协议已经足够完善, 但是没有要求数据追赶, 数据可靠性低于raft.</p>
+<h2 id="2-multi-paxos">2. multi-paxos解决什么问题</h2>
+<p>对于基础的paxos协议, 存在活锁情况, 考虑以下场景:</p>
+<p>A, B, C三台容灾单元, 提出两个提案, 内容都为修改x的值, 分别如下:</p>
+<ol>
+<li>提案一, 修改x=1</li>
+<li>
+<p>提案二, 修改x=2<br>
+姑且忽略具体编号, 假设编号按照以下出现顺序递增:</p>
+</li>
+<li>
+<p>提案一, 准备阶段, 得到A, B, C中任意多数派回应, 正要进入批准阶段.</p>
+</li>
+<li>提案二, 准备阶段, 因为编号更大, 覆盖了A, B, C中多数派的承诺, 正要进入批准阶段.</li>
+<li>提案一因为被截胡, 超时重试, 开启新一轮提案, 内容还是修改x=1, 但是编号更新后增大.</li>
+<li>提案二而后又被更新编号的提案一截胡, 没能等到多数派回应, 同样发起重试.</li>
+<li>如此往复, 提案一与提案二相互截胡, 导致没有任何提案通过多数派批准, 形成<strong>活锁</strong>.<br>
+即便通过限制重试次数跳出活锁, 但是依旧会造成时间消耗.</li>
+</ol>
+<h2 id="3-multi-paxos">3. multi-paxos如何解决问题</h2>
+<p>multi-paxos增加了leader概念, 通过选举得出一个任期属性的leader, 规定提案只能由leader提出, 其他容灾单元称为follower, 与leader一同进行多数派决议; follower通过定时轮询(心跳)确认leader存活, leader失联后进行重新选举, 每一轮选举的任期递增.</p>
+<p>由于选取了一个全权负责提出提案的leader, 所以实现了串行化操作, 并且由于不存在并发, 所以也不需要准备阶段, 每次提案直接进入批准阶段等待多数派回应即可, 就不会发生活锁情况.</p>
+<p>接下来介绍一下leader的选举过程:</p>
+<p>概念的提出者并没有明确规定选举方式, 一般而言, 可以使用basic-paxos的三段式提交进行leader的选举(因为选举是低频事件, 添加重试次数限制后可以容忍三段式提交的活锁缺陷).</p>
+<p>至于leader的任期, 是为了避免网络分区恢复后发生同时存在多个leader的情况. 通过每次提案中带有发起者的任期可以直接让恢复的旧leader接收到新leader提案消息后主动降为follower, 其他容灾单元接收到旧leader的提案后判断出其任期更旧也会进行忽略, 从而避免因为存在多个leader而退化为普通多数派决议.</p>
+<h1>raft</h1>
+<ul>
+<li><a href="https://www.zhenchao.io/2020/01/01/protocol/raft/">理解 Raft 分布式共识算法 | 指 间 (zhenchao.io)</a></li>
+</ul>
+<h2 id="1-raft">1. raft是什么</h2>
+<p>raft与multi-paxos都是能够保证数据一致性的多数派决议方案, 但是raft比multi-paxos更进一步要求了日志序列化, 并保证follower的日志与leader日志达成最终一致性. (数据追赶)</p>
+<h2 id="2-raft">2. raft解决什么问题</h2>
+<p>对于multi-paxos而言, 每个提案仅需要多数派回应并学习, 也没有要求数据追赶, 这样可能导致如下情况:</p>
+<p>A, B, C三台容灾单元, 其中存储的数据如下:</p>
+<ol>
+<li>A上存储x=1</li>
+<li>B与C上存储x=2<br>
+如果B或C掉线, 就会导致数据x无法读取得到多数派结果, <strong>数据可靠性低</strong>.</li>
+</ol>
+<h2 id="3-raft">3. raft如何解决问题</h2>
+<p>由于leader唯一, 提案串行化执行, 所以leader的日志天然满足序列化.</p>
+<p>此外raft规定了follower应该与leader的日志保持一致, 否则不能参与决议, 优先数据追赶.</p>
+<p>同时raft对于选举过程增加了额外规定, 保证了选举得出的leader持有最多的日志:</p>
+<p>对于选举时, 每个容灾单元仅持有一票, 候选者可以投自己一票, 并向其他容灾单元发出带有自己日志信息的投票请求:<br>
+其他容灾单元接收到投票请求时, 判断候选者持有的日志是否不少于于自己, 如果是则投票.<br>
+因为日志就是由多数派决议得出的, 所以多数容灾单元都持有最多的日志, 对于非最多日志持有者就不可能在选举中获得多数选票, 保证了选举得出的leader持有最多日志.</p>
+<p>此外, raft还引入了随机选举延时(randomized election timeouts), 不同的容灾单元会在leader失联后等待一段随机时间后发起选举请求, 用以错开候选人, 避免选举过程出现平票.</p>
+  </div>
+
+  
+  <div class="tags-row">
+    <a class="pill" href="../../tags/study-notes/">#学习笔记</a>
+  </div>
+  
+
+  <div class="share-row">
+    <span class="share-label">分享</span>
+    <button type="button" class="share-btn" id="share-copy">复制链接</button>
+    <a class="share-btn" id="share-weibo" target="_blank" rel="noopener">微博</a>
+    <button type="button" class="share-btn" id="share-native" hidden>系统分享</button>
+  </div>
+
+  <nav class="post-nav">
+    
+    <a class="prev" href="../24x6cGKiy/"><span class="dir">上一篇 · 更新</span>数据库-事务<em class="pn-date">2024-09-06</em></a>
+    
+    
+    <a class="next" href="../N6PkLgMlT/"><span class="dir">下一篇 · 更早</span>校园网AP隔离-内网穿透实现<em class="pn-date">2023-12-02</em></a>
+    
+  </nav>
+
+  
+  
+<section class="comments" id="comments">
+  <h2>评论</h2>
+  <script src="https://giscus.app/client.js"
+          data-repo="UFOAlastor/UFOAlastor.github.io"
+          data-repo-id="MDEwOlJlcG9zaXRvcnkyNTIzNDYzMDY="
+          data-category="General"
+          data-category-id="DIC_kwDODwp_ws4DI204"
+          data-mapping="specific"
+          data-term="quorum与paxos与raft"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="light"
+          data-lang="zh-CN"
+          data-loading="lazy"
+          async>
+  </script>
+</section>
+
+</article>
+
+  </div>
+
+  
+
+<aside class="sidebar sidebar-toc" id="toc-panel" aria-label="本文目录">
+  <button type="button" class="toc-close" id="toc-close" aria-label="关闭目录">✕</button>
+  <section class="widget widget-toc">
+    <h2 class="widget-title">本文目录
+      <button type="button" class="toc-collapse" id="toc-collapse" aria-controls="toc-panel" aria-expanded="true" title="收起目录，正文占满">收起 ⌄</button>
+    </h2>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#1-quorum">1. quorum是什么</a></li>
+        
+        <li class="toc-l2"><a href="#2-quorum">2. quorum解决什么问题</a></li>
+        
+        <li class="toc-l2"><a href="#3-quorum">3. quorum如何解决问题</a></li>
+        
+        <li class="toc-l3"><a href="#3-1">3.1. 投票机制</a></li>
+        
+        <li class="toc-l2"><a href="#1-paxos">1. paxos是什么</a></li>
+        
+        <li class="toc-l2"><a href="#2-paxos">2. paxos解决什么问题</a></li>
+        
+        <li class="toc-l2"><a href="#3-paxos">3. paxos如何解决问题</a></li>
+        
+        <li class="toc-l2"><a href="#1-multi-paxos">1. multi-paxos是什么</a></li>
+        
+        <li class="toc-l2"><a href="#2-multi-paxos">2. multi-paxos解决什么问题</a></li>
+        
+        <li class="toc-l2"><a href="#3-multi-paxos">3. multi-paxos如何解决问题</a></li>
+        
+        <li class="toc-l2"><a href="#1-raft">1. raft是什么</a></li>
+        
+        <li class="toc-l2"><a href="#2-raft">2. raft解决什么问题</a></li>
+        
+        <li class="toc-l2"><a href="#3-raft">3. raft如何解决问题</a></li>
+        
+      </ol>
+    </nav>
+  </section>
+</aside>
+<button type="button" class="toc-restore" id="toc-restore" aria-controls="toc-panel" aria-expanded="false" title="展开目录">目录</button>
+<script>
+(function () {
+  var KEY = 'alastor-toc-collapsed';
+  var btn = document.getElementById('toc-collapse');
+  var back = document.getElementById('toc-restore');
+  var close = document.getElementById('toc-close');
+  if (!btn || !back) return;
+  var wide = window.matchMedia('(min-width: 1200px)');
+  var setCollapsed = function (collapsed) {
+    document.body.classList.toggle('toc-collapsed', collapsed);
+    btn.setAttribute('aria-expanded', String(!collapsed));
+    back.setAttribute('aria-expanded', String(!collapsed));
+    try { localStorage.setItem(KEY, collapsed ? '1' : '0'); } catch (e) {}
+  };
+  var closeSheet = function () { document.body.classList.remove('toc-mobile-open'); };
+  btn.addEventListener('click', function () { setCollapsed(true); });
+  back.addEventListener('click', function () {
+    if (wide.matches) { setCollapsed(false); }
+    else { document.body.classList.toggle('toc-mobile-open'); }
+  });
+  if (close) close.addEventListener('click', closeSheet);
+  /* 点目录里的链接就收起弹层；点遮罩也收起 */
+  document.querySelectorAll('#toc-panel a').forEach(function (a) {
+    a.addEventListener('click', closeSheet);
+  });
+  document.addEventListener('click', function (e) {
+    if (!document.body.classList.contains('toc-mobile-open')) return;
+    if (e.target.closest('#toc-panel') || e.target.closest('#toc-restore')) return;
+    closeSheet();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSheet();
+  });
+  try { if (wide.matches && localStorage.getItem(KEY) === '1') setCollapsed(true); } catch (e) {}
+})();
+</script>
+
+
+</main>
+
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-line"></div>
+    <nav class="footer-nav">
+      <a href="../">主页</a>
+      <a href="../about/">关于</a>
+      <a href="../archives/">归档</a>
+      <a href="../tags/">标签</a>
+      <a href="../links/">友链</a>
+      <a href="../search/">搜索</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+    <p class="footer-cat-slot"></p>
+    <p>
+      <a href="https://icp.gov.moe/?keyword=20201412" target="_blank" rel="noopener">萌ICP备 20201412号</a>
+    </p>
+    <p id="show_date_time" data-birth="2020-04-02">本站已愉快蹦哒…</p>
+    <p>Copyright © 2020 Zander Alastor. All rights reserved.</p>
+  </div>
+</footer>
+
+<a class="go-home" href="../" aria-label="回到主页" title="回到主页">
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M12 3.2 3 10.4h2.6V20h5.1v-4.6h2.6V20h5.1v-8.6H21L12 3.2z" fill="currentColor"/></svg>
+</a>
+<button class="go-top" id="go-top" aria-label="回到顶部">↑</button>
+
+<script src="../assets/js/app.js" defer></script>
+<script>
+/* Vercount 访问统计：国内直连，无需注册，POST 上报 + 自动写入 span */
+(function () {
+  var host = location.hostname;
+  if (host !== 'alastor.top' && host !== 'www.alastor.top' && host !== 'ufoalastor.github.io') return;
+  var s = document.createElement('script');
+  s.src = 'https://events.vercount.one/js';
+  s.defer = true;
+  document.head.appendChild(s);
+})();
+</script>
+
+<script src="../assets/js/highlight/highlight.pack.js"></script>
+<script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+
+
+<script>
+(function () {
+  var u = location.href, t = document.title;
+  var wb = document.getElementById('share-weibo');
+  if (wb) wb.href = 'https://service.weibo.com/share/share.php?url=' + encodeURIComponent(u) + '&title=' + encodeURIComponent(t);
+  var cp = document.getElementById('share-copy');
+  if (cp) cp.addEventListener('click', function () {
+    var done = function () { cp.textContent = '已复制'; setTimeout(function () { cp.textContent = '复制链接'; }, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(u).then(done, done);
+    else { var i = document.createElement('textarea'); i.value = u; document.body.appendChild(i); i.select(); document.execCommand('copy'); i.remove(); done(); }
+  });
+  var nat = document.getElementById('share-native');
+  if (nat && navigator.share) { nat.hidden = false; nat.addEventListener('click', function () { navigator.share({ title: t, url: u }); }); }
+
+  /* 目录：滚动时高亮当前小节（只认右侧固定目录，手机折叠目录不参与） */
+  var tocLinks = [].slice.call(document.querySelectorAll('.sidebar-toc .toc a'));
+  if (tocLinks.length) {
+    var heads = tocLinks.map(function (a) {
+      return document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    });
+    var spy = function () {
+      var y = window.scrollY + 120, cur = 0;
+      heads.forEach(function (h, i) { if (h && h.offsetTop <= y) cur = i; });
+      tocLinks.forEach(function (a, i) { a.classList.toggle('active', i === cur); });
+      /* 目录比视口高时，把当前项滚进目录列可视区（只滚目录，不动正文） */
+      var bar = document.querySelector('.sidebar-toc');
+      var act = tocLinks[cur];
+      if (bar && act && bar.scrollHeight > bar.clientHeight + 4) {
+        var r = act.getBoundingClientRect(), br = bar.getBoundingClientRect();
+        if (r.top < br.top + 8 || r.bottom > br.bottom - 8) {
+          bar.scrollTop += r.top - br.top - bar.clientHeight / 3;
+        }
+      }
+    };
+    window.addEventListener('scroll', spy, { passive: true });
+    spy();
+  }
+})();
+</script>
+
+</body>
+</html>

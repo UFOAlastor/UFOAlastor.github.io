@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>香色闺阁书源制作教程 · Zander Alastor&#39;s blog</title>
+<meta name="description" content="此店不售此书。分享工具、教程和记录生活。">
+<meta name="theme-color" content="#222222">
+<meta property="og:site_name" content="Zander Alastor&#39;s blog">
+<meta property="og:title" content="香色闺阁书源制作教程">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://s2.loli.net/2022/07/30/j6lUrbmSehEaMTJ.png">
+<link rel="icon" href="../assets/img/favicon.ico">
+<link rel="alternate" type="application/rss+xml" title="Zander Alastor&#39;s blog" href="../rss.xml">
+<link rel="stylesheet" href="../assets/css/style.css?v=07210bad">
+
+<link rel="stylesheet" href="../assets/css/highlight/railscasts.css">
+
+
+</head>
+<body class="single">
+
+<header class="site-header">
+  <div class="wrap head-inner">
+    <a class="brand" href="../">Zander Alastor&#39;s blog</a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-btn" aria-label="打开菜单"><span></span></label>
+    <nav class="menu" aria-label="主导航">
+      <ul>
+        <li><a href="../about/">关于</a></li>
+        <li><a href="../archives/">归档</a></li>
+        <li><a href="../links/">友链</a></li>
+        <li><a href="../search/">搜索</a></li>
+        <li><a href="../">主页</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+</header>
+
+
+<main class="wrap layout">
+  <aside class="sidebar sidebar-tools" aria-label="站点工具">
+    
+    
+
+    <section>
+      <h2 class="widget-title">近期文章</h2>
+      <ul class="widget-list">
+        
+        <li><a href="../picayomi/">给 Kindle 写一个漫画阅读插件 PicaYomi</a><span class="d">10-24</span></li>
+        
+        <li><a href="../3BsZpFxPKL/">解决bat脚本无法执行conda环境</a><span class="d">12-29</span></li>
+        
+        <li><a href="../JFt3l7SWY/">ProtoBuf协议</a><span class="d">09-06</span></li>
+        
+        <li><a href="../24x6cGKiy/">数据库-事务</a><span class="d">09-06</span></li>
+        
+        <li><a href="../2lEd0eWPD/">quorum与paxos与raft</a><span class="d">09-06</span></li>
+        
+        <li><a href="../N6PkLgMlT/">校园网AP隔离-内网穿透实现</a><span class="d">12-02</span></li>
+        
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="widget-title">标签</h2>
+      <div class="tag-cloud">
+        
+        <a class="pill" href="../tags/tools/">工具分享 · 20</a>
+        
+        <a class="pill" href="../tags/study-notes/">学习笔记 · 18</a>
+        
+        <a class="pill" href="../tags/problem-solving/">问题解决 · 17</a>
+        
+        <a class="pill" href="../tags/daily-life/">日常 · 12</a>
+        
+        <a class="pill" href="../tags/gridea/">Gridea · 7</a>
+        
+        <a class="pill" href="../tags/kaios/">KaiOS · 5</a>
+        
+        <a class="pill" href="../tags/cpp/">C++ · 4</a>
+        
+        <a class="pill" href="../tags/python/">python · 2</a>
+        
+        <a class="pill" href="../tags/works/">作品 · 2</a>
+        
+        <a class="pill" href="../tags/">全部 →</a>
+      </div>
+    </section>
+
+    
+
+    
+  </aside>
+
+  <div class="content">
+    
+<article class="post">
+  <header class="article-head">
+    
+    <div class="article-kicker">
+      问题解决 · 工具分享
+    </div>
+    
+    <h1 class="article-title">香色闺阁书源制作教程</h1>
+    <div class="article-meta">
+      <time datetime="2022-07-30">2022 年 07 月 30 日</time>
+      <span class="article-readcount" id="vercount_value_page_pv"></span>
+    </div>
+  </header>
+
+  
+  <details class="toc-inline">
+    <summary>本文目录 <span class="n">11 节</span></summary>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#sec-1">前言</a></li>
+        
+        <li class="toc-l2"><a href="#sec-2">从一次实战开始</a></li>
+        
+        <li class="toc-l2"><a href="#sec-3">新建站点</a></li>
+        
+        <li class="toc-l2"><a href="#sec-4">常用配置部分</a></li>
+        
+        <li class="toc-l3"><a href="#sec-5">书籍搜索</a></li>
+        
+        <li class="toc-l3"><a href="#sec-6">书籍详情</a></li>
+        
+        <li class="toc-l3"><a href="#sec-7">章节列表</a></li>
+        
+        <li class="toc-l3"><a href="#sec-8">章节内容</a></li>
+        
+        <li class="toc-l3"><a href="#sec-9">书籍分类</a></li>
+        
+        <li class="toc-l2"><a href="#sec-10">更多配置</a></li>
+        
+        <li class="toc-l2"><a href="#bato-to-xbs">Bato.to.xbs</a></li>
+        
+      </ol>
+    </nav>
+  </details>
+  
+
+  <div class="prose">
+    <h2 id="sec-1">前言</h2>
+<p>手上有部老ipadmini2，放着吃灰不好，就拿来做看书看漫画专用机。</p>
+<p>哔哩哔哩漫画乘着活动充了50元，但还是不够划算，继续充钱有点亏，就研究了几个开源漫画软件。</p>
+<p>目前我看下来ios上其实比较好的是源阅读，但是ipadmini2系统只到ios12.5，源阅读最低要求ios13，恶心人。</p>
+<p>香色闺阁非常友好的支持了我的mini2，所以我现在主力漫画软件就是香色闺阁。</p>
+<p>但是香色闺阁的xbs加密源文件属实也是恶心人，只能用ios设备编辑，不能在电脑上编写，好在本身很简单，原理就是个简易版爬虫。</p>
+<h2 id="sec-2">从一次实战开始</h2>
+<p>最近喜欢看英文版日漫，边娱乐边复习六级（属于是给看漫画找借口了）</p>
+<p>但是已有的香色闺阁漫画源中英文书源较少，所以打算自己写一个</p>
+<p>选的网站是bato.to，一个资源非常全，而且可以大陆直连的网站</p>
+<h2 id="sec-3">新建站点</h2>
+<p>进入香色闺阁软件，点击左面的站点管理，点击更多，选择新建站点</p>
+<p><img loading="lazy" alt="IMG_0400" src="https://s2.loli.net/2022/07/30/YqUvdtaelFrBM38.png"></p>
+<p>这里我已经把基础内容填写完成了</p>
+<p>大部分选项的含义和作用都是一目了然的，这里只挑几个重点讲一下</p>
+<p>“权重”：该站点在列表中排列的先后顺序，最大值9999，不过好几个源作者都喜欢标9999，而且xbs还加密（说的就是你益达源），总体上没什么用，你编辑站点的时候可以直接顶置，方便反复修改</p>
+<p>“httpheaders”：cookie装里面，有些站点可能要登入才能查看某些资源，cookie的获取方式可以直接百度</p>
+<p>一个示例：</p>
+<pre><code class="language-json">{&quot;Cookie&quot;:&quot;XXX&quot;,&quot;User-Agent&quot;:&quot;Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/96.0.4664.110 Safari\/537.36&quot;}
+</code></pre>
+<h2 id="sec-4">常用配置部分</h2>
+<h3 id="sec-5">书籍搜索</h3>
+<p><img loading="lazy" alt="image-20220730192045418" src="https://s2.loli.net/2022/07/30/XOxZiJBAFLrRof1.png"></p>
+<p>进入你的目标网站，搜索某个很常见的关键词，保证有多页结果，然后翻到比如第4页，记住上面的连接格式</p>
+<pre><code class="language-python">https://bato.to/search?word=game&amp;page=4
+修改为下面这种格式：
+https://bato.to/search?word=%@keyWord&amp;page=%@pageIndex
+</code></pre>
+<p><img loading="lazy" alt="1C8AA354-54C3-4EE2-9ED0-A085B802F369" src="https://s2.loli.net/2022/07/30/Zkoj51MOUuVQICJ.png"></p>
+<p>响应规则里面按照格式填写，具体的div，class之类的通过F12打开目标网页源文件查看</p>
+<p><img loading="lazy" alt="image-20220730202800179" src="https://s2.loli.net/2022/07/30/YeM17KzHmXLWfQ8.png"></p>
+<p>格式很简单</p>
+<pre><code class="language-python">// 开头
+div或img之类的对应&lt;div &gt;, &lt;img &gt;
+@ 用来定位class或者id
+要获取&lt;div src=&quot;xxx&quot;&gt;里面的src时也是用@src
+</code></pre>
+<p>“更多配置”这一块，在制作小说源的时候要调一下编码为中文编码，我们这里是漫画，不用管文本编码</p>
+<h3 id="sec-6">书籍详情</h3>
+<p><img loading="lazy" alt="5F6A9D76-4843-4FF0-B153-F0884CF9D2A0" src="https://s2.loli.net/2022/07/30/lEs7r3wLhyjcUOR.png"></p>
+<p>详情这一块，接触文本会比较多一点，可能需要借助js格式化一些段落，或去除一些无用标记</p>
+<p>这里举个例子，可以参考一下（去除多余的网页br格式）</p>
+<pre><code class="language-python">//div[@id='limit-height-body-summary']/div[@class='limit-html'] || @js:
+let reg = new RegExp('&lt;br /&gt;', 'g')
+return result.replace(reg, '')
+</code></pre>
+<h3 id="sec-7">章节列表</h3>
+<p><img loading="lazy" alt="EC22DDB6-1AB6-4EAE-B05F-6A5461494560" src="https://s2.loli.net/2022/07/30/KhZ9uTxj2kXev5C.png"></p>
+<p>这里的“下一级界面地址”要注意，可能会有坑</p>
+<p>我这里的bato.to网站就遇到坑了</p>
+<p><img loading="lazy" alt="image-20220730204224527" src="https://s2.loli.net/2022/07/30/mr9zC7Lxy1f4YTt.png"></p>
+<p>bato.to网站的章节链接不是完整URL，而是相对网站主域名的相对路径，直接使用就会 “ URL错误，没有URL编码? “ 这样报错</p>
+<p>手动调整一下，保证是完整的URL传出：</p>
+<pre><code class="language-python">//a[@class='visited chapt']/@href || @js:
+let url = 'http://bato.to' +result;
+return url;
+</code></pre>
+<h3 id="sec-8">章节内容</h3>
+<p>章节内容就是我们最关键的漫画图片部分</p>
+<p><img loading="lazy" alt="image-20220730205104233" src="https://s2.loli.net/2022/07/30/CfbIvNlGK7S2atZ.png"></p>
+<p>使用“蓝色框框”中的元素检查工具，点击“绿色宽宽”中的也就是漫画图片部分，然后下方开发者工具就会跳转出来相应的源码部分</p>
+<p>我们关注两个“红色框框”中的内容，src是我们漫画图片的直接地址，class用来定位这个部分，辅助我们得到src</p>
+<p><img loading="lazy" alt="E5CCD377-48A2-4980-B302-DBF5145F965B" src="https://s2.loli.net/2022/07/30/kCZEAX1gI4sax5j.png"></p>
+<p><strong>这个网站还有个坑，漫画图片加载是js动态加载，直接爬取网页得不到图片</strong></p>
+<p><img loading="lazy" alt="image-20220731124452719" src="https://s2.loli.net/2022/07/31/wRQzlZNgyHTPamv.png"></p>
+<p>这里请求信息我们要加上webView</p>
+<p>（这类js加载的网站第一次打开某本漫画会比较慢，要加载完全部资源才会在软件上显示出页码）</p>
+<pre><code class="language-python">请求信息：
+@js:
+return {'url':result, 'webView':&quot;&quot;};
+</code></pre>
+<p>之后正文部分还是一样的</p>
+<pre><code class="language-python">正文：
+//img[@class='page-img']/@src
+</code></pre>
+<h3 id="sec-9">书籍分类</h3>
+<p>整体还是大同小异，不过这一部分要手动配置的内容比较多，我就直接上截图和代码了</p>
+<p><img loading="lazy" alt="D954C400-EADD-46B4-8E78-AA5DA4BF18B4" src="https://s2.loli.net/2022/07/30/6hYiryc43BvSgQd.png"></p>
+<pre><code class="language-python">请求信息：
+@js:
+return 'https://bato.to/browse?genres=' + params.filters.genre1 + ',' + params.filters.genre2 + ',' + params.filters.genre3 + ',' + params.filters.genre4 + '&amp;langs=' + params.filters.translated + '&amp;origs=' + params.filters.original + '&amp;release=' + params.filters.release + '&amp;chapters=' + params.filters.chapters + '&amp;sort=' + params.filters.sort + '&amp;page=' + params.pageIndex;
+
+更多配置-moreKeys：（全是标签）
+{&quot;pageSize&quot;:60,&quot;requestFilters&quot;:[{&quot;items&quot;:[{&quot;value&quot;:&quot;&quot;,&quot;title&quot;:&quot;All&quot;},{&quot;value&quot;:&quot;artbook&quot;,&quot;title&quot;:&quot;Artbook&quot;},{&quot;value&quot;:&quot;cartoon&quot;,&quot;title&quot;:&quot;Cartoon&quot;},{&quot;value&quot;:&quot;comic&quot;,&quot;title&quot;:&quot;Comic&quot;},{&quot;value&quot;:&quot;doujinshi&quot;,&quot;title&quot;:&quot;Doujinshi&quot;}
+。。。。。。
+{&quot;value&quot;:&quot;zombies&quot;,&quot;title&quot;:&quot;Zombies&quot;}],&quot;key&quot;:&quot;genre4&quot;},{&quot;items&quot;:[{&quot;title&quot;:&quot;All&quot;,&quot;value&quot;:&quot;&quot;},{&quot;title&quot;:&quot;ar&quot;,&quot;value&quot;:&quot;ar&quot;},{&quot;title&quot;:&quot;en&quot;,&quot;value&quot;:&quot;en&quot;},{&quot;title&quot;:&quot;es&quot;,&quot;value&quot;:&quot;es&quot;},{&quot;title&quot;:&quot;pt&quot;,&quot;value&quot;:&quot;pt&quot;},{&quot;title&quot;:&quot;it&quot;,&quot;value&quot;:&quot;it&quot;},{&quot;title&quot;:&quot;pl&quot;,&quot;value&quot;:&quot;pl&quot;},{&quot;title&quot;:&quot;id&quot;,&quot;value&quot;:&quot;id&quot;},
+。。。。。。
+{&quot;title&quot;:&quot;Pending&quot;,&quot;value&quot;:&quot;pending&quot;},{&quot;title&quot;:&quot;Ongoing&quot;,&quot;value&quot;:&quot;ongoing&quot;},{&quot;title&quot;:&quot;Completed&quot;,&quot;value&quot;:&quot;completed&quot;},{&quot;title&quot;:&quot;Hiatus&quot;,&quot;value&quot;:&quot;hiatus&quot;},{&quot;value&quot;:&quot;50&quot;,&quot;title&quot;:&quot;50+&quot;},{&quot;value&quot;:&quot;10&quot;,&quot;title&quot;:&quot;10+&quot;},{&quot;value&quot;:&quot;1&quot;,&quot;title&quot;:&quot;1+&quot;}],&quot;key&quot;:&quot;chapters&quot;},{&quot;items&quot;:
+。。。。。。
+{&quot;value&quot;:&quot;views_w.za&quot;,&quot;title&quot;:&quot;7days&quot;},{&quot;value&quot;:&quot;views_d.za&quot;,&quot;title&quot;:&quot;24hours&quot;},{&quot;value&quot;:&quot;views_h.za&quot;,&quot;title&quot;:&quot;60minutes&quot;}],&quot;key&quot;:&quot;sort&quot;}]}
+</code></pre>
+<h2 id="sec-10">更多配置</h2>
+<p>比如书单啊，广场啊，热词啥的，因为不是必须品，我这里就不继续写教程了</p>
+<p>想做的话和上面的例子都是大同小异，按照格式制作即可</p>
+<h2 id="bato-to-xbs">Bato.to.xbs</h2>
+<p>还有不懂的地方可以下载这个样例xbs</p>
+<p><a href="https://github.com/UFOAlastor/xiangseguige/tree/main/书源">xiangseguige/书源 at main · UFOAlastor/xiangseguige (github.com)</a></p>
+  </div>
+
+  
+  <div class="tags-row">
+    <a class="pill" href="../../tags/problem-solving/">#问题解决</a><a class="pill" href="../../tags/tools/">#工具分享</a>
+  </div>
+  
+
+  <div class="share-row">
+    <span class="share-label">分享</span>
+    <button type="button" class="share-btn" id="share-copy">复制链接</button>
+    <a class="share-btn" id="share-weibo" target="_blank" rel="noopener">微博</a>
+    <button type="button" class="share-btn" id="share-native" hidden>系统分享</button>
+  </div>
+
+  <nav class="post-nav">
+    
+    <a class="prev" href="../qvDrVg_o2/"><span class="dir">上一篇 · 更新</span>石蒜摇 | vscode插件发布<em class="pn-date">2022-08-28</em></a>
+    
+    
+    <a class="next" href="../gMsxg_5dy/"><span class="dir">下一篇 · 更早</span>document.querySelector错误返回null<em class="pn-date">2022-07-25</em></a>
+    
+  </nav>
+
+  
+  
+<section class="comments" id="comments">
+  <h2>评论</h2>
+  <script src="https://giscus.app/client.js"
+          data-repo="UFOAlastor/UFOAlastor.github.io"
+          data-repo-id="MDEwOlJlcG9zaXRvcnkyNTIzNDYzMDY="
+          data-category="General"
+          data-category-id="DIC_kwDODwp_ws4DI204"
+          data-mapping="specific"
+          data-term="香色闺阁书源制作教程"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="light"
+          data-lang="zh-CN"
+          data-loading="lazy"
+          async>
+  </script>
+</section>
+
+</article>
+
+  </div>
+
+  
+
+<aside class="sidebar sidebar-toc" id="toc-panel" aria-label="本文目录">
+  <button type="button" class="toc-close" id="toc-close" aria-label="关闭目录">✕</button>
+  <section class="widget widget-toc">
+    <h2 class="widget-title">本文目录
+      <button type="button" class="toc-collapse" id="toc-collapse" aria-controls="toc-panel" aria-expanded="true" title="收起目录，正文占满">收起 ⌄</button>
+    </h2>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#sec-1">前言</a></li>
+        
+        <li class="toc-l2"><a href="#sec-2">从一次实战开始</a></li>
+        
+        <li class="toc-l2"><a href="#sec-3">新建站点</a></li>
+        
+        <li class="toc-l2"><a href="#sec-4">常用配置部分</a></li>
+        
+        <li class="toc-l3"><a href="#sec-5">书籍搜索</a></li>
+        
+        <li class="toc-l3"><a href="#sec-6">书籍详情</a></li>
+        
+        <li class="toc-l3"><a href="#sec-7">章节列表</a></li>
+        
+        <li class="toc-l3"><a href="#sec-8">章节内容</a></li>
+        
+        <li class="toc-l3"><a href="#sec-9">书籍分类</a></li>
+        
+        <li class="toc-l2"><a href="#sec-10">更多配置</a></li>
+        
+        <li class="toc-l2"><a href="#bato-to-xbs">Bato.to.xbs</a></li>
+        
+      </ol>
+    </nav>
+  </section>
+</aside>
+<button type="button" class="toc-restore" id="toc-restore" aria-controls="toc-panel" aria-expanded="false" title="展开目录">目录</button>
+<script>
+(function () {
+  var KEY = 'alastor-toc-collapsed';
+  var btn = document.getElementById('toc-collapse');
+  var back = document.getElementById('toc-restore');
+  var close = document.getElementById('toc-close');
+  if (!btn || !back) return;
+  var wide = window.matchMedia('(min-width: 1200px)');
+  var setCollapsed = function (collapsed) {
+    document.body.classList.toggle('toc-collapsed', collapsed);
+    btn.setAttribute('aria-expanded', String(!collapsed));
+    back.setAttribute('aria-expanded', String(!collapsed));
+    try { localStorage.setItem(KEY, collapsed ? '1' : '0'); } catch (e) {}
+  };
+  var closeSheet = function () { document.body.classList.remove('toc-mobile-open'); };
+  btn.addEventListener('click', function () { setCollapsed(true); });
+  back.addEventListener('click', function () {
+    if (wide.matches) { setCollapsed(false); }
+    else { document.body.classList.toggle('toc-mobile-open'); }
+  });
+  if (close) close.addEventListener('click', closeSheet);
+  /* 点目录里的链接就收起弹层；点遮罩也收起 */
+  document.querySelectorAll('#toc-panel a').forEach(function (a) {
+    a.addEventListener('click', closeSheet);
+  });
+  document.addEventListener('click', function (e) {
+    if (!document.body.classList.contains('toc-mobile-open')) return;
+    if (e.target.closest('#toc-panel') || e.target.closest('#toc-restore')) return;
+    closeSheet();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSheet();
+  });
+  try { if (wide.matches && localStorage.getItem(KEY) === '1') setCollapsed(true); } catch (e) {}
+})();
+</script>
+
+
+</main>
+
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-line"></div>
+    <nav class="footer-nav">
+      <a href="../">主页</a>
+      <a href="../about/">关于</a>
+      <a href="../archives/">归档</a>
+      <a href="../tags/">标签</a>
+      <a href="../links/">友链</a>
+      <a href="../search/">搜索</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+    <p class="footer-cat-slot"></p>
+    <p>
+      <a href="https://icp.gov.moe/?keyword=20201412" target="_blank" rel="noopener">萌ICP备 20201412号</a>
+    </p>
+    <p id="show_date_time" data-birth="2020-04-02">本站已愉快蹦哒…</p>
+    <p>Copyright © 2020 Zander Alastor. All rights reserved.</p>
+  </div>
+</footer>
+
+<a class="go-home" href="../" aria-label="回到主页" title="回到主页">
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M12 3.2 3 10.4h2.6V20h5.1v-4.6h2.6V20h5.1v-8.6H21L12 3.2z" fill="currentColor"/></svg>
+</a>
+<button class="go-top" id="go-top" aria-label="回到顶部">↑</button>
+
+<script src="../assets/js/app.js" defer></script>
+<script>
+/* Vercount 访问统计：国内直连，无需注册，POST 上报 + 自动写入 span */
+(function () {
+  var host = location.hostname;
+  if (host !== 'alastor.top' && host !== 'www.alastor.top' && host !== 'ufoalastor.github.io') return;
+  var s = document.createElement('script');
+  s.src = 'https://events.vercount.one/js';
+  s.defer = true;
+  document.head.appendChild(s);
+})();
+</script>
+
+<script src="../assets/js/highlight/highlight.pack.js"></script>
+<script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+
+
+<script>
+(function () {
+  var u = location.href, t = document.title;
+  var wb = document.getElementById('share-weibo');
+  if (wb) wb.href = 'https://service.weibo.com/share/share.php?url=' + encodeURIComponent(u) + '&title=' + encodeURIComponent(t);
+  var cp = document.getElementById('share-copy');
+  if (cp) cp.addEventListener('click', function () {
+    var done = function () { cp.textContent = '已复制'; setTimeout(function () { cp.textContent = '复制链接'; }, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(u).then(done, done);
+    else { var i = document.createElement('textarea'); i.value = u; document.body.appendChild(i); i.select(); document.execCommand('copy'); i.remove(); done(); }
+  });
+  var nat = document.getElementById('share-native');
+  if (nat && navigator.share) { nat.hidden = false; nat.addEventListener('click', function () { navigator.share({ title: t, url: u }); }); }
+
+  /* 目录：滚动时高亮当前小节（只认右侧固定目录，手机折叠目录不参与） */
+  var tocLinks = [].slice.call(document.querySelectorAll('.sidebar-toc .toc a'));
+  if (tocLinks.length) {
+    var heads = tocLinks.map(function (a) {
+      return document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    });
+    var spy = function () {
+      var y = window.scrollY + 120, cur = 0;
+      heads.forEach(function (h, i) { if (h && h.offsetTop <= y) cur = i; });
+      tocLinks.forEach(function (a, i) { a.classList.toggle('active', i === cur); });
+      /* 目录比视口高时，把当前项滚进目录列可视区（只滚目录，不动正文） */
+      var bar = document.querySelector('.sidebar-toc');
+      var act = tocLinks[cur];
+      if (bar && act && bar.scrollHeight > bar.clientHeight + 4) {
+        var r = act.getBoundingClientRect(), br = bar.getBoundingClientRect();
+        if (r.top < br.top + 8 || r.bottom > br.bottom - 8) {
+          bar.scrollTop += r.top - br.top - bar.clientHeight / 3;
+        }
+      }
+    };
+    window.addEventListener('scroll', spy, { passive: true });
+    spy();
+  }
+})();
+</script>
+
+</body>
+</html>

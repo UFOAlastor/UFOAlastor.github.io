@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>数据库-事务 · Zander Alastor&#39;s blog</title>
+<meta name="description" content="此店不售此书。分享工具、教程和记录生活。">
+<meta name="theme-color" content="#222222">
+<meta property="og:site_name" content="Zander Alastor&#39;s blog">
+<meta property="og:title" content="数据库-事务">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://s2.loli.net/2024/09/06/Fo9j3fglXNHT78G.png">
+<link rel="icon" href="../assets/img/favicon.ico">
+<link rel="alternate" type="application/rss+xml" title="Zander Alastor&#39;s blog" href="../rss.xml">
+<link rel="stylesheet" href="../assets/css/style.css?v=07210bad">
+
+<link rel="stylesheet" href="../assets/css/highlight/railscasts.css">
+<link rel="stylesheet" href="../vendor/katex/katex.min.css">
+
+</head>
+<body class="single">
+
+<header class="site-header">
+  <div class="wrap head-inner">
+    <a class="brand" href="../">Zander Alastor&#39;s blog</a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-btn" aria-label="打开菜单"><span></span></label>
+    <nav class="menu" aria-label="主导航">
+      <ul>
+        <li><a href="../about/">关于</a></li>
+        <li><a href="../archives/">归档</a></li>
+        <li><a href="../links/">友链</a></li>
+        <li><a href="../search/">搜索</a></li>
+        <li><a href="../">主页</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+</header>
+
+
+<main class="wrap layout">
+  <aside class="sidebar sidebar-tools" aria-label="站点工具">
+    
+    
+
+    <section>
+      <h2 class="widget-title">近期文章</h2>
+      <ul class="widget-list">
+        
+        <li><a href="../picayomi/">给 Kindle 写一个漫画阅读插件 PicaYomi</a><span class="d">10-24</span></li>
+        
+        <li><a href="../3BsZpFxPKL/">解决bat脚本无法执行conda环境</a><span class="d">12-29</span></li>
+        
+        <li><a href="../JFt3l7SWY/">ProtoBuf协议</a><span class="d">09-06</span></li>
+        
+        <li><a href="../24x6cGKiy/">数据库-事务</a><span class="d">09-06</span></li>
+        
+        <li><a href="../2lEd0eWPD/">quorum与paxos与raft</a><span class="d">09-06</span></li>
+        
+        <li><a href="../N6PkLgMlT/">校园网AP隔离-内网穿透实现</a><span class="d">12-02</span></li>
+        
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="widget-title">标签</h2>
+      <div class="tag-cloud">
+        
+        <a class="pill" href="../tags/tools/">工具分享 · 20</a>
+        
+        <a class="pill" href="../tags/study-notes/">学习笔记 · 18</a>
+        
+        <a class="pill" href="../tags/problem-solving/">问题解决 · 17</a>
+        
+        <a class="pill" href="../tags/daily-life/">日常 · 12</a>
+        
+        <a class="pill" href="../tags/gridea/">Gridea · 7</a>
+        
+        <a class="pill" href="../tags/kaios/">KaiOS · 5</a>
+        
+        <a class="pill" href="../tags/cpp/">C++ · 4</a>
+        
+        <a class="pill" href="../tags/python/">python · 2</a>
+        
+        <a class="pill" href="../tags/works/">作品 · 2</a>
+        
+        <a class="pill" href="../tags/">全部 →</a>
+      </div>
+    </section>
+
+    
+
+    
+  </aside>
+
+  <div class="content">
+    
+<article class="post">
+  <header class="article-head">
+    
+    <div class="article-kicker">
+      学习笔记
+    </div>
+    
+    <h1 class="article-title">数据库-事务</h1>
+    <div class="article-meta">
+      <time datetime="2024-09-06">2024 年 09 月 06 日</time>
+      <span class="article-readcount" id="vercount_value_page_pv"></span>
+    </div>
+  </header>
+
+  
+  <details class="toc-inline">
+    <summary>本文目录 <span class="n">26 节</span></summary>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#1">1. 事务是什么</a></li>
+        
+        <li class="toc-l2"><a href="#2">2. 事务解决什么问题</a></li>
+        
+        <li class="toc-l2"><a href="#3">3. 事务如何解决问题</a></li>
+        
+        <li class="toc-l2"><a href="#1-acid">1. ACID是什么</a></li>
+        
+        <li class="toc-l2"><a href="#2-acid">2. ACID具体内容</a></li>
+        
+        <li class="toc-l3"><a href="#2-1-atomicity">2.1. 原子性(Atomicity)</a></li>
+        
+        <li class="toc-l3"><a href="#2-2-consistency">2.2. 一致性(Consistency)</a></li>
+        
+        <li class="toc-l3"><a href="#2-3-isolation">2.3. 隔离性(Isolation)</a></li>
+        
+        <li class="toc-l3"><a href="#2-4-durability">2.4. 持久性(Durability)</a></li>
+        
+        <li class="toc-l2"><a href="#1-2">1. 并发一致性问题是什么</a></li>
+        
+        <li class="toc-l2"><a href="#2-2">2. 并发一致性问题具体内容</a></li>
+        
+        <li class="toc-l3"><a href="#2-1">2.1. 丢失修改</a></li>
+        
+        <li class="toc-l3"><a href="#2-2-dirty-read">2.2. 脏读(Dirty Read)</a></li>
+        
+        <li class="toc-l3"><a href="#2-3-nonrepeatable-read">2.3. 不可重复读(Nonrepeatable Read)</a></li>
+        
+        <li class="toc-l3"><a href="#2-4-phantom-read">2.4. 幻读(Phantom Read)</a></li>
+        
+        <li class="toc-l2"><a href="#1-3">1. 两段锁协议</a></li>
+        
+        <li class="toc-l3"><a href="#1-1">1.1. 两段锁协议是什么</a></li>
+        
+        <li class="toc-l3"><a href="#1-2-2">1.2. 两段锁协议解决什么问题</a></li>
+        
+        <li class="toc-l3"><a href="#1-3-2">1.3. 两段锁协议如何解决问题</a></li>
+        
+        <li class="toc-l2"><a href="#2-3">2. 三级封锁协议</a></li>
+        
+        <li class="toc-l3"><a href="#2-1-2">2.1. 三级封锁协议是什么</a></li>
+        
+        <li class="toc-l3"><a href="#2-2-2">2.2. 三级封锁协议解决什么问题</a></li>
+        
+        <li class="toc-l3"><a href="#2-3-2">2.3. 三级封锁协议如何解决问题</a></li>
+        
+        <li class="toc-l2"><a href="#3-2">3. 四种隔离级别</a></li>
+        
+        <li class="toc-l3"><a href="#3-1">3.1. 四种隔离级别是什么</a></li>
+        
+        <li class="toc-l3"><a href="#3-2-2">3.2. 四种隔离级别具体内容</a></li>
+        
+      </ol>
+    </nav>
+  </details>
+  
+
+  <div class="prose">
+    <h1>事务</h1>
+<h2 id="1">1. 事务是什么</h2>
+<p>事务是针对数据库的一系列操作条件下保证数据一致性与可靠性的概念, 定义了事务是一个不可分割的工作单元, 包含一系列数据库操作, 这些操作要么全部执行成功, 要么失败后全部回滚.</p>
+<h2 id="2">2. 事务解决什么问题</h2>
+<p>考虑一个场景: <br>
+账户转账任务, 从A账户转账100元到B账户: </p>
+<ol>
+<li>第一步, 从A账户扣款100元</li>
+<li>第二步, 向B账户添加100元</li>
+</ol>
+<p>如果没有采用事务, 执行完第一步操作后网络或程序崩溃, 导致A账户扣款100元, 但是B账户没有添加100元, 这令整个账户系统中凭空消失了100元余额.</p>
+<h2 id="3">3. 事务如何解决问题</h2>
+<p>事务保证了事务中的一系列数据库操作, 要么全部执行成功, 要么失败全部回滚.</p>
+<p>针对上述场景, 如果事务刚执行完第一步后网络或程序崩溃, 此时操作还未提交, A账户的余额未变更;  如果事务提交后, 操作B账户余额失败, 事务会通过undo log或者版本控制进行回滚.</p>
+<p>事务通常通过以下步骤来执行: </p>
+<ol>
+<li>开始事务(Begin Transaction): <ul>
+<li>事务开始, 数据库记录事务的初始状态. </li>
+</ul>
+</li>
+<li>执行操作(Execute Operations): <ul>
+<li>进行一系列的数据库操作(如插入, 更新, 删除等), 这些操作暂时不会提交到数据库. </li>
+</ul>
+</li>
+<li>检查一致性(Check Consistency): <ul>
+<li>检查所有操作是否成功执行, 确保数据仍然满足一致性约束. </li>
+</ul>
+</li>
+<li>提交事务(Commit Transaction): <ul>
+<li>如果所有操作都成功, 提交事务. 此时, 所有操作的结果被永久性地写入数据库. </li>
+</ul>
+</li>
+<li>回滚事务(Rollback Transaction): <ul>
+<li>如果有任何操作失败, 回滚事务. 此时, 撤销所有已经执行的操作, 将数据库恢复到事务开始前的状态. </li>
+</ul>
+</li>
+</ol>
+<h1>ACID属性</h1>
+<h2 id="1-acid">1. ACID是什么</h2>
+<p>ACID是事务具有的4个关键特性, 也是保证事务正确性的4个要求, 包含原子性, 一致性, 隔离性, 持久性.</p>
+<h2 id="2-acid">2. ACID具体内容</h2>
+<h3 id="2-1-atomicity">2.1. 原子性(Atomicity)</h3>
+<p>事务的所有操作要么全部完成, 要么全部不完成. 事务一旦开始, 要么完全成功, 要么在出错时完全撤销, 系统不会处于不完整状态.</p>
+<p>如果在事务执行过程中出现错误, 所有已执行的操作会被撤销, 数据回滚到事务开始前的状态.</p>
+<h3 id="2-2-consistency">2.2. 一致性(Consistency)</h3>
+<p>事务的一致性与"分布式数据一致性"含义不同:<br>
+事务的一致性强调<strong>处理前后结果应与需求预期保持一致</strong>, 是一种逻辑一致, 人为定义的规则.</p>
+<p>事务在执行前和执行后, 数据库都必须保持一致的状态. 执行事务后, 所有的业务规则, 约束和触发器都必须被满足.</p>
+<p>一致性确保事务执行后, 数据库从一个合法状态转移到另一个合法状态. </p>
+<p>通过原子性, 持久性, 隔离性最终实现数据一致性.</p>
+<h3 id="2-3-isolation">2.3. 隔离性(Isolation)</h3>
+<p>事务的执行过程与其他事务隔离, 不会被其他事务干. 即使有多个事务同时执行, 它们的中间状态相互之间不可见, 也不会相互影响.</p>
+<p>隔离性是一个最常放松的一个, 随着数据库隔离级别的提高, 数据的并发能力就会有所下降. 如何在并发性和隔离性之间做一个很好的权衡就成了一个至关重要的问题.</p>
+<p>隔离性通过两段式锁协议或三级封锁协议来实现, 划分出多种隔离级别, 常见的四种隔离级别为: 读未提交, 读提交, 可重复读和可序列化.</p>
+<h3 id="2-4-durability">2.4. 持久性(Durability)</h3>
+<p>一旦事务提交, 其对数据库的修改将永久保存, 即使系统崩溃也不会丢失.</p>
+<p>数据库通过日志或其它机制来保证数据的持久性, 即事务的结果被永久性地写入存储设备.</p>
+<h1>并发一致性问题</h1>
+<h2 id="1-2">1. 并发一致性问题是什么</h2>
+<p>并发一致性问题指的是在并发环境下, 由于事务的隔离性很难保证, 会出现4种数据一致性问题.</p>
+<h2 id="2-2">2. 并发一致性问题具体内容</h2>
+<h3 id="2-1">2.1. 丢失修改</h3>
+<p>一个事务对数据进行了修改, 在事务提交之前, 另一个事务对同一条数据进行了修改, <strong>覆盖</strong>了之前的修改; </p>
+<p>考虑一个场景: <br>
+假设有一个网上购物平台, 有两个用户A和B, 他们几乎同时购买最后一件商品: </p>
+<ol>
+<li>用户A的事务: <ol>
+<li>检查库存数量. </li>
+<li>扣减库存. </li>
+<li>确认订单. </li>
+</ol>
+</li>
+<li>
+<p>用户B的事务: </p>
+<ol>
+<li>检查库存数量. </li>
+<li>扣减库存. </li>
+<li>确认订单. <br>
+不采用两段锁协议时可能发生如下情况: </li>
+</ol>
+</li>
+<li>
+<p>用户A对库存数量加锁, 进行读取, 读到剩余数量为1, 读取完成后释放锁.</p>
+</li>
+<li>紧接着用户B拿到库存数量的锁, 读取剩余数量也为1, 读完后释放锁.</li>
+<li>然后用户A和用户B都可以执行扣减库存, 因为都读取到剩余数量为1.</li>
+<li>最后库存数量被减到-1; 或者库存被覆盖, 虽然显示为0, 但是A和B都下单成功.</li>
+</ol>
+<h3 id="2-2-dirty-read">2.2. 脏读(Dirty Read)</h3>
+<p>一个事务读取了被另一个事务修改, 但<strong>未提交</strong>(回滚)的数据, 造成两个事务得到的数据不一致.</p>
+<p>考虑一个场景: <br>
+A和B两个企业用户, 企业拥有共享余额, 该企业中用户可以共同进行充值或消费:</p>
+<ol>
+<li>企业余额初始为0.</li>
+<li>用户A进行充值操作, 充入100元, 企业余额增加为100元, 事务还没提交, 等待A个人余额扣款.</li>
+<li>用户B此时想要使用企业余额消费50元, 读取到企业余额为100元, 充足, 发起扣款50元.</li>
+<li>于此同时, 用户A个人余额扣款失败, 充值失败, 事务未提交, 数据回滚, 企业余额变回0元.</li>
+<li>但是用户B发起了扣款50元的操作, 企业余额被减少到-50元.</li>
+</ol>
+<h3 id="2-3-nonrepeatable-read">2.3. 不可重复读(Nonrepeatable Read)</h3>
+<p>在同一个事务中, 某查询操作在一个时间读取某一行数据和之后一个时间读取该行数据, 发现数据已经<strong>发生修改</strong>(针对<strong>update</strong>操作)</p>
+<p>考虑一个场景:<br>
+A和B两个企业用户, 企业拥有共享余额, 该企业中用户可以共同充值或消费:</p>
+<ol>
+<li>企业余额初始为100元.</li>
+<li>用户A想要进行消费, 第一步查询企业余额, 确定能够消费的上限.</li>
+<li>用户B此时已经发起一个扣款操作, 消费100元, 令企业余额减为0.</li>
+<li>用户A认为自己最多能消费100元, 发起了一个50元的扣款请求.</li>
+<li>系统规定为了避免扣款透支, 扣款前会进行查询, 此时再次读取发现企业余额为0.</li>
+</ol>
+<p>用户A的消费操作因为两次读取同一个数据发现数据被修改而被迫失败.</p>
+<h3 id="2-4-phantom-read">2.4. 幻读(Phantom Read)</h3>
+<p>当同一查询多次执行时, 由于其它事务在这个数据范围内执行插入操作, 会导致每次返回的结果集不同. 和不可重复读的区别: 针对的是一个<strong>数据整体/范围</strong>, 并且针对<strong>insert</strong>操作)</p>
+<p>考虑一个场景:<br>
+企业要给员工发放工资, 需要统计出所有员工工资, 对企业账户进行扣款, 以及员工账户进行加款, 企业原本共10名员工, 每个员工固定工资3k:</p>
+<ol>
+<li>事务A: 查询所有员工, 统计出总额<span class="arithmatex">\(10\times 3k=3w\)</span>, 对企业账户扣款3w.</li>
+<li>此时另一个事务B: 新增两名员工, 工资同样3k, 更新员工表.</li>
+<li>事务A: 对全体员工发放3k的工资, 查询所有员工, 读取到12名员工, 每人3k工资.</li>
+</ol>
+<p>因为事务A查询员工返回的结果集改变, 员工得到的工资总额为<span class="arithmatex">\(12\times 3k=3.6w\)</span>.</p>
+<p>对账户系统而言, 员工账户到账总额超出企业账户扣款, 发生错误.</p>
+<h1>事务的数据一致性保证</h1>
+<h2 id="1-3">1. 两段锁协议</h2>
+<h3 id="1-1">1.1. 两段锁协议是什么</h3>
+<p>两段锁协议(Two-Phase Locking, 2PL)是一种通过将事务执行过程分为两个阶段以确保数据库事务之间隔离性的方法, 用来防止并发一致性问题, 保证事务调度串行化.</p>
+<h3 id="1-2-2">1.2. 两段锁协议解决什么问题</h3>
+<p>两段锁协议没有规定锁类型, 采用最严格的表级排他锁, 能够解决全部并发一致性问题: </p>
+<ul>
+<li>[[事务#2.1. 丢失修改]].</li>
+<li>[[事务#2.2. 脏读 (Dirty Read)]].</li>
+<li>[[事务#2.3. 不可重复读(Nonrepeatable Read)]].</li>
+<li>[[事务#2.4. 幻读(Phantom Read)]].</li>
+</ul>
+<h3 id="1-3-2">1.3. 两段锁协议如何解决问题</h3>
+<p>两段锁协议规定事务执行过程分为"扩展阶段"与"收缩阶段": </p>
+<ul>
+<li>扩展阶段(Growing Phase): 事务申请和获取所有需要的锁, 在这个阶段不能释放任何锁.</li>
+<li>收缩阶段(Shrinking Phase): 扩展阶段结束后, 释放申请的所有锁, 不能再申请新的锁.</li>
+</ul>
+<p>两段锁协议保证了在事务提交以前, 所有所需的数据都无法被其他事务进行读取或修改.</p>
+<ul>
+<li>丢失修改: 事务提交前其他事务无法修改当前事务占有的数据.</li>
+<li>脏读: 事务提交前其他事务无法读取当前事务修改的数据.</li>
+<li>不可重复读: 事务提交前其他事务无法修改当前事务占有的数据, 数据不可能发生变化.</li>
+<li>幻读: 事务提交前其他事务无法修改当前事务占有的数据范围, 数据不可能发生变化.</li>
+</ul>
+<p>两段锁协议的两个阶段并没有限制对数据的操作, 拿到锁之后就可以进行进行数据的读写, 例如在扩展阶段的中途, 读写已经拿到锁的数据; 或者在收缩阶段的中途, 读写还未释放锁的数据. </p>
+<p>如果事务遵循两段锁协议, 那么它们的并发调度是可串行化的: <strong>两段锁是可序列化的充分条件</strong>, 但不是必要条件.</p>
+<p>采用两段锁协议也有可能产生死锁, 这是因为每个事务都不能及时解除被它封锁的数据, 可能会导致多个事务互相都要求对方已封锁的数据不能继续运行.</p>
+<h2 id="2-3">2. 三级封锁协议</h2>
+<h3 id="2-1-2">2.1. 三级封锁协议是什么</h3>
+<p>三级封锁协议是对两段锁协议的细分讨论, 划分了三级封锁级别, 实现比两段锁协议更细粒度的并发控制, 可以根据需求选择不同级别的封锁方式以换取并发性能.</p>
+<h3 id="2-2-2">2.2. 三级封锁协议解决什么问题</h3>
+<h4>2.2.1. 一级封锁协议</h4>
+<p>可以解决丢失修改问题: [[事务#2.1. 丢失修改]].</p>
+<h4>2.2.2. 二级封锁协议</h4>
+<p>可以解决脏读问题: [[事务#2.2. 脏读 (Dirty Read)]].</p>
+<h4>2.2.3. 三级封锁协议</h4>
+<p>可以解决不可重复读问题: [[事务#2.3. 不可重复读(Nonrepeatable Read)]].<br>
+使用表级锁可以解决幻读问题: [[事务#2.4. 幻读(Phantom Read)]].</p>
+<h3 id="2-3-2">2.3. 三级封锁协议如何解决问题</h3>
+<h4>2.3.1. 一级封锁协议</h4>
+<p>事务修改数据之前必须先加X锁(排他锁), 直到事务结束才释放.</p>
+<p>一级封锁协议类似于两段锁协议, 但是仅规定了修改数据需要加锁, 没有对数据读取加以限制.</p>
+<p>X锁(排他锁)不能与其他锁共存, 无法抢占加了S锁的数据, 加了X锁后其他事务无法再加S锁.</p>
+<p>通过在事务期间持续持有排他锁, 避免了其他事务对当前事务占有数据进行修改, 避免了事务提交前数据修改被其他事务修改覆盖.</p>
+<h4>2.3.2. 二级封锁协议</h4>
+<p>在一级封锁协议基础上, 事务在读取数据前必须先加S锁(共享锁), 读取完成后即可释放.</p>
+<p>S锁(共享锁)允许与其他事务的S锁共存, 允许对数据进行读取, 但是不能修改数据.</p>
+<p>如果有其他事务想要修改数据, 就意味着已经对该数据添加了X锁, 当前事务就无法添加S锁, 也就无法读取数据, 避免读取到脏数据. 反过来说, 当前事务能够添加S锁, 说明没有其他事务准备对该数据进行修改, 指导释放S锁之前, 其他事务也无法添加X锁.</p>
+<h4>2.3.3. 三级封锁协议</h4>
+<p>在二级封锁协议基础上, 事务在读取数据前必须先加S锁, 并且直到事务提交才能释放.</p>
+<p>针对事务期间可能存在的需要多次读取同一数据的场景, 事务期间持续持有S锁, 避免了其他事务对数据进行修改, 实现了对不可重复读问题的解决.</p>
+<p>此外, 使用表级锁, 可以避免所需数据范围内发生插入或修改, 解决幻读问题.</p>
+<h2 id="3-2">3. 四种隔离级别</h2>
+<h3 id="3-1">3.1. 四种隔离级别是什么</h3>
+<p>对于事务的ACID性质, 隔离性一般常被弱化, 因为隔离性越高, 事务的调度并发性能越低.</p>
+<p>所以往往要在隔离性与并发性能之间进行权衡, 因此数据库系统划分出多种隔离级别, 用来描述事务的隔离性程度. </p>
+<p>常见的方式将隔离级别划分为4种: 未提交读, 已提交读, 可重复读, 可序列化.</p>
+<h3 id="3-2-2">3.2. 四种隔离级别具体内容</h3>
+<h4>3.2.1. 未提交读 (Read Uncommitted)</h4>
+<p>未提交读描述为事务能够读取其他事务还未提交的修改, 是最低的隔离级别.</p>
+<p>一般而言, 丢失修改是数据库系统完全不可接受的, 所以实际场景种数据库至少采用了一级封锁协议保证不会发生丢失修改.</p>
+<p>而未提交读则是在不存在丢失修改的基础上, 什么也不另外规定, 允许事务读取其他事务未提交的修改, 留下导致"脏读"的隐患, 是最低的隔离级别.</p>
+<h4>3.2.2. 已提交读 (Read Committed)</h4>
+<p>已提交读描述为事务只能读取到其他已提交事务的数据, 可以避免脏读问题. </p>
+<p>已提交读是通过二级封锁协议实现的, 只有其他事务提交后才会释放X锁, 才能读取数据.</p>
+<p>已提交读还存在"不可重复读"问题(同一事务内两次读取的数据不一致).</p>
+<p>SQL Server, Oracle的默认级别为已提交读(read committed).</p>
+<h4>3.2.3. 可重复读 (Repeatable Read)</h4>
+<p>可重复读描述为事务可以多次读取同一数据且保持一致, 可以避免不可重复读问题, </p>
+<p>可重复读是通过三级封锁协议实现的, 只有事务提交后才会释放S锁, 其他事务无法修改数据.</p>
+<p>可重复度还存在“幻读”问题(事务前后读取的数据范围内条目增加). </p>
+<p>MySQL的默认级别为可重复读(repeated read).</p>
+<h4>3.2.4. 可序列化 (Serializable)</h4>
+<p>可序列化描述为事务的调度可以实现序列化, 是最高级别的隔离, 可以避免幻读问题. </p>
+<p>可序列化是通过三级封锁协议配合表级锁实现, 或者通过两段锁协议实现.</p>
+<p>可序列化就解决了全部并发一致性问题, 但是事务调度序列化, 并发性能最差, 一般不使用.</p>
+  </div>
+
+  
+  <div class="tags-row">
+    <a class="pill" href="../../tags/study-notes/">#学习笔记</a>
+  </div>
+  
+
+  <div class="share-row">
+    <span class="share-label">分享</span>
+    <button type="button" class="share-btn" id="share-copy">复制链接</button>
+    <a class="share-btn" id="share-weibo" target="_blank" rel="noopener">微博</a>
+    <button type="button" class="share-btn" id="share-native" hidden>系统分享</button>
+  </div>
+
+  <nav class="post-nav">
+    
+    <a class="prev" href="../JFt3l7SWY/"><span class="dir">上一篇 · 更新</span>ProtoBuf协议<em class="pn-date">2024-09-06</em></a>
+    
+    
+    <a class="next" href="../2lEd0eWPD/"><span class="dir">下一篇 · 更早</span>quorum与paxos与raft<em class="pn-date">2024-09-06</em></a>
+    
+  </nav>
+
+  
+  
+<section class="comments" id="comments">
+  <h2>评论</h2>
+  <script src="https://giscus.app/client.js"
+          data-repo="UFOAlastor/UFOAlastor.github.io"
+          data-repo-id="MDEwOlJlcG9zaXRvcnkyNTIzNDYzMDY="
+          data-category="General"
+          data-category-id="DIC_kwDODwp_ws4DI204"
+          data-mapping="specific"
+          data-term="数据库-事务"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="light"
+          data-lang="zh-CN"
+          data-loading="lazy"
+          async>
+  </script>
+</section>
+
+</article>
+
+  </div>
+
+  
+
+<aside class="sidebar sidebar-toc" id="toc-panel" aria-label="本文目录">
+  <button type="button" class="toc-close" id="toc-close" aria-label="关闭目录">✕</button>
+  <section class="widget widget-toc">
+    <h2 class="widget-title">本文目录
+      <button type="button" class="toc-collapse" id="toc-collapse" aria-controls="toc-panel" aria-expanded="true" title="收起目录，正文占满">收起 ⌄</button>
+    </h2>
+    <nav class="toc" aria-label="文章目录">
+      <ol>
+        
+        <li class="toc-l2"><a href="#1">1. 事务是什么</a></li>
+        
+        <li class="toc-l2"><a href="#2">2. 事务解决什么问题</a></li>
+        
+        <li class="toc-l2"><a href="#3">3. 事务如何解决问题</a></li>
+        
+        <li class="toc-l2"><a href="#1-acid">1. ACID是什么</a></li>
+        
+        <li class="toc-l2"><a href="#2-acid">2. ACID具体内容</a></li>
+        
+        <li class="toc-l3"><a href="#2-1-atomicity">2.1. 原子性(Atomicity)</a></li>
+        
+        <li class="toc-l3"><a href="#2-2-consistency">2.2. 一致性(Consistency)</a></li>
+        
+        <li class="toc-l3"><a href="#2-3-isolation">2.3. 隔离性(Isolation)</a></li>
+        
+        <li class="toc-l3"><a href="#2-4-durability">2.4. 持久性(Durability)</a></li>
+        
+        <li class="toc-l2"><a href="#1-2">1. 并发一致性问题是什么</a></li>
+        
+        <li class="toc-l2"><a href="#2-2">2. 并发一致性问题具体内容</a></li>
+        
+        <li class="toc-l3"><a href="#2-1">2.1. 丢失修改</a></li>
+        
+        <li class="toc-l3"><a href="#2-2-dirty-read">2.2. 脏读(Dirty Read)</a></li>
+        
+        <li class="toc-l3"><a href="#2-3-nonrepeatable-read">2.3. 不可重复读(Nonrepeatable Read)</a></li>
+        
+        <li class="toc-l3"><a href="#2-4-phantom-read">2.4. 幻读(Phantom Read)</a></li>
+        
+        <li class="toc-l2"><a href="#1-3">1. 两段锁协议</a></li>
+        
+        <li class="toc-l3"><a href="#1-1">1.1. 两段锁协议是什么</a></li>
+        
+        <li class="toc-l3"><a href="#1-2-2">1.2. 两段锁协议解决什么问题</a></li>
+        
+        <li class="toc-l3"><a href="#1-3-2">1.3. 两段锁协议如何解决问题</a></li>
+        
+        <li class="toc-l2"><a href="#2-3">2. 三级封锁协议</a></li>
+        
+        <li class="toc-l3"><a href="#2-1-2">2.1. 三级封锁协议是什么</a></li>
+        
+        <li class="toc-l3"><a href="#2-2-2">2.2. 三级封锁协议解决什么问题</a></li>
+        
+        <li class="toc-l3"><a href="#2-3-2">2.3. 三级封锁协议如何解决问题</a></li>
+        
+        <li class="toc-l2"><a href="#3-2">3. 四种隔离级别</a></li>
+        
+        <li class="toc-l3"><a href="#3-1">3.1. 四种隔离级别是什么</a></li>
+        
+        <li class="toc-l3"><a href="#3-2-2">3.2. 四种隔离级别具体内容</a></li>
+        
+      </ol>
+    </nav>
+  </section>
+</aside>
+<button type="button" class="toc-restore" id="toc-restore" aria-controls="toc-panel" aria-expanded="false" title="展开目录">目录</button>
+<script>
+(function () {
+  var KEY = 'alastor-toc-collapsed';
+  var btn = document.getElementById('toc-collapse');
+  var back = document.getElementById('toc-restore');
+  var close = document.getElementById('toc-close');
+  if (!btn || !back) return;
+  var wide = window.matchMedia('(min-width: 1200px)');
+  var setCollapsed = function (collapsed) {
+    document.body.classList.toggle('toc-collapsed', collapsed);
+    btn.setAttribute('aria-expanded', String(!collapsed));
+    back.setAttribute('aria-expanded', String(!collapsed));
+    try { localStorage.setItem(KEY, collapsed ? '1' : '0'); } catch (e) {}
+  };
+  var closeSheet = function () { document.body.classList.remove('toc-mobile-open'); };
+  btn.addEventListener('click', function () { setCollapsed(true); });
+  back.addEventListener('click', function () {
+    if (wide.matches) { setCollapsed(false); }
+    else { document.body.classList.toggle('toc-mobile-open'); }
+  });
+  if (close) close.addEventListener('click', closeSheet);
+  /* 点目录里的链接就收起弹层；点遮罩也收起 */
+  document.querySelectorAll('#toc-panel a').forEach(function (a) {
+    a.addEventListener('click', closeSheet);
+  });
+  document.addEventListener('click', function (e) {
+    if (!document.body.classList.contains('toc-mobile-open')) return;
+    if (e.target.closest('#toc-panel') || e.target.closest('#toc-restore')) return;
+    closeSheet();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSheet();
+  });
+  try { if (wide.matches && localStorage.getItem(KEY) === '1') setCollapsed(true); } catch (e) {}
+})();
+</script>
+
+
+</main>
+
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-line"></div>
+    <nav class="footer-nav">
+      <a href="../">主页</a>
+      <a href="../about/">关于</a>
+      <a href="../archives/">归档</a>
+      <a href="../tags/">标签</a>
+      <a href="../links/">友链</a>
+      <a href="../search/">搜索</a>
+      <a href="../rss.xml">RSS</a>
+    </nav>
+    <p class="footer-cat-slot"></p>
+    <p>
+      <a href="https://icp.gov.moe/?keyword=20201412" target="_blank" rel="noopener">萌ICP备 20201412号</a>
+    </p>
+    <p id="show_date_time" data-birth="2020-04-02">本站已愉快蹦哒…</p>
+    <p>Copyright © 2020 Zander Alastor. All rights reserved.</p>
+  </div>
+</footer>
+
+<a class="go-home" href="../" aria-label="回到主页" title="回到主页">
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M12 3.2 3 10.4h2.6V20h5.1v-4.6h2.6V20h5.1v-8.6H21L12 3.2z" fill="currentColor"/></svg>
+</a>
+<button class="go-top" id="go-top" aria-label="回到顶部">↑</button>
+
+<script src="../assets/js/app.js" defer></script>
+<script>
+/* Vercount 访问统计：国内直连，无需注册，POST 上报 + 自动写入 span */
+(function () {
+  var host = location.hostname;
+  if (host !== 'alastor.top' && host !== 'www.alastor.top' && host !== 'ufoalastor.github.io') return;
+  var s = document.createElement('script');
+  s.src = 'https://events.vercount.one/js';
+  s.defer = true;
+  document.head.appendChild(s);
+})();
+</script>
+
+<script src="../assets/js/highlight/highlight.pack.js"></script>
+<script>if (window.hljs) { hljs.initHighlightingOnLoad(); }</script>
+
+<script src="../vendor/katex/katex.min.js" defer></script>
+<script src="../assets/js/math.js" defer></script>
+
+
+<script>
+(function () {
+  var u = location.href, t = document.title;
+  var wb = document.getElementById('share-weibo');
+  if (wb) wb.href = 'https://service.weibo.com/share/share.php?url=' + encodeURIComponent(u) + '&title=' + encodeURIComponent(t);
+  var cp = document.getElementById('share-copy');
+  if (cp) cp.addEventListener('click', function () {
+    var done = function () { cp.textContent = '已复制'; setTimeout(function () { cp.textContent = '复制链接'; }, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(u).then(done, done);
+    else { var i = document.createElement('textarea'); i.value = u; document.body.appendChild(i); i.select(); document.execCommand('copy'); i.remove(); done(); }
+  });
+  var nat = document.getElementById('share-native');
+  if (nat && navigator.share) { nat.hidden = false; nat.addEventListener('click', function () { navigator.share({ title: t, url: u }); }); }
+
+  /* 目录：滚动时高亮当前小节（只认右侧固定目录，手机折叠目录不参与） */
+  var tocLinks = [].slice.call(document.querySelectorAll('.sidebar-toc .toc a'));
+  if (tocLinks.length) {
+    var heads = tocLinks.map(function (a) {
+      return document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    });
+    var spy = function () {
+      var y = window.scrollY + 120, cur = 0;
+      heads.forEach(function (h, i) { if (h && h.offsetTop <= y) cur = i; });
+      tocLinks.forEach(function (a, i) { a.classList.toggle('active', i === cur); });
+      /* 目录比视口高时，把当前项滚进目录列可视区（只滚目录，不动正文） */
+      var bar = document.querySelector('.sidebar-toc');
+      var act = tocLinks[cur];
+      if (bar && act && bar.scrollHeight > bar.clientHeight + 4) {
+        var r = act.getBoundingClientRect(), br = bar.getBoundingClientRect();
+        if (r.top < br.top + 8 || r.bottom > br.bottom - 8) {
+          bar.scrollTop += r.top - br.top - bar.clientHeight / 3;
+        }
+      }
+    };
+    window.addEventListener('scroll', spy, { passive: true });
+    spy();
+  }
+})();
+</script>
+
+</body>
+</html>

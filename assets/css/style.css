@@ -622,6 +622,7 @@ button { font-family: inherit; }
 }
 .widget-btn:hover { background: #fffbe9; border-color: #e2d6a8; color: var(--gold-ink-hover); }
 .widget-btn span { color: var(--gold-ink); }
+.site-visits { margin: 10px 0 0; font-size: 0.8rem; color: var(--muted); }
 
 /* 窄屏折叠目录（正文顶部 <details>） */
 .toc-inline { display: none; margin: 0 0 clamp(20px, 3vw, 30px); }

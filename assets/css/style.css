@@ -597,14 +597,13 @@ button { font-family: inherit; }
     align-self: start;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
-    overscroll-behavior: contain;
+    /* 到达侧栏边界后允许页面继续滚动，避免留言板被视口裁住。 */
+    overscroll-behavior-y: auto;
     padding-right: 6px;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(219, 179, 2, .45) transparent;
+    scrollbar-width: none;
   }
-  .sidebar::-webkit-scrollbar { width: 5px; }
-  .sidebar::-webkit-scrollbar-thumb { background: rgba(219, 179, 2, .45); border-radius: 99px; }
-  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar-tools:has(.comments) { padding-bottom: 360px; }
+  .sidebar::-webkit-scrollbar { display: none; }
 }
 
 /* 侧栏友链按钮（不再列前几个，全部指向 /links/） */

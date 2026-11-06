@@ -5,8 +5,15 @@
   <link>https://alastor.top/</link>
   <description>此店不售此书。分享工具、教程和记录生活。</description>
   <language>zh-CN</language>
-  <lastBuildDate>Tue, 27 Oct 2026 21:18:03 +0800</lastBuildDate>
+  <lastBuildDate>Fri, 06 Nov 2026 22:41:00 +0800</lastBuildDate>
   <atom:link href="https://alastor.top/rss.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Volume Balancer 网页响度均衡</title>
+    <link>https://alastor.top/volume-balancer/</link>
+    <guid isPermaLink="true">https://alastor.top/volume-balancer/</guid>
+    <pubDate>Fri, 06 Nov 2026 19:44:00 +0800</pubDate>
+    <description>1. 前言 平时用浏览器看视频, 听音乐, 总会遇到声音忽大忽小的情况. 上一个视频音量刚调好, 换一个又要重新调; 多开几个网页时, 每个页面的声音也不太一样. 所以做了一个 Edge 插件, 叫 Volume Balancer. 主要是…</description>
+  </item>
   <item>
     <title>给 Kindle 写一个漫画阅读插件 PicaYomi</title>
     <link>https://alastor.top/picayomi/</link>
@@ -139,13 +146,6 @@
     <guid isPermaLink="true">https://alastor.top/M9Ox-fH5r/</guid>
     <pubDate>Tue, 17 May 2022 15:06:12 +0800</pubDate>
     <description>前言 我们不如叫它“6倍筛法” （笑 关于素数的6倍原理 只有6k-1和6k+1才“有可能”是质数 先列一段素数 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 2…</description>
-  </item>
-  <item>
-    <title>嘉然代打DianaCoding-Vscode插件发布</title>
-    <link>https://alastor.top/1Nb8gqVrF/</link>
-    <guid isPermaLink="true">https://alastor.top/1Nb8gqVrF/</guid>
-    <pubDate>Tue, 03 May 2022 15:03:35 +0800</pubDate>
-    <description>嘉然陪你打代码~ 然然会跟着你的动作敲击键盘~ 受BongoCat（代打猫）启发，制作这样一个“嘉然代打”的vscode插件 其中“代打”一词致敬“代打猫” 简单预览 功能概况 检测26个字母和数字键的按击，然然会做出相应动作，同时一旁还会…</description>
   </item>
 </channel>
 </rss>
